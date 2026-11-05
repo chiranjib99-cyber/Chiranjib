@@ -1409,6 +1409,707 @@ body.cricket-roster-mode .history .edited-chip,body.cricket-roster-mode .history
 .dialog .cricket-delete-buttons #cricket-delete-confirm:disabled{opacity:.43!important;cursor:not-allowed!important;box-shadow:none!important}
 .dialog .cricket-delete-buttons #cricket-delete-cancel{color:#684854!important;background:rgba(255,255,255,.52)!important}
 
+
+/* Phase 2: existing configuration dimensions/position remain unchanged; neutral glass. */
+body.cricket-roster-mode #cricket-live .cricket-inline-config{
+ background:rgba(255,255,255,.23)!important;
+ border:1px solid rgba(255,255,255,.72)!important;
+ box-shadow:0 8px 22px rgba(50,52,63,.075),inset 0 1px 0 rgba(255,255,255,.55)!important;
+ backdrop-filter:blur(16px) saturate(110%);-webkit-backdrop-filter:blur(16px) saturate(110%);
+ color:#3a3a43!important;
+}
+body.cricket-roster-mode #cricket-live .cricket-inline-config-body{color:#4a4a54!important;border-top-color:rgba(100,100,110,.18)!important}
+body.cricket-roster-mode #cricket-live .cricket-inline-config .config-expand{color:#60616b!important}
+/* Do not modify live team-card dimensions or styling. Only temporarily frost signings on name focus. */
+#cricket-bidding-layout:not(.auction-is-complete) .card.cricket-name-editing .metric:first-child{
+ filter:blur(8px)!important;pointer-events:none!important;user-select:none!important;
+}
+/* Only completed cricket team cards; preserve their existing gradient/tints/size. */
+#cricket-bidding-layout.auction-is-complete .card .player-label{font-size:0!important}
+#cricket-bidding-layout.auction-is-complete .card.a .player-label::before{content:'PLAYER 1';font-size:10px}
+#cricket-bidding-layout.auction-is-complete .card.b .player-label::before{content:'PLAYER 2';font-size:10px}
+#cricket-bidding-layout.auction-is-complete .card .player-label::after{display:none!important;content:none!important}
+#cricket-bidding-layout.auction-is-complete .cricket-card-status{display:none!important}
+#cricket-bidding-layout.auction-is-complete .card .metric:first-child>span{
+ display:inline-flex;width:max-content;max-width:100%;padding:5px 11px;margin-bottom:8px;
+ border-radius:999px;background:rgba(41,154,106,.17);border:1px solid rgba(35,145,95,.29);color:#18845b;
+ font-size:10px;font-weight:850;
+}
+#cricket-bidding-layout.auction-is-complete .card .metric:last-child.cricket-completed-stat-panel{
+ display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;
+ align-items:start;min-width:0;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>span,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-stat-pill{
+ display:inline-flex;align-items:center;justify-content:center;width:max-content;max-width:100%;
+ border-radius:999px;padding:5px 9px;margin-bottom:8px;
+ background:rgba(255,255,255,.54);border:1px solid rgba(255,255,255,.70);
+ color:#665269;font-size:10px;font-weight:800;line-height:1.15;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>strong,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-gmp-value{
+ display:block;color:#A87717!important;font-weight:900;font-size:clamp(15px,1.7vw,22px);line-height:1.2;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>small,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-gmp-name{
+ display:block;color:#24202b!important;font-size:11px;line-height:1.35;margin-top:4px;overflow-wrap:anywhere;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-gmp-half{
+ grid-column:2;grid-row:1/4;min-width:0;border-left:1px solid rgba(80,72,85,.17);padding-left:10px;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>span,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>strong,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>small{grid-column:1;min-width:0}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>span{grid-row:1}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>strong{grid-row:2}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>small{grid-row:3}
+/* Preserve original desktop rendering, changing only mobile squad/history country labels. */
+body.cricket-roster-mode .country-mobile{display:none!important}
+@media(max-width:760px){
+ body.cricket-roster-mode .country-desktop{display:none!important}
+ body.cricket-roster-mode .country-mobile{display:inline-flex!important}
+ body.cricket-roster-mode .squad-country.country-mobile,
+ body.cricket-roster-mode .cr-history-country.country-mobile{
+  display:inline-flex;align-items:center;justify-content:center;text-align:center;
+  width:23px;min-width:23px;height:17px;line-height:17px;font-size:10px!important;
+  font-weight:750;letter-spacing:0;border-radius:5px;border:1px solid rgba(115,103,139,.19);
+  background:rgba(255,255,255,.33);
+ }
+ body.cricket-roster-mode .team.a .squad-country.country-mobile{color:#977021}
+ body.cricket-roster-mode .team.b .squad-country.country-mobile{color:#7954a9}
+ body.cricket-roster-mode .cr-history-country.country-mobile{color:#71617f}
+}
+#cricket-bidding-layout.auction-is-complete .card .metric:first-child{display:flex;flex-direction:column;align-items:flex-start}
+#cricket-bidding-layout.auction-is-complete .card .metric:first-child>span{display:inline-flex;flex-shrink:0}
+#cricket-bidding-layout.auction-is-complete .card .metric:first-child>strong{display:block;white-space:nowrap}
+#cricket-final .result-overview-gmp small{display:block;font-size:11px;color:#655a75;margin-top:5px;overflow-wrap:anywhere}
+@media(max-width:650px){
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>span,
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-stat-pill{font-size:9px;padding:4px 5px;white-space:nowrap}
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>strong,
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-gmp-value{
+  font-size:12px!important;white-space:nowrap!important;letter-spacing:-.025em;
+ }
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>small,
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-gmp-name{
+  font-size:9px!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;
+ }
+ #cricket-bidding-layout.auction-is-complete .cricket-gmp-half{padding-left:6px}
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel{gap:5px!important}
+}
+
+
+
+/* V28.1 QA fixes — no changes to the original completed team card gradients/outer size. */
+/* Scope is only Cricket Team Squad and Transaction History; all country markers are two letters. */
+body.cricket-roster-mode .squad-country.country-desktop,
+body.cricket-roster-mode .cr-history-country.country-desktop {
+ display:inline-flex;align-items:center;justify-content:center;text-align:center;
+ width:23px;min-width:23px;height:17px;box-sizing:border-box;
+ font-size:10px!important;font-weight:750;line-height:17px;letter-spacing:0;
+ border-radius:5px;border:1px solid rgba(115,103,139,.19);
+ background:rgba(255,255,255,.33);
+}
+/* Bring both original metric boxes back to the same V27 height. */
+#cricket-bidding-layout.auction-is-complete .card .metrics>.metric {
+ box-sizing:border-box;height:92px;min-height:92px;max-height:92px;
+ padding:11px 13px 9px;overflow:hidden;
+}
+#cricket-bidding-layout.auction-is-complete .card .metric:first-child>span,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>span,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-stat-pill {
+ height:20px;box-sizing:border-box;padding:3px 9px;margin-bottom:4px;
+ font-size:10px!important;font-weight:800;line-height:12px;white-space:nowrap;
+}
+#cricket-bidding-layout.auction-is-complete .card .metric:first-child>strong,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>strong,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-gmp-value {
+ font-size:20px!important;line-height:24px!important;letter-spacing:-.035em;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>small,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-gmp-name {
+ font-size:11px!important;line-height:14px!important;margin-top:3px;color:#24202b!important;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel{gap:5px!important}
+#cricket-bidding-layout.auction-is-complete .cricket-gmp-half{padding-left:8px;}
+@media(max-width:650px){
+ #cricket-bidding-layout.auction-is-complete .card .metrics>.metric{height:92px;min-height:92px;max-height:92px;padding:11px 10px 9px}
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>span,
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-stat-pill{font-size:9px!important;padding:3px 6px}
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>strong,
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-gmp-value{font-size:clamp(13px,4.4vw,18px)!important;letter-spacing:-.035em!important}
+ #cricket-bidding-layout.auction-is-complete .cricket-gmp-half{padding-left:5px}
+}
+/* Neutral liquid glass: preserve existing dropdown position and exact 245px width. */
+body.cricket-roster-mode #cricket-live .cricket-inline-config {
+ background:rgba(255,255,255,.16)!important;
+ border:1px solid rgba(255,255,255,.82)!important;
+ box-shadow:0 13px 30px rgba(61,58,70,.10),inset 0 1px 0 rgba(255,255,255,.87),inset 0 -1px 0 rgba(255,255,255,.22)!important;
+ -webkit-backdrop-filter:blur(22px) saturate(100%);backdrop-filter:blur(22px) saturate(100%);
+}
+body.cricket-roster-mode #cricket-live .cricket-inline-config summary{color:#33323b!important;font-weight:850}
+body.cricket-roster-mode #cricket-live .cricket-inline-config-body {
+ background:rgba(255,255,255,.12);border-top:1px solid rgba(255,255,255,.66)!important;
+ padding:10px 12px 12px!important;line-height:1.45!important;color:#4c4b55!important;
+ font-size:11px!important;
+}
+body.cricket-roster-mode #cricket-live .cricket-inline-config-body .cr-config-row{padding:5px 0;overflow-wrap:anywhere}
+body.cricket-roster-mode #cricket-live .cricket-inline-config-body .cr-config-row + .cr-config-row{border-top:1px solid rgba(105,103,115,.13)}
+body.cricket-roster-mode #cricket-live .cricket-inline-config-body .cr-config-label{font-weight:800;color:#4b4953}
+
+
+/* Final constrained card polish: same panel geometry; no clipped names. */
+#cricket-bidding-layout.auction-is-complete .card .metrics>.metric{padding:9px 10px 7px}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel{
+ grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3px!important;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>span,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-stat-pill{
+ font-size:9px!important;padding:2px 5px!important;height:18px;margin-bottom:2px!important;letter-spacing:-.025em;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>strong,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-gmp-value{
+ font-size:clamp(13px,1.45vw,20px)!important;line-height:22px!important;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>small,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-gmp-name{
+ display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+ overflow:hidden;overflow-wrap:anywhere;white-space:normal!important;text-overflow:clip!important;
+ font-size:10px!important;line-height:12px!important;margin-top:2px;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-gmp-half{padding-left:6px}
+@media(max-width:650px){
+ #cricket-bidding-layout.auction-is-complete .card .metrics>.metric{padding:9px 8px 7px}
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>span,
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-stat-pill{font-size:8px!important;padding:2px 3px!important}
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>strong,
+ #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-gmp-value{font-size:clamp(13px,4.2vw,18px)!important}
+}
+
+
+/* V28.2: approved six narrow fixes. Preserve Football and live-auction behavior. */
+/* 1) Hover is a preview, not an edit: prevent its highlight extending under signings. */
+#cricket-bidding-layout:not(.auction-is-complete) .cards .name-input:not(:focus):hover{
+  clip-path:inset(0 123px 0 0 round 11px);
+}
+#cricket-bidding-layout:not(.auction-is-complete) .cards .name-input:focus{
+  clip-path:none;
+}
+/* 2) Same vertical rhythm across Highest Bid and Highest GMP in the shared panel. */
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel{
+  grid-template-rows:18px 22px minmax(24px,1fr)!important;
+  align-content:stretch;row-gap:4px!important;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>.cricket-stat-pill,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>.cricket-gmp-half>.cricket-stat-pill{
+  min-height:18px!important;height:18px!important;margin:0!important;
+  align-self:start!important;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>strong,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>.cricket-gmp-half>.cricket-gmp-value{
+  height:22px!important;line-height:22px!important;margin:0!important;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>small,
+#cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>.cricket-gmp-half>.cricket-gmp-name{
+  font-size:10px!important;line-height:13px!important;margin:0!important;
+}
+#cricket-bidding-layout.auction-is-complete .cricket-gmp-half{
+  grid-row:1/4!important;display:grid!important;
+  grid-template-rows:18px 22px minmax(24px,1fr)!important;
+  align-content:stretch;row-gap:4px!important;
+}
+/* 3) A visible NEXT PLAYER must not stretch its card below the Mark Unsold panel. */
+@media(min-width:831px){
+ #cricket-bidding-layout:not(.auction-is-complete)>.cricket-live-top-card,
+ #cricket-bidding-layout:not(.auction-is-complete)>.cricket-shared-price{
+   height:300px!important;min-height:300px!important;max-height:300px!important;align-self:stretch!important;
+ }
+ #cricket-bidding-layout:not(.auction-is-complete) #cricket-current{
+   height:100%!important;max-height:100%!important;min-height:0!important;
+   box-sizing:border-box;display:flex!important;flex-direction:column!important;overflow:hidden;
+ }
+ #cricket-bidding-layout:not(.auction-is-complete) #cricket-current .cricket-inner{
+   min-height:0!important;flex:1 1 auto!important;overflow:hidden;
+ }
+ #cricket-bidding-layout:not(.auction-is-complete) #cricket-current:has(#cricket-next:not([hidden])) .cricket-player-main{
+   min-height:0!important;height:100%!important;
+ }
+ #cricket-bidding-layout:not(.auction-is-complete) #cricket-current #cricket-next:not([hidden]){
+   flex:0 0 38px!important;min-height:38px!important;max-height:38px!important;
+   margin:7px 0 0!important;padding:6px 10px!important;
+ }
+}
+/* 4) Put the heading, center config, and stage at the same top alignment. */
+#cricket-live .cricket-live-top{align-items:start!important;}
+#cricket-live .cricket-live-heading{align-self:start!important;}
+#cricket-live .cricket-inline-config{align-self:start!important;margin-top:0!important;}
+#cricket-live .cricket-stage{align-self:start!important;display:inline-flex;align-items:center;justify-content:center;min-height:43px!important;}
+/* 5) Multiple overall GMP leaders are each visible, including 3+ ties. */
+#cricket-final .result-overview-gmp .gmp-tied-players{display:flex;flex-direction:column;gap:2px;max-height:110px;overflow-y:auto;}
+#cricket-final .result-overview-gmp .gmp-tied-player{display:block;overflow-wrap:anywhere;}
+/* 6) Restore classic V27 compact country-code styling: no new badge backgrounds. */
+body.cricket-roster-mode .squad-country.country-desktop,
+body.cricket-roster-mode .cr-history-country.country-desktop{
+ display:inline-flex!important;align-items:center;justify-content:center;
+ width:23px!important;min-width:23px!important;height:auto!important;
+ line-height:1!important;font-size:10px!important;font-weight:700!important;
+ letter-spacing:-.025em!important;background:transparent!important;
+ border:0!important;border-radius:0!important;padding:0!important;
+}
+body.cricket-roster-mode .country-mobile{display:none!important;}
+@media(max-width:760px){
+ body.cricket-roster-mode .squad-country.country-desktop,
+ body.cricket-roster-mode .cr-history-country.country-desktop{display:inline-flex!important;}
+ body.cricket-roster-mode .squad-country.country-mobile,
+ body.cricket-roster-mode .cr-history-country.country-mobile{display:none!important;}
+}
+
+
+/* V28.3 — Country labels: reuse the Phase 1 compact, no-background text-code
+   presentation for every country, including EN and SA. No icon, flag or highlight. */
+body.cricket-roster-mode .squad-country.is-text{
+ width:22px;min-width:22px;height:auto;line-height:1;
+ font-size:9px;font-weight:650;letter-spacing:-.025em;
+ border:0;border-radius:0;background:transparent;padding:0;
+ text-align:center;display:inline-flex;align-items:center;justify-content:center;
+}
+body.cricket-roster-mode .cr-history-country.is-text{
+ width:23px;min-width:23px;height:auto;line-height:1;
+ font-size:9px;font-weight:700;letter-spacing:normal;color:#71617f;
+ border:0;border-radius:0;background:transparent;padding:0;
+ text-align:center;display:inline-flex;align-items:center;justify-content:center;
+}
+/* V28.3 — retain existing single-value GMP presentation and stacked tie names.
+   Do not scroll: scale only name/team text when more entries share the top GMP. */
+#cricket-final .result-overview-gmp .gmp-tied-players{
+ display:flex;flex-direction:column;gap:2px;max-height:none!important;
+ overflow:visible!important;overflow-y:visible!important;
+ font-size:11px;line-height:1.2;
+}
+#cricket-final .result-overview-gmp .gmp-tied-player{
+ display:block;overflow-wrap:anywhere;white-space:normal;
+ font-size:inherit;line-height:inherit;
+}
+#cricket-final .result-overview-gmp .gmp-tied-players[data-tie-count="2"]{font-size:9.5px;gap:1px;}
+#cricket-final .result-overview-gmp .gmp-tied-players[data-tie-count="3"]{font-size:8px;gap:1px;line-height:1.1;}
+#cricket-final .result-overview-gmp .gmp-tied-players[data-tie-count="4"]{font-size:7px;gap:0;line-height:1.08;}
+#cricket-final .result-overview-gmp .gmp-tied-players[data-tie-count="5"],
+#cricket-final .result-overview-gmp .gmp-tied-players[data-tie-count="6"]{font-size:6.5px;gap:0;line-height:1.05;}
+/* Preserve already-approved card appearance and no scrollbar buttons. */
+#cricket-final .result-overview-gmp .gmp-tied-players::-webkit-scrollbar{display:none;}
+
+/* V28.5: V28.3 Final Results design restored. Only vertically center the five
+   simple Auction Overview numbers inside their existing glass tiles. The GMP
+   tile, labels, fonts, sizes, and all other components are unchanged. */
+#cricket-final .overview-section .result-summary-box:not(.result-overview-gmp){position:relative;}
+#cricket-final .overview-section .result-summary-box:not(.result-overview-gmp) > strong{
+  position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);
+}
+
+
+/* V29: Create New Auction + Cricket Setup polish only. V28.5 other pages untouched. */
+.dialog.new-setup-dialog{background:rgba(249,249,252,.88)!important;border:1px solid rgba(255,255,255,.82)!important;backdrop-filter:blur(26px) saturate(112%);-webkit-backdrop-filter:blur(26px) saturate(112%);box-shadow:0 26px 90px rgba(36,40,64,.19),inset 0 1px 0 rgba(255,255,255,.9);color:#273142}
+.dialog.new-setup-dialog #modal-title{color:#273142}
+.new-setup-step{font-size:11px;letter-spacing:.09em;font-weight:850;text-transform:uppercase;color:#67758b;margin:16px 0 10px}
+.new-mode-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.new-mode-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:7px;background:rgba(255,255,255,.48);border:1px solid rgba(143,156,178,.34);border-radius:16px;padding:18px 8px;cursor:pointer;min-height:112px;transition:border-color .12s ease,background .12s ease}
+.new-mode-tile:has(input:checked){background:rgba(232,239,246,.8);border-color:#6c8da7;box-shadow:inset 0 0 0 1px #6c8da754}
+.new-mode-tile input{position:absolute;opacity:0;pointer-events:none}
+.new-mode-tile:focus-within{outline:2px solid #5986a1;outline-offset:2px}
+.new-mode-tile strong{font-size:15px}.new-mode-tile small{font-size:11px;color:#697389}
+.new-mode-emoji{font-size:26px;line-height:1.2}
+.new-setup-details[hidden]{display:none!important}
+.new-setup-details{border-top:1px solid rgba(110,125,150,.18);margin-top:16px;padding-top:3px}
+.new-setup-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.new-setup-row>.new-setup-col{min-width:0}
+.new-setup-budget-row{display:flex;gap:8px;align-items:center}
+.new-setup-budget-row input{flex:1;min-width:0}
+.new-setup-currency{min-width:55px;color:#4a5d6e;font-weight:800;font-size:13px}
+.new-setup-hint{color:#68788b;font-size:11px;line-height:1.5;margin:0 0 12px}
+.new-setup-dialog .field-label{color:#485972}
+.new-setup-dialog .dialog-input{background:rgba(255,255,255,.76)!important;border-color:rgba(154,166,190,.48)!important;color:#273142!important}
+.new-setup-dialog #new-create:disabled{opacity:.45;cursor:not-allowed}
+#cricket-setup .cricket-setup-grid{align-items:stretch}
+#cricket-setup .cricket-rules{height:100%;max-width:440px}
+#cricket-setup .cricket-config{height:100%;min-width:0;background:rgba(252,252,255,.58)!important;border:1px solid rgba(255,255,255,.82)!important;backdrop-filter:blur(22px) saturate(112%);-webkit-backdrop-filter:blur(22px) saturate(112%);box-shadow:0 17px 38px rgba(38,48,78,.11),inset 0 1px rgba(255,255,255,.78);border-radius:22px}
+#cricket-setup .cricket-config>h3:first-child{font-size:19px;padding-bottom:10px;border-bottom:1px solid rgba(115,131,154,.17);margin-bottom:16px;color:#283449}
+#cricket-setup .cricket-config .dialog-input{background:rgba(255,255,255,.68);border:1px solid rgba(131,145,166,.33);border-radius:12px}
+#cricket-setup .cricket-start-purse{background:rgba(255,255,255,.58);border:1px solid rgba(135,153,173,.24);color:#344157;gap:12px;padding:12px;flex-wrap:wrap}
+#cricket-setup .cricket-start-purse label{font-weight:750}
+#cricket-setup #cricket-setup-budget{border-radius:10px;border:1px solid rgba(119,137,158,.38);background:rgba(255,255,255,.85);color:#273142;padding:10px 12px;font:inherit;font-size:15px;font-weight:800;width:min(180px,100%)}
+#cricket-setup .cricket-config #cricket-start{margin-top:8px}
+#cricket-setup .cricket-pool-box{background:rgba(251,252,255,.53)!important;border:1px solid rgba(255,255,255,.78)!important;backdrop-filter:blur(20px) saturate(115%);-webkit-backdrop-filter:blur(20px) saturate(115%);box-shadow:0 15px 35px rgba(37,49,76,.095),inset 0 1px rgba(255,255,255,.8);border-radius:22px}
+#cricket-setup .cricket-pool-head{border-bottom:1px solid rgba(130,148,174,.2);padding-bottom:13px}
+#cricket-setup .cricket-pool-table thead th{background:rgba(235,240,247,.75);color:#38465e;position:sticky;top:0;z-index:2}
+#cricket-setup .cricket-pool-table tbody tr:hover{background:rgba(255,255,255,.37)}
+#cricket-setup .cricket-pool-table input,#cricket-setup .cricket-pool-table select{background:rgba(255,255,255,.72);border-color:rgba(121,136,160,.3)}
+body.cricket-setup-active .manage #manage-toggle,body.cricket-setup-active .manage #audit-btn,body.cricket-setup-active .manage #export-btn{display:none!important}
+@media(max-width:760px){#cricket-setup .cricket-rules{height:auto}#cricket-setup .cricket-config{height:auto}.new-setup-row{grid-template-columns:1fr}.dialog.new-setup-dialog{padding:19px}.new-mode-tile{min-height:96px}}
+
+
+/* V29.1: approved Cricket Setup-only visual refinements. No behavior/handlers changed. */
+#cricket-setup .cricket-start-purse{
+  background:#172a43!important;color:#d8e5f8!important;
+  border:1px solid rgba(117,146,185,.48)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
+}
+#cricket-setup .cricket-start-purse label{color:#d8e5f8!important}
+#cricket-setup #cricket-setup-budget{
+  color:#f6d48d!important;background:rgba(6,17,34,.44)!important;
+  border:1px solid rgba(246,212,141,.4)!important;
+  font-weight:850;box-shadow:inset 0 1px 2px rgba(0,0,0,.1);
+}
+#cricket-setup #cricket-setup-budget:focus{outline:2px solid rgba(246,212,141,.72);outline-offset:2px}
+#cricket-setup .cricket-pool-box{
+  background:linear-gradient(120deg,rgba(250,231,167,.31) 0%,rgba(253,250,255,.60) 46%,rgba(203,177,241,.33) 100%)!important;
+  border:1px solid rgba(255,255,255,.88)!important;
+  box-shadow:0 16px 40px rgba(78,54,119,.12),inset 0 1px 0 rgba(255,255,255,.82);
+}
+#cricket-setup .cricket-pool-scroll{isolation:isolate;border-radius:13px;}
+#cricket-setup .cricket-pool-table{border-collapse:separate;border-spacing:0}
+#cricket-setup .cricket-pool-table thead th{
+  position:sticky;top:0;z-index:3;
+  background:#eae8f4!important;
+  color:#39445b;line-height:1.35;vertical-align:middle;
+  padding:13px 7px;white-space:nowrap;
+  box-shadow:inset 0 -1px 0 rgba(112,97,153,.21);
+}
+#cricket-setup .cricket-pool-table tbody td{vertical-align:middle;padding:9px 7px;}
+#cricket-setup .cricket-pool-table tbody tr{background:rgba(255,255,255,.25)}
+#cricket-setup .cricket-pool-table tbody tr:nth-child(even){background:rgba(238,229,251,.26)}
+@media(max-width:760px){
+  #cricket-setup .cricket-pool-box{padding:14px!important;min-width:0}
+  #cricket-setup .cricket-pool-head{align-items:stretch}
+  #cricket-setup .cricket-pool-tools{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+  #cricket-setup .cricket-pool-tools #cricket-search{grid-column:1/-1;width:100%;min-width:0}
+  #cricket-setup .cricket-pool-tools #cricket-role-filter,
+  #cricket-setup .cricket-pool-tools #cricket-add-player{width:100%;min-width:0;max-width:100%}
+  #cricket-setup .cricket-pool-scroll{width:100%;max-width:100%;overflow-x:hidden;overflow-y:auto;margin-top:12px}
+  #cricket-setup .cricket-pool-table{display:block;min-width:0!important;width:100%;border-spacing:0}
+  #cricket-setup .cricket-pool-table thead{display:none}
+  #cricket-setup .cricket-pool-table tbody{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;min-width:0}
+  #cricket-setup .cricket-pool-table tbody tr{
+    min-width:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-areas:'num del' 'name name' 'age country' 'role type';
+    align-items:end;gap:9px 10px;padding:12px;
+    background:linear-gradient(135deg,rgba(255,250,234,.78),rgba(243,233,255,.8))!important;
+    border:1px solid rgba(174,150,201,.27);border-radius:14px;
+    box-shadow:0 3px 12px rgba(72,48,107,.05);
+  }
+  #cricket-setup .cricket-pool-table tbody td{display:flex;flex-direction:column;gap:5px;min-width:0;padding:0!important;border:0;overflow:visible}
+  #cricket-setup .cricket-pool-table tbody td:nth-child(1){grid-area:num;font-size:11px;font-weight:850;color:#725a92;justify-content:center;align-self:center}
+  #cricket-setup .cricket-pool-table tbody td:nth-child(2){grid-area:name}
+  #cricket-setup .cricket-pool-table tbody td:nth-child(3){grid-area:age}
+  #cricket-setup .cricket-pool-table tbody td:nth-child(4){grid-area:country}
+  #cricket-setup .cricket-pool-table tbody td:nth-child(5){grid-area:role}
+  #cricket-setup .cricket-pool-table tbody td:nth-child(6){grid-area:type}
+  #cricket-setup .cricket-pool-table tbody td:nth-child(7){grid-area:del;align-items:flex-end}
+  #cricket-setup .cricket-pool-table tbody td:nth-child(2)::before{content:'PLAYER NAME'}
+  #cricket-setup .cricket-pool-table tbody td:nth-child(3)::before{content:'AGE'}
+  #cricket-setup .cricket-pool-table tbody td:nth-child(4)::before{content:'COUNTRY'}
+  #cricket-setup .cricket-pool-table tbody td:nth-child(5)::before{content:'ROLE'}
+  #cricket-setup .cricket-pool-table tbody td:nth-child(6)::before{content:'PLAYER TYPE'}
+  #cricket-setup .cricket-pool-table tbody td::before{font-size:9px;font-weight:850;letter-spacing:.055em;color:#746584;line-height:1.15}
+  #cricket-setup .cricket-pool-table input,
+  #cricket-setup .cricket-pool-table select{width:100%;min-width:0!important;max-width:100%;box-sizing:border-box;font-size:12px;padding:10px 7px;line-height:1.3;min-height:38px}
+  #cricket-setup .cricket-pool-table .cricket-name{min-width:0!important}
+  #cricket-setup .cricket-pool-table .cricket-remove{min-width:36px;min-height:32px;font-size:18px;padding:2px 9px}
+}
+
+
+/* V29.2 — approved Navy + warm-gold LIQUID GLASS Auction Management styling.
+   UI-only; preserve every management action, existing setup visibility rules,
+   original team-card gradients, and all auction logic. */
+.manage.glass{
+  background:#172A43!important;
+  color:#eef4fd!important;
+  border:1px solid rgba(255,240,196,.27)!important;
+  box-shadow:0 19px 47px rgba(17,34,56,.17),inset 0 1px 0 rgba(255,255,255,.18)!important;
+  backdrop-filter:blur(22px) saturate(142%);
+  -webkit-backdrop-filter:blur(22px) saturate(142%);
+}
+.manage.glass::before{
+  background:linear-gradient(110deg,rgba(246,212,141,.10),transparent 42%,rgba(180,190,224,.07))!important;
+}
+.manage.glass h2{color:#f7f9fe!important;position:relative}
+.management-actions{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:10px!important;
+  overflow:visible!important;
+  padding-bottom:1px!important;
+}
+.management-actions button{
+  --glass-label:#263d59;
+  flex:initial!important;
+  min-width:0!important;
+  width:100%;min-height:53px;
+  color:var(--glass-label)!important;
+  font-weight:820!important;font-size:12px!important;
+  line-height:1.3!important;
+  padding:10px 11px!important;
+  border-radius:13px!important;
+  border:1px solid rgba(255,244,197,.78)!important;
+  background:linear-gradient(145deg,rgba(255,247,218,.92) 0%,rgba(246,220,153,.82) 53%,rgba(225,183,100,.79) 100%)!important;
+  backdrop-filter:blur(16px) saturate(165%)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(165%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.86),inset 0 -1px 0 rgba(130,89,28,.16),0 6px 15px rgba(5,17,34,.15)!important;
+  text-shadow:none!important;
+  white-space:normal;
+  overflow-wrap:normal!important;
+  transition:transform .14s ease,box-shadow .14s ease,filter .14s ease!important;
+}
+.management-actions button:hover:not(:disabled){
+  transform:translateY(-2px)!important;
+  filter:brightness(1.05)!important;
+  background:linear-gradient(145deg,rgba(255,250,228,.95),rgba(248,222,151,.88),rgba(232,194,109,.84))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.92),0 10px 21px rgba(3,15,32,.19)!important;
+}
+.management-actions button:active:not(:disabled){transform:translateY(1px)!important}
+.management-actions #manage-toggle{--glass-label:#5c3b83}
+.management-actions #audit-btn{--glass-label:#344b71}
+.management-actions #export-btn{--glass-label:#23645b}
+.management-actions #import-btn{--glass-label:#233a59}
+.management-actions #reset-btn{--glass-label:#a44b0d}
+.management-actions #delete-auction-btn{--glass-label:#a92233}
+/* Preserve the existing unmistakable green state when signing edit mode is active. */
+.management-actions #manage-toggle.chosen{
+  color:#fff!important;
+  background:linear-gradient(135deg,rgba(24,145,79,.92),rgba(63,192,117,.86))!important;
+  border-color:rgba(216,255,226,.72)!important;
+}
+.management-actions #manage-toggle.chosen:hover:not(:disabled){
+  background:linear-gradient(135deg,rgba(25,157,84,.95),rgba(77,203,128,.89))!important;
+}
+@media(max-width:680px){
+  .management-actions{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+  .management-actions button{min-height:51px!important;font-size:11.5px!important;padding:9px 6px!important}
+}
+@media(max-width:350px){
+  .management-actions button{font-size:10.5px!important;letter-spacing:-.025em!important}
+}
+/* Edit signing dialog: clear, accessible Cancel / Save Changes visual hierarchy;
+   original event handlers and warning dialogs are untouched. */
+.dialog .dialog-actions #edit-cancel,
+.dialog .dialog-actions #cricket-edit-cancel{
+  --action-tone:79,93,115;
+  color:#24374e!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(223,233,245,.72))!important;
+  border:1px solid rgba(255,255,255,.9)!important;
+  text-shadow:none!important;
+}
+.dialog .dialog-actions #edit-save,
+.dialog .dialog-actions #cricket-edit-confirm{
+  --action-tone:32,144,95;
+  color:white!important;
+  background:linear-gradient(135deg,rgba(27,147,98,.92),rgba(45,189,130,.83))!important;
+  border:1px solid rgba(191,243,217,.66)!important;
+}
+
+
+/* V29.3 — LOCKED clear navy liquid-glass Auction Management bar, desktop 75px. */
+@media (min-width:951px){
+  .manage.glass:not([hidden]){
+    box-sizing:border-box!important;
+    height:75px!important;min-height:75px!important;
+    margin-top:24px!important;padding:10px 17px!important;
+    display:flex!important;flex-direction:row!important;align-items:center!important;
+    justify-content:space-between!important;gap:16px!important;
+  }
+  .manage.glass h2{font-size:14px!important;line-height:1.2!important;white-space:nowrap!important;margin:0!important;flex:0 0 auto!important}
+  .manage.glass .management-actions{
+    flex:0 1 auto!important;display:flex!important;grid-template-columns:none!important;
+    flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-end!important;
+    gap:8px!important;min-width:0!important;overflow:visible!important;padding:0!important;
+  }
+  .manage.glass .management-actions button{
+    flex:0 0 auto!important;width:auto!important;height:32px!important;min-height:32px!important;
+    padding:0 11px!important;line-height:1.1!important;white-space:nowrap!important;
+    font-size:11px!important;font-weight:760!important;border-radius:999px!important;
+  }
+}
+.manage.glass{
+  background:linear-gradient(120deg,rgba(23,42,67,.78),rgba(23,42,67,.64) 58%,rgba(23,42,67,.74))!important;
+  border:1px solid rgba(164,187,216,.20)!important;
+  color:#eaf0f9!important;
+  box-shadow:0 16px 40px rgba(0,0,0,.20),inset 0 1px 0 rgba(227,237,255,.11),inset 0 -1px 0 rgba(0,0,0,.14)!important;
+  backdrop-filter:blur(22px) saturate(125%)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(125%)!important;
+}
+.manage.glass::before{background:linear-gradient(180deg,rgba(227,237,255,.035),transparent 45%)!important;pointer-events:none!important}
+.manage.glass .management-actions button{
+  background:linear-gradient(160deg,rgba(245,210,131,.28),rgba(210,157,67,.12) 56%,rgba(238,197,106,.19))!important;
+  border:1px solid rgba(250,213,140,.43)!important;
+  border-radius:999px!important;
+  color:#e6efff!important;
+  box-shadow:inset 0 1px 0 rgba(255,228,167,.28),inset 0 -1px 0 rgba(87,53,9,.09),0 3px 10px rgba(0,0,0,.10)!important;
+  text-shadow:none!important;
+}
+.manage.glass .management-actions button::before{background:none!important;content:none!important}
+.manage.glass .management-actions button:hover:not(:disabled){
+  background:linear-gradient(160deg,rgba(255,223,160,.37),rgba(213,160,72,.21))!important;
+  border-color:rgba(255,223,159,.75)!important;
+  transform:translateY(-1px)!important;
+  box-shadow:inset 0 1px 0 rgba(255,228,167,.28),0 3px 10px rgba(0,0,0,.1)!important;
+}
+.manage.glass .management-actions #manage-toggle{color:#ded0ff!important}
+.manage.glass .management-actions #audit-btn{color:#baceff!important}
+.manage.glass .management-actions #export-btn{color:#a6eedc!important}
+.manage.glass .management-actions #import-btn{color:#e6efff!important}
+.manage.glass .management-actions #reset-btn{color:#ffd194!important}
+.manage.glass .management-actions #delete-auction-btn{color:#ff9d9f!important}
+/* Retain recognisable active edit state from V29.2. */
+.manage.glass .management-actions #manage-toggle.chosen{color:#fff!important;background:linear-gradient(135deg,rgba(24,145,79,.92),rgba(63,192,117,.86))!important;border-color:rgba(216,255,226,.72)!important}
+@media(max-width:950px){
+ .manage.glass{height:auto!important;min-height:0!important;padding:14px!important}
+ .manage.glass h2{margin:0 0 12px!important;font-size:15px!important}
+ .manage.glass .management-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;overflow:visible!important;padding:0!important}
+ .manage.glass .management-actions button{width:100%!important;height:34px!important;min-height:34px!important;padding:0 6px!important;font-size:10.5px!important;line-height:1.15!important;white-space:normal!important}
+}
+
+
+/* V29.4 — mobile-only premium dark liquid-glass theme; desktop unaffected. */
+.mobile-theme-switch{display:none!important}
+@media(max-width:760px){
+ .top-actions{gap:8px!important;flex-wrap:nowrap!important}
+ .mobile-theme-switch{
+   display:inline-flex!important;align-items:center;justify-content:center;gap:6px;
+   min-height:37px;padding:8px 11px;border-radius:999px;white-space:nowrap;
+   background:rgba(23,42,67,.14);color:#403456;border:1px solid rgba(101,83,144,.25);
+   box-shadow:inset 0 1px rgba(255,255,255,.28);font-size:11px;font-weight:800;
+ }
+ .top-actions .new-auction{font-size:11px;padding:10px 12px;min-height:37px}
+ body.mobile-dark{
+   color-scheme:dark;--ink:#ecf1fa;--sub:#b2c0d4;--glass:rgba(23,42,67,.77);
+   --glass-2:rgba(23,42,67,.65);--line:rgba(172,196,224,.22);
+   --shadow:0 17px 45px rgba(0,0,0,.27),inset 0 1px 0 rgba(190,216,255,.09);
+   --glow:0 0 0 1px rgba(185,210,244,.12),0 16px 38px rgba(0,0,0,.20);
+   background:radial-gradient(circle at 14% 4%,rgba(151,110,48,.13),transparent 35%),radial-gradient(circle at 90% 15%,rgba(127,96,184,.14),transparent 36%),linear-gradient(160deg,#080f1d,#0b1424 48%,#121b2d)!important;
+ }
+ body.mobile-dark::before{background:radial-gradient(circle,rgba(181,139,63,.11),transparent 65%)}
+ body.mobile-dark::after{background:radial-gradient(circle,rgba(125,103,194,.12),transparent 70%)}
+ body.mobile-dark .floral-wallpaper{opacity:.20}
+ body.mobile-dark .mobile-theme-switch{color:#f8d993;background:rgba(232,196,112,.10);border-color:rgba(243,207,133,.43)}
+ body.mobile-dark :is(.glass,.hero-shell,.auction-entry,.auction-switcher,.team,.history,.card,.cricket-zone .cricket-config,.cricket-zone .cricket-rules,.cricket-zone .cricket-pool,.cricket-zone .cricket-setup-card,#cricket-board,#cricket-final,.cricket-finish-panel){
+   background:linear-gradient(135deg,rgba(23,42,67,.87),rgba(14,28,47,.81))!important;
+   border-color:rgba(160,185,218,.20)!important;
+   box-shadow:0 15px 35px rgba(0,0,0,.23),inset 0 1px rgba(194,217,244,.09)!important;
+   backdrop-filter:blur(20px) saturate(115%);-webkit-backdrop-filter:blur(20px) saturate(115%);
+   color:#ebf2fd;
+ }
+ body.mobile-dark .glass::before{background:linear-gradient(120deg,rgba(215,232,255,.025),transparent 38%,rgba(215,232,255,.012))!important}
+ body.mobile-dark .glass::after{border-color:rgba(195,218,255,.075)!important}
+ body.mobile-dark :is(.card.a,.cricket-bidding-layout .card.a){background:linear-gradient(105deg,rgba(97,72,29,.64),rgba(23,42,67,.83) 58%,rgba(17,30,49,.88))!important}
+ body.mobile-dark :is(.card.b,.cricket-bidding-layout .card.b){background:linear-gradient(105deg,rgba(68,51,105,.68),rgba(23,42,67,.82) 58%,rgba(17,30,49,.89))!important}
+ body.mobile-dark .card.a::before{background:linear-gradient(90deg,rgba(236,190,89,.26),transparent)!important}
+ body.mobile-dark .card.b::before{background:linear-gradient(90deg,rgba(173,141,223,.26),transparent)!important}
+ body.mobile-dark :is(.title,h1,h2,h3,h4,.name-input,.balance,.metric strong,.player-label,.purchase,.section-head,.team h2,.history h2){color:#edf3ff!important;text-shadow:none!important}
+ body.mobile-dark .title .shine{background:linear-gradient(125deg,#f5d38a,#d2adff);background-clip:text;-webkit-background-clip:text;color:transparent!important}
+ body.mobile-dark :is(.eyebrow,.balance-label,.spent,.muted,.subtitle,.note,.field-label,.metric span,.metric small,.footer,.cricket-heading p,.cricket-requirement-label){color:#b1bfd4!important}
+ body.mobile-dark :is(.roster-item,.metric,.audit-item,.cricket-requirement-row,.cricket-pool-table tbody tr,.cricket-player-row,.cricket-score-side,.cricket-score-rules,.cricket-rule,.result-overview-item,.result-card,.result-stat,.new-mode-tile){
+   background:rgba(18,34,55,.65)!important;border-color:rgba(157,180,213,.18)!important;color:#edf3fd!important;
+ }
+ body.mobile-dark :is(input,select,textarea,.dialog-input,.field input,.auction-entry .field input,.cricket-shared-price input,#cricket-setup .dialog-input){
+   background:rgba(10,23,41,.78)!important;color:#edf3ff!important;border-color:rgba(151,177,209,.32)!important;
+   box-shadow:inset 0 1px rgba(255,255,255,.035)!important;
+ }
+ body.mobile-dark input::placeholder,body.mobile-dark textarea::placeholder{color:#8496ad!important}
+ body.mobile-dark :is(label,th,td,.cricket-pool-table th,.cricket-pool-table td,.cricket-rule,.cricket-requirement-row small){color:#d6e0ef!important}
+ body.mobile-dark :is(.dialog,.dialog.new-setup-dialog){background:linear-gradient(145deg,rgba(22,41,64,.97),rgba(12,25,44,.98))!important;color:#edf3ff!important;border-color:rgba(181,203,234,.23)!important;box-shadow:0 20px 70px rgba(0,0,0,.50)!important}
+ body.mobile-dark :is(.dialog h2,.dialog.new-setup-dialog #modal-title,.dialog-copy,.dialog .muted){color:#edf3ff!important}
+ body.mobile-dark .modal-layer{background:rgba(2,7,18,.76)!important}
+ body.mobile-dark .auction-tab{background:rgba(25,44,68,.82)!important;border-color:rgba(173,193,226,.25)!important;color:#dae4f7!important}
+ body.mobile-dark .auction-tab.active{background:linear-gradient(120deg,#7357b6,#5d4395)!important;color:#fff!important}
+ body.mobile-dark .new-auction{background:linear-gradient(125deg,#168450,#27aa6c)!important;color:white!important}
+ body.mobile-dark :is(.card .add,.cricket-primary){color:#fff!important}
+ body.mobile-dark #cricket-live .cricket-inline-config{background:rgba(23,42,67,.90)!important;border-color:rgba(180,199,227,.27)!important;box-shadow:0 13px 29px rgba(0,0,0,.21)!important}
+ body.mobile-dark #cricket-live .cricket-inline-config :is(summary,.cricket-inline-config-body,.cr-config-label,.config-expand){color:#e5edfc!important}
+ body.mobile-dark #cricket-live .cricket-inline-config-body{background:rgba(12,25,44,.62)!important;border-top-color:rgba(188,207,233,.20)!important}
+ body.mobile-dark #cricket-live .cr-config-row + .cr-config-row{border-top-color:rgba(185,203,232,.13)!important}
+ body.mobile-dark #cricket-live .cricket-stage{background:#192b45!important;color:#f9dc96!important}
+ body.mobile-dark .cricket-shared-price{background:linear-gradient(135deg,rgba(37,47,80,.90),rgba(20,35,58,.94))!important;border-color:rgba(176,189,221,.26)!important}
+ body.mobile-dark .cricket-shared-price :is(label,small){color:#d7e1f1!important}
+ body.mobile-dark .cricket-current{background:#0b1424!important;border-color:rgba(178,194,225,.18)!important}
+ body.mobile-dark .cricket-inner{background:#1b2c45!important}
+ body.mobile-dark .cricket-live-message{color:#ffd4c6!important}
+ body.mobile-dark :is(#cricket-board .cricket-score-side,#cricket-board .cricket-score-rules){background:rgba(14,29,48,.72)!important;border-color:rgba(171,194,224,.19)!important}
+ body.mobile-dark :is(#cricket-board .cricket-rule,#cricket-board .cricket-score-detail,#cricket-board h4){color:#d8e4f5!important}
+ body.mobile-dark :is(#cricket-final .result-report-body,#cricket-final .result-dashboard-grid,#cricket-final .result-report){color:#e8eefb!important}
+ body.mobile-dark #cricket-final :is(.result-dashboard-item,.result-stat,.result-record-item,.result-hero,.result-spending-grid>*,.result-overview-card){background:rgba(19,36,58,.80)!important;color:#eef3ff!important;border-color:rgba(164,190,225,.18)!important}
+ body.mobile-dark #cricket-final :is(h3,h4,strong,.result-value){color:#f5d38d!important}
+ body.mobile-dark .tag{background:rgba(199,168,93,.20)!important;color:#f4d58e!important}
+ body.mobile-dark .tag.b{background:rgba(169,137,225,.20)!important;color:#d6c0ff!important}
+ body.mobile-dark .table-wrap :is(th,td){border-color:rgba(177,198,230,.13)!important}
+ body.mobile-dark .cricket-pool-table thead{background:rgba(17,32,52,.96)!important}
+ body.mobile-dark .cricket-pool-table :is(th,td){color:#e4ecfa!important}
+ body.mobile-dark .cricket-pool-table tbody tr{box-shadow:inset 0 1px rgba(185,205,238,.09)!important}
+ body.mobile-dark .manage.glass{background:linear-gradient(125deg,rgba(23,42,67,.94),rgba(23,42,67,.86))!important}
+ body.mobile-dark .management-actions button{color:#f0dfb5!important}
+ body.mobile-dark .management-actions #reset-btn{color:#ffcf95!important}
+ body.mobile-dark .management-actions #delete-auction-btn{color:#ff969a!important}
+ body.mobile-dark .management-actions #export-btn{color:#a6eedc!important}
+ body.mobile-dark .management-actions #audit-btn{color:#bdcbff!important}
+ body.mobile-dark .management-actions #manage-toggle{color:#d8beff!important}
+ body.mobile-dark :is(.cricket-config,.cricket-pool,.cricket-rules) :is(h2,h3,h4,strong){color:#eef3ff!important}
+ body.mobile-dark .cricket-config :is(.budget-value,.cricket-purse-value){color:#f4d48c!important}
+ body.mobile-dark :is(.cricket-country-code,.squad-country,.cr-history-country){color:#e2ecf8!important}
+ body.mobile-dark :is(.roster-item .price,.team.a .roster-item .price){color:#f1cd80!important}
+ body.mobile-dark .team.b .roster-item .price{color:#d4b9ff!important}
+ body.mobile-dark a{color:#c5b2fc}
+ body.mobile-dark :is(.error,.negative){color:#ff9ca7!important}
+ body.mobile-dark button:focus-visible,body.mobile-dark input:focus-visible{outline:2px solid #f0d18a;outline-offset:2px}
+}
+/* Prevent the entire 'Frozen after Start Auction' phrase from splitting awkwardly. */
+#cricket-live .cr-config-row .cr-config-freeze{display:inline-block;white-space:nowrap}
+@media(max-width:760px){#cricket-live .cr-config-row .cr-config-freeze{white-space:normal}}
+
+
+/* Final mobile dark-theme contrast refinements, without touching light mode. */
+@media(max-width:760px){
+ body.mobile-dark .card.a::before{background:linear-gradient(90deg,rgba(167,123,48,.27),rgba(19,37,57,.10))!important}
+ body.mobile-dark .card.b::before{background:linear-gradient(90deg,rgba(122,93,177,.27),rgba(19,37,57,.10))!important}
+ body.mobile-dark :is(button:not(.new-auction):not(.add):not(.cricket-primary):not(.mobile-theme-switch):not(.auction-tab):not(.cricket-primary):not(.cricket-secondary):not(.cricket-stat-pill),.dialog button:not(.new-auction)){
+   background:linear-gradient(140deg,rgba(48,69,97,.77),rgba(22,39,61,.83))!important;
+   color:#e8edf8!important;border-color:rgba(168,190,219,.28)!important;
+   box-shadow:inset 0 1px rgba(209,229,254,.095),0 5px 15px rgba(0,0,0,.12)!important;
+ }
+ body.mobile-dark .manage.glass .management-actions button{
+   background:linear-gradient(155deg,rgba(243,203,118,.22),rgba(201,151,63,.12))!important;
+   border-color:rgba(244,206,138,.38)!important;
+ }
+ body.mobile-dark .dialog .dialog-actions .primary-btn,body.mobile-dark .dialog .dialog-actions .new-auction{
+   background:linear-gradient(120deg,rgba(26,138,89,.95),rgba(49,180,119,.94))!important;color:white!important;
+ }
+ body.mobile-dark .cricket-pool-table :is(button,select,input){color:#e9f0fc!important}
+ body.mobile-dark .cricket-requirement-number.met{color:#78e2b5!important}
+ body.mobile-dark .cricket-requirement-number.unmet{color:#ff9daa!important}
+ body.mobile-dark .cricket-score-side .cricket-score-detail strong{color:#e5edf9!important}
+ body.mobile-dark :is(.dialog .dialog-top button,#modal-close){color:#e2d6ff!important}
+}
+
+
+/* V29.5: Match the approved transparent navy action bar on the light wallpaper.
+   Strong navy pigment avoids the previous pale/milky blend, while preserving glass depth. */
+@media (min-width:951px){
+  .manage.glass{
+    background:linear-gradient(120deg,rgba(23,42,67,.97),rgba(23,42,67,.94) 58%,rgba(23,42,67,.97))!important;
+    border-color:rgba(164,187,216,.20)!important;
+    box-shadow:0 16px 40px rgba(0,0,0,.20),inset 0 1px 0 rgba(227,237,255,.11),inset 0 -1px 0 rgba(0,0,0,.14)!important;
+  }
+  .manage.glass::before{background:linear-gradient(180deg,rgba(227,237,255,.035),transparent 45%)!important}
+  .manage.glass::after{border-color:rgba(164,187,216,.08)!important}
+}
+/* V29.5: Widen only the live Cricket Auction Configuration dropdown. */
+@media(min-width:711px){
+  #cricket-live .cricket-live-top{grid-template-columns:minmax(0,1fr) 310px minmax(120px,1fr)}
+  #cricket-live .cricket-inline-config{width:310px!important;max-width:310px!important;min-width:310px!important}
+}
+@media(min-width:381px) and (max-width:710px){
+  #cricket-live .cricket-inline-config{max-width:min(310px,calc(100vw - 130px))!important;width:100%!important}
+}
+/* Put appearance status under the Cricket Auction text, not under the cricket bat emoji. */
+#cricket-live .cricket-live-heading>p#cricket-progress{padding-left:37px!important;box-sizing:border-box}
+
 </style>
 </head>
 <body>
@@ -1446,7 +2147,7 @@ body.cricket-roster-mode .history .edited-chip,body.cricket-roster-mode .history
         <h1 class="title">Build your <span class="shine">dream teams</span>.</h1>
         <p class="subtitle">Two teams. One dream draft. Buy your stars, track winning bids, and build your team.</p>
       </div>
-      <div class="top-actions"><button id="new-auction" class="new-auction" type="button">＋ New Auction</button></div>
+      <div class="top-actions"><button id="new-auction" class="new-auction" type="button">＋ New Auction</button><button id="mobile-theme-toggle" class="mobile-theme-switch" type="button" aria-pressed="false" aria-label="Enable mobile dark mode">☾ Dark</button></div>
     </div>
   </section>
 
@@ -1477,7 +2178,7 @@ body.cricket-roster-mode .history .edited-chip,body.cricket-roster-mode .history
     <div><h3>🏆 Auction Completion</h3><p class="muted" id="cricket-end-reason">Both teams must have a legal Playing XI.</p></div>
     <button id="cricket-end" type="button" class="cricket-end-btn" disabled>🏆 End Auction &amp; Calculate Results</button>
   </section>
-  <div id="cricket-xi-view" class="cricket-xi-view glass"><div class="cricket-pool-head"><h3>Playing XI</h3><p class="muted">Available choices and squad eligibility</p></div><div id="cricket-xi-content"></div></div>
+  <div id="cricket-xi-view" class="cricket-xi-view glass"><div class="cricket-pool-head"><h3>Squad Compliance</h3><p class="muted">Available choices and squad eligibility</p></div><div id="cricket-xi-content"></div></div>
   <div id="cricket-final" class="cricket-final glass" hidden></div>
 </section>
   <section class="cards" aria-label="Team budgets">
@@ -1525,12 +2226,12 @@ body.cricket-roster-mode .history .edited-chip,body.cricket-roster-mode .history
       <div class="cricket-rules-divider"></div>
       <h4>Generate your player list using ChatGPT</h4><p class="cricket-muted">Copy the instructions below into ChatGPT to generate a compatible player CSV.</p>
       <button id="cricket-copy-prompt" type="button" class="cricket-copy">⧉ Copy ChatGPT Prompt</button>
-      <label for="cricket-upload" class="cricket-upload"><span class="cricket-upload-icon">☁</span><strong>Upload Generated CSV</strong><span>48 players · CSV format</span><span>Required: Name, Age, Country, Role</span><span>Optional: Player Type</span></label>
+      <label for="cricket-upload" class="cricket-upload"><span class="cricket-upload-icon">☁</span><strong>Upload Generated CSV</strong><span>48 players · CSV format</span><span>Required: Name, Age, Country, Role, Player Type</span><span>All five columns mandatory</span></label>
       <input type="file" id="cricket-upload" accept=".csv,text/csv" hidden>
     </div>
-    <div class="cricket-config glass"><h3>Auction configuration</h3><label class="field-label" for="cricket-title">Auction title</label><input id="cricket-title" maxlength="55" class="dialog-input"><div class="cricket-config-two"><div><label class="field-label" for="cricket-name-a">Team 1</label><input id="cricket-name-a" maxlength="35" class="dialog-input"></div><div><label class="field-label" for="cricket-name-b">Team 2</label><input id="cricket-name-b" maxlength="35" class="dialog-input"></div></div><div class="cricket-start-purse">Starting purse per team <strong>₹100.00 Cr</strong></div><h3>Player pool validation</h3><div id="cricket-validation" class="cricket-validation" aria-live="polite"></div><button id="cricket-restore" class="cricket-secondary" type="button">↻ Restore Default Players</button><button id="cricket-start" class="cricket-primary" type="button" disabled>Start Auction</button></div>
+    <div class="cricket-config glass"><h3>Auction configuration</h3><label class="field-label" for="cricket-title">Auction title</label><input id="cricket-title" maxlength="55" class="dialog-input"><div class="cricket-config-two"><div><label class="field-label" for="cricket-name-a">Team 1</label><input id="cricket-name-a" maxlength="35" class="dialog-input"></div><div><label class="field-label" for="cricket-name-b">Team 2</label><input id="cricket-name-b" maxlength="35" class="dialog-input"></div></div><div class="cricket-start-purse"><label for="cricket-setup-budget">Starting purse per team (₹ Cr)</label><input id="cricket-setup-budget" type="number" min="11" max="100000" step="0.01" inputmode="decimal" aria-label="Starting purse per cricket team"></div><h3>Player pool validation</h3><div id="cricket-validation" class="cricket-validation" aria-live="polite"></div><button id="cricket-restore" class="cricket-secondary" type="button">↻ Restore Default Players</button><button id="cricket-start" class="cricket-primary" type="button" disabled>Start Auction</button></div>
   </div>
-  <div class="cricket-pool-box glass"><div class="cricket-pool-head"><h3>Manage player pool</h3><div class="cricket-pool-tools"><input id="cricket-search" type="search" placeholder="Search a player or country" aria-label="Search player pool"><select id="cricket-role-filter" aria-label="Filter role"><option value="">All roles</option><option>BAT</option><option>WK</option><option>AR</option><option>BOWL</option></select><button id="cricket-add-player" type="button" class="cricket-secondary">＋ Add Player</button></div></div><div class="cricket-pool-scroll"><table class="cricket-pool-table"><thead><tr><th>#</th><th>Player name</th><th>Age</th><th>Country</th><th>Role</th><th>Player type (optional)</th><th></th></tr></thead><tbody id="cricket-pool-rows"></tbody></table></div></div>
+  <div class="cricket-pool-box glass"><div class="cricket-pool-head"><h3>Manage player pool</h3><div class="cricket-pool-tools"><input id="cricket-search" type="search" placeholder="Search a player or country" aria-label="Search player pool"><select id="cricket-role-filter" aria-label="Filter role"><option value="">All roles</option><option>BAT</option><option>WK</option><option>AR</option><option>BOWL</option></select><button id="cricket-add-player" type="button" class="cricket-secondary">＋ Add Player</button></div></div><div class="cricket-pool-scroll"><table class="cricket-pool-table"><thead><tr><th>#</th><th>Player name</th><th>Age</th><th>Country</th><th>Role</th><th>Player type</th><th></th></tr></thead><tbody id="cricket-pool-rows"></tbody></table></div></div>
 </section>
 
   <datalist id="cricketer-suggestions"><option value="Virat Kohli"></option><option value="Rohit Sharma"></option><option value="MS Dhoni"></option><option value="Sachin Tendulkar"></option><option value="Jasprit Bumrah"></option><option value="Hardik Pandya"></option><option value="Ravindra Jadeja"></option><option value="Shubman Gill"></option><option value="KL Rahul"></option><option value="Rishabh Pant"></option><option value="Suryakumar Yadav"></option><option value="Yashasvi Jaiswal"></option><option value="Mohammed Shami"></option><option value="Mohammed Siraj"></option><option value="Shreyas Iyer"></option><option value="Sanju Samson"></option><option value="Ishan Kishan"></option><option value="Ruturaj Gaikwad"></option><option value="Rinku Singh"></option><option value="Axar Patel"></option><option value="Kuldeep Yadav"></option><option value="Ravichandran Ashwin"></option><option value="Yuvraj Singh"></option><option value="Virender Sehwag"></option><option value="Gautam Gambhir"></option><option value="Rahul Dravid"></option><option value="Sourav Ganguly"></option><option value="Kapil Dev"></option><option value="Anil Kumble"></option><option value="Harbhajan Singh"></option><option value="Zaheer Khan"></option><option value="Bhuvneshwar Kumar"></option><option value="Shikhar Dhawan"></option><option value="Dinesh Karthik"></option><option value="Suresh Raina"></option><option value="AB de Villiers"></option><option value="Faf du Plessis"></option><option value="Quinton de Kock"></option><option value="Heinrich Klaasen"></option><option value="David Miller"></option><option value="Kagiso Rabada"></option><option value="Aiden Markram"></option><option value="Tristan Stubbs"></option><option value="Dale Steyn"></option><option value="Hashim Amla"></option><option value="Graeme Smith"></option><option value="Jacques Kallis"></option><option value="Chris Gayle"></option><option value="Andre Russell"></option><option value="Sunil Narine"></option><option value="Nicholas Pooran"></option><option value="Kieron Pollard"></option><option value="Dwayne Bravo"></option><option value="Shimron Hetmyer"></option><option value="Jason Holder"></option><option value="Shai Hope"></option><option value="Brian Lara"></option><option value="Viv Richards"></option><option value="Shivnarine Chanderpaul"></option><option value="Alzarri Joseph"></option><option value="Jos Buttler"></option><option value="Ben Stokes"></option><option value="Joe Root"></option><option value="Harry Brook"></option><option value="Jofra Archer"></option><option value="Phil Salt"></option><option value="Sam Curran"></option><option value="Liam Livingstone"></option><option value="Moeen Ali"></option><option value="Jonny Bairstow"></option><option value="Adil Rashid"></option><option value="James Anderson"></option><option value="Stuart Broad"></option><option value="Eoin Morgan"></option><option value="Alex Hales"></option><option value="David Warner"></option><option value="Steve Smith"></option><option value="Pat Cummins"></option><option value="Mitchell Starc"></option><option value="Glenn Maxwell"></option><option value="Travis Head"></option><option value="Marnus Labuschagne"></option><option value="Josh Hazlewood"></option><option value="Mitchell Marsh"></option><option value="Marcus Stoinis"></option><option value="Adam Zampa"></option><option value="Cameron Green"></option><option value="Nathan Lyon"></option><option value="Shane Warne"></option><option value="Ricky Ponting"></option><option value="Adam Gilchrist"></option><option value="Michael Clarke"></option><option value="Brett Lee"></option><option value="Matthew Hayden"></option><option value="Kane Williamson"></option><option value="Devon Conway"></option><option value="Daryl Mitchell"></option><option value="Rachin Ravindra"></option><option value="Trent Boult"></option><option value="Tim Southee"></option><option value="Glenn Phillips"></option><option value="Mitchell Santner"></option><option value="Lockie Ferguson"></option><option value="Brendon McCullum"></option><option value="Ross Taylor"></option><option value="Babar Azam"></option><option value="Shaheen Afridi"></option><option value="Mohammad Rizwan"></option><option value="Fakhar Zaman"></option><option value="Naseem Shah"></option><option value="Shadab Khan"></option><option value="Haris Rauf"></option><option value="Imad Wasim"></option><option value="Saim Ayub"></option><option value="Shoaib Malik"></option><option value="Shahid Afridi"></option><option value="Wasim Akram"></option><option value="Waqar Younis"></option><option value="Inzamam-ul-Haq"></option><option value="Mohammad Amir"></option><option value="Rashid Khan"></option><option value="Mohammad Nabi"></option><option value="Rahmanullah Gurbaz"></option><option value="Mujeeb Ur Rahman"></option><option value="Ibrahim Zadran"></option><option value="Azmatullah Omarzai"></option><option value="Naveen-ul-Haq"></option><option value="Litton Das"></option><option value="Shakib Al Hasan"></option><option value="Mustafizur Rahman"></option><option value="Taskin Ahmed"></option><option value="Mehidy Hasan Miraz"></option><option value="Tamim Iqbal"></option><option value="Mushfiqur Rahim"></option><option value="Wanindu Hasaranga"></option><option value="Pathum Nissanka"></option><option value="Kusal Mendis"></option><option value="Matheesha Pathirana"></option><option value="Maheesh Theekshana"></option><option value="Angelo Mathews"></option><option value="Kumar Sangakkara"></option><option value="Mahela Jayawardene"></option><option value="Lasith Malinga"></option><option value="Muttiah Muralitharan"></option><option value="Sanath Jayasuriya"></option><option value="Charith Asalanka"></option><option value="Paul Stirling"></option><option value="Josh Little"></option><option value="Harry Tector"></option><option value="Andy Balbirnie"></option><option value="Sikandar Raza"></option><option value="Blessing Muzarabani"></option><option value="Sean Williams"></option></datalist>
@@ -1766,7 +2467,10 @@ function cleanAuction(a){
     teamAtSigning:String(e.teamAtSigning||'').slice(0,35),
     ...(typeof e.poolId==='string'?{poolId:e.poolId}:{}),
     ...(e.round==='initial'||e.round==='recall'||e.round==='reentry'?{round:e.round}:{}),
-    ...(Number.isSafeInteger(e.appearance)?{appearance:e.appearance}:{})
+    ...(Number.isSafeInteger(e.appearance)?{appearance:e.appearance}:{}),
+    ...(Number.isSafeInteger(e.purseAtSigning)?{purseAtSigning:e.purseAtSigning}:{}),
+    ...(Number.isSafeInteger(e.originalBidAtSigning)?{originalBidAtSigning:e.originalBidAtSigning}:{}),
+    ...(Number.isFinite(e.gmpAtSigning)&&e.gmpAtSigning>=0?{gmpAtSigning:e.gmpAtSigning}:{})
   }));
   x.audit=(Array.isArray(a.audit)?a.audit:[]).filter(l=>l&&['Edited','Deleted'].includes(l.action)).map(l=>({...l}));
   if(a.cricket&&typeof a.cricket==='object'&&Array.isArray(a.cricket.pool))x.cricket=JSON.parse(JSON.stringify(a.cricket));
@@ -1803,6 +2507,10 @@ function toast(message){$('auction-error').textContent=message;}
 function clearEntry(){ $('purchase').value='';$('amount').value='';toast('');}
 function syncHover(){for(const p of ['a','b']){const disabled=manageOn||(hoveredTeam!==null&&hoveredTeam!==p)||(isAdvanced()&&(!state.cricket.started||state.cricket.resolution!=='pending'||!!state.cricket.passed?.[p]||(state.cricket.complete||state.cricket.awaitingEnd)));$('sign-'+p).disabled=disabled;cards[p].classList.toggle('inactive-team',disabled&&!manageOn);}}
 function syncEditLock(){
+  // V29.6: reset the edit/signing control from the CURRENT auction state on every render.
+  // A completed Cricket auction may disable it, but that must not leak to another auction
+  // when switching tabs without refreshing the browser. Save Changes uses this same control.
+  $('manage-toggle').disabled=isAdvanced()&&!!state.cricket?.complete;
   document.body.classList.toggle('edit-lock',manageOn);
   for(const id of ['audit-btn','export-btn','import-btn','reset-btn','delete-auction-btn','new-auction','undo','purchase','amount','name-a','name-b']) $(id).disabled=manageOn;
   document.querySelectorAll('.auction-tab').forEach(b=>b.disabled=manageOn);
@@ -1865,8 +2573,8 @@ function render(){renderTabs();suggestions();syncEditLock();$('manage-toggle').s
   }
   renderCricket();
 }
-function showDialog(title,markup,handler){$('modal-title').textContent=title;document.querySelector('.dialog').classList.toggle('audit-dialog',title==='Edit / Delete History');document.querySelector('.dialog').classList.toggle('delete-confirm',title==='Delete Auction');$('modal-body').innerHTML=markup;$('modal-layer').hidden=false;$('modal-layer').classList.add('open');modalCallback=handler;const focus=$('modal-body').querySelector('input:not([type=file]),button');if(focus)focus.focus();}
-function closeDialog(){document.querySelector('.dialog').classList.remove('audit-dialog','delete-confirm');$('modal-layer').classList.remove('open');$('modal-layer').hidden=true;$('modal-body').replaceChildren();modalCallback=null;}
+function showDialog(title,markup,handler){$('modal-title').textContent=title;document.querySelector('.dialog').classList.toggle('audit-dialog',title==='Edit / Delete History');document.querySelector('.dialog').classList.toggle('delete-confirm',title==='Delete Auction');document.querySelector('.dialog').classList.toggle('new-setup-dialog',title==='Create New Auction');$('modal-body').innerHTML=markup;$('modal-layer').hidden=false;$('modal-layer').classList.add('open');modalCallback=handler;const focus=$('modal-body').querySelector('input:not([type=file]),button');if(focus)focus.focus();}
+function closeDialog(){document.querySelector('.dialog').classList.remove('audit-dialog','delete-confirm','new-setup-dialog');$('modal-layer').classList.remove('open');$('modal-layer').hidden=true;$('modal-body').replaceChildren();modalCallback=null;}
 $('modal-close').onclick=closeDialog;
 $('modal-layer').addEventListener('click',e=>{if(e.target===$('modal-layer'))closeDialog();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('modal-layer').hidden)closeDialog();});
@@ -1905,7 +2613,10 @@ async function downloadBackup(auction=state){
   const json=JSON.stringify({format:FORMAT,exportedAt:new Date().toISOString(),activeId:auction.id,auctions:[auction]},null,2);
   const blob=new Blob([json],{type:'application/json'});
   const safeTitle=auction.title.trim().replace(/[^a-z0-9-_]+/gi,'-').replace(/^-+|-+$/g,'').slice(0,55)||'auction';
-  const name='dream-draft-'+safeTitle+'-'+new Date().toISOString().replace(/[:.]/g,'-').slice(0,19)+'.json';
+  // Local wall-clock timestamp, not UTC; all exports use auction slug and time.
+  const now=new Date(),pad=n=>String(n).padStart(2,'0');
+  const localStamp=`${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}T${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`;
+  const name='dream-draft-'+safeTitle.toLowerCase()+'-'+localStamp+'.json';
   if(typeof window.showDirectoryPicker==='function'){
     try{
       let folder=await loadExportFolder();
@@ -1913,10 +2624,14 @@ async function downloadBackup(auction=state){
       let permission=await folder.queryPermission({mode:'readwrite'});
       if(permission!=='granted')permission=await folder.requestPermission({mode:'readwrite'});
       if(permission!=='granted'){toast('Folder access not granted. Export cancelled.');return false;}
-      const file=await folder.getFileHandle(name,{create:true});
+      // Select D:\ in the chooser to create D:\Auction CSV if missing,
+      // or select the existing Auction CSV folder directly.
+      let destination=folder;
+      if(folder.name.toLowerCase()!=='auction csv')destination=await folder.getDirectoryHandle('Auction CSV',{create:true});
+      const file=await destination.getFileHandle(name,{create:true});
       const writer=await file.createWritable();await writer.write(blob);await writer.close();
       await storeExportFolder(folder);
-      toast('Export saved in '+folder.name+' / '+name);
+      toast('Export saved in '+destination.name+' / '+name);
       return true;
     }catch(err){
       if(err?.name==='AbortError'){toast('Export cancelled.');return false;}
@@ -1929,7 +2644,7 @@ async function downloadBackup(auction=state){
 }
 function confirmExport(){
   const chosen=state;
-  showDialog('Export Auction',`<p class="dialog-copy">Do you want to export <strong id="export-auction-name"></strong>?</p><p class="dialog-copy">This backup includes this auction’s teams, budgets, signings, transactions, and edit/delete history only. On first export, choose D:\\Auction CSV in the folder picker; later exports reuse it where browser permissions allow.</p><div class="dialog-actions"><button id="export-cancel" type="button">Cancel</button><button id="export-confirm" class="primary-btn" type="button"></button></div>`,()=>{});
+  showDialog('Export Auction',`<p class="dialog-copy">Do you want to export <strong id="export-auction-name"></strong>?</p><p class="dialog-copy">This backup includes this auction’s teams, budgets, signings, transactions, and edit/delete history only. On first export, select the D: drive root to create or use Auction CSV, or select the existing Auction CSV folder. Later exports reuse the folder where permission allows.</p><div class="dialog-actions"><button id="export-cancel" type="button">Cancel</button><button id="export-confirm" class="primary-btn" type="button"></button></div>`,()=>{});
   $('export-auction-name').textContent=chosen.title;
   $('export-confirm').textContent='Export '+chosen.title;
   $('export-cancel').onclick=closeDialog;
@@ -1979,19 +2694,48 @@ function showAudit(){
   updateResults();
 }
 
-function startNewAuction(){const next=Math.max(0,...store.auctions.map(a=>Number(a.title.match(/^Auction (\d+)$/)?.[1]||0)))+1;
-  showDialog('Create New Auction',`<label class="field-label" for="new-title">Auction name</label><input class="dialog-input" id="new-title" maxlength="55"><label class="field-label" for="new-budget">Starting budget for each team ($)</label><input class="dialog-input" id="new-budget" type="number" min="1" step="1" value="1000"><label class="field-label">Auction mode</label><div class="mode-picker"><label><input type="radio" name="new-mode" value="football" checked> ⚽ Football</label><label><input type="radio" name="new-mode" value="cricket"> 🏏 Cricket</label></div><label class="field-label" for="new-import">Import existing auction data (optional)</label><input class="dialog-input file-input" id="new-import" type="file" accept=".json,application/json"><p class="muted">Leave empty for a fresh auction. Importing an existing auction uses its own saved settings and signings.</p><p id="modal-error" class="error"></p><div class="dialog-actions"><button id="new-cancel">Cancel</button><button id="new-create" class="new-auction">Create Auction</button></div>`,()=>{});
-  $('new-title').value='Auction '+next;$('new-cancel').onclick=closeDialog;
-  const budgetLabel=document.querySelector('label[for=new-budget]');
-  const updateNewMode=()=>{const selected=document.querySelector('input[name=new-mode]:checked').value==='cricket';$('new-budget').disabled=selected;budgetLabel.textContent=selected?'Cricket team purse: ₹100.00 Cr (fixed)':'Starting budget for each team ($)';};
-  document.querySelectorAll('input[name=new-mode]').forEach(el=>el.addEventListener('change',updateNewMode));updateNewMode();
-  $('new-create').onclick=async()=>{const name=$('new-title').value.trim(),dollars=Number($('new-budget').value),mode=document.querySelector('input[name=new-mode]:checked').value,file=$('new-import').files[0];
-    if(!name||!Number.isSafeInteger(dollars)||dollars<1||dollars>1e9){modalError('Enter an auction name and a whole-dollar budget of at least $1.');return;}
-    let auction=fresh(uid(),name,dollars*100,mode);
-    if(file){try{const data=JSON.parse(await file.text());const source=Array.isArray(data.auctions)?data.auctions.find(a=>a.id===data.activeId)||data.auctions[0]:data;if(!source||!source.names||!Array.isArray(source.entries))throw Error('File does not contain auction data.');auction=cleanAuction({...source,id:auction.id,title:name});}catch(err){modalError('Import failed: '+err.message);return;}}
-    if(mode==='cricket'&&!file){auction.budget=1000000;auction.cricket=freshCricket();}store.auctions.push(auction);state=auction;store.activeId=auction.id;hoveredTeam=null;manageOn=false;save();clearEntry();render();syncHover();closeDialog();
-  };
+function startNewAuction(){
+ const next=Math.max(0,...store.auctions.map(a=>Number(a.title.match(/^Auction (\d+)$/)?.[1]||0)))+1;
+ showDialog('Create New Auction',`<div class="new-setup-step">Step 1 · Choose auction mode</div>
+ <div class="new-mode-tiles" role="radiogroup" aria-label="Auction mode">
+  <label class="new-mode-tile"><input type="radio" name="new-mode" value="football"><span class="new-mode-emoji">⚽</span><strong>Football</strong><small>Default $700</small></label>
+  <label class="new-mode-tile"><input type="radio" name="new-mode" value="cricket"><span class="new-mode-emoji">🏏</span><strong>Cricket</strong><small>Default ₹100 Cr</small></label>
+ </div>
+ <div class="new-setup-details" id="new-setup-details" hidden><div class="new-setup-step">Step 2 · Auction details</div>
+  <label class="field-label" for="new-title">Auction name</label><input class="dialog-input" id="new-title" maxlength="55">
+  <div class="new-setup-row"><div class="new-setup-col"><label class="field-label" for="new-team-a">Team 1</label><input class="dialog-input" id="new-team-a" maxlength="35"></div><div class="new-setup-col"><label class="field-label" for="new-team-b">Team 2</label><input class="dialog-input" id="new-team-b" maxlength="35"></div></div>
+  <label class="field-label" for="new-budget">Starting purse per team</label><div class="new-setup-budget-row"><input class="dialog-input" id="new-budget" type="number" inputmode="decimal" min="0.01" step="0.01"><span class="new-setup-currency" id="new-budget-currency"></span></div>
+  <p class="new-setup-hint" id="new-budget-hint"></p>
+  <label class="field-label" for="new-import">Import existing auction data (optional)</label><input class="dialog-input file-input" id="new-import" type="file" accept=".json,application/json"><p class="muted">Leave empty for a fresh auction. Importing existing data preserves its saved settings and signings.</p>
+ </div><p id="modal-error" class="error" role="alert"></p><div class="dialog-actions"><button id="new-cancel">Cancel</button><button id="new-create" class="new-auction" disabled>Create Auction</button></div>`,()=>{});
+ $('new-title').value='Auction '+next;$('new-team-a').value='Player A';$('new-team-b').value='Player B';$('new-cancel').onclick=closeDialog;
+ const modeInputs=[...document.querySelectorAll('input[name=new-mode]')];let lastMode='',userChangedBudget=false;
+ const sync=()=>{
+   const mode=document.querySelector('input[name=new-mode]:checked')?.value||'';
+   $('new-setup-details').hidden=!mode;
+   $('new-create').disabled=!mode;
+   if(!mode)return;
+   if(mode!==lastMode){$('new-budget').value=mode==='cricket'?'100':'700';userChangedBudget=false;lastMode=mode;}
+   $('new-budget-currency').textContent=mode==='cricket'?'₹ Cr':'USD ($)';
+   $('new-budget-hint').textContent=mode==='cricket'?'Default ₹100 Cr · Adjustable until Start Auction. Minimum ₹11 Cr for a legal XI.':'Default $700 · Adjustable before creation. Whole-dollar budgets.';
+   $('new-budget').step=mode==='cricket'?'0.01':'1';$('new-budget').min=mode==='cricket'?'11':'1';
+ };
+ modeInputs.forEach(el=>el.addEventListener('change',sync));sync();
+ $('new-create').onclick=async()=>{
+   const mode=document.querySelector('input[name=new-mode]:checked')?.value,name=$('new-title').value.trim(),teamA=$('new-team-a').value.trim(),teamB=$('new-team-b').value.trim(),raw=$('new-budget').value.trim(),value=Number(raw),file=$('new-import').files[0];
+   if(!mode){modalError('Choose Football or Cricket first.');return;}
+   if(!name||!teamA||!teamB){modalError('Enter the auction name and both team names.');return;}
+   const valid=raw!==''&&Number.isFinite(value)&&value>0&&(mode==='cricket'?value>=11&&Number.isSafeInteger(Math.round(value*100))&&Math.abs(value*100-Math.round(value*100))<1e-6:value>=1&&Number.isSafeInteger(value));
+   if(!valid){modalError(mode==='cricket'?'Enter a starting purse of at least ₹11 Cr, with at most two decimal places.':'Enter a positive whole-dollar starting purse.');return;}
+   const units=mode==='cricket'?Math.round(value*100):value*100;
+   if(!Number.isSafeInteger(units)||units>1e9){modalError('Starting purse is too large.');return;}
+   let auction=fresh(uid(),name,units,mode);auction.names={a:teamA.slice(0,35),b:teamB.slice(0,35)};
+   if(file){try{const data=JSON.parse(await file.text());const source=Array.isArray(data.auctions)?data.auctions.find(a=>a.id===data.activeId)||data.auctions[0]:data;if(!source||!source.names||!Array.isArray(source.entries))throw Error('File does not contain auction data.');auction=cleanAuction({...source,id:auction.id,title:name});}catch(err){modalError('Import failed: '+err.message);return;}}
+   if(mode==='cricket'&&!file){auction.cricket=freshCricket();}
+   store.auctions.push(auction);state=auction;store.activeId=auction.id;hoveredTeam=null;manageOn=false;save();clearEntry();render();syncHover();closeDialog();
+ };
 }
+
 async function importAll(file){
   if(!file)return;
   let incoming;
@@ -2020,7 +2764,7 @@ function deleteAuction(){const title=state.title;
   });
 }
 function resetAuction(){promptAction('Reset Current Auction','Clear every signing, transaction and audit record for '+state.title+'? Team names and budgets will be restored. Other auctions are not affected.',()=>{
-    state.entries=[];state.audit=[];state.nextNumber=1;state.names={a:'Player A',b:'Player B'};if(isAdvanced()){state.cricket=freshCricket();state.budget=1000000;} hoveredTeam=null;manageOn=false;save();clearEntry();render();syncHover();
+    state.entries=[];state.audit=[];state.nextNumber=1;state.names={a:'Player A',b:'Player B'};if(isAdvanced()){state.cricket=freshCricket();} hoveredTeam=null;manageOn=false;save();clearEntry();render();syncHover();
   });}
 // Actions
 for(const p of ['a','b']){
@@ -2051,7 +2795,7 @@ $('all-import-file').addEventListener('change',async e=>{const file=e.target.fil
 $('reset-btn').onclick=()=>{if(!manageOn)resetAuction();};
 $('delete-auction-btn').onclick=()=>{if(!manageOn)deleteAuction();};
 /* Advanced Cricket Auction extension. Football paths deliberately remain untouched. */
-const CRICKET_PROMPT='Generate a CSV containing exactly 48 unique real cricket players. Required columns: player_name,age,country,role. Optional fifth column: player_type for specialization. Country totals: India 22, Australia 6, England 5, South Africa 5, New Zealand 4, West Indies 3, Afghanistan 1, Sri Lanka 1, Bangladesh 1. Role totals: BAT 18, WK 7, AR 8, BOWL 15. Use full country names, whole-number ages, no duplicate players, and one primary role per player. Include accurate player information. Verify all counts and return only valid CSV text with a header row.';
+const CRICKET_PROMPT='Generate exactly 48 unique real cricket players as RAW CSV only, without Markdown code fences or commentary. CRITICAL: the CSV header must be exactly player_name,age,country,role,player_type (these five exact column names, lowercase with underscores; never write name in place of player_name). Every row MUST have all five nonempty fields. player_name: full unique player name; age: accurate whole number 1-110; country: full country name; role: exactly BAT, WK, AR, or BOWL; player_type: nonempty player specialization such as Right-hand Batter, Wicketkeeper-Batter, Batting All-rounder or Right-arm Fast Bowler. CSV quote any values containing commas. Country totals: India 22, Australia 6, England 5, South Africa 5, New Zealand 4, West Indies 3, Afghanistan 1, Sri Lanka 1, Bangladesh 1. Role totals: BAT 18, WK 7, AR 8, BOWL 15. Exactly 48 player rows plus one exact header row, no empty fields, no duplicate players, no extra columns. Verify header, country totals, role totals and all 48 rows before returning only CSV content.';
 const COUNTRY_TARGET={India:22,Australia:6,England:5,'South Africa':5,'New Zealand':4,'West Indies':3,Afghanistan:1,'Sri Lanka':1,Bangladesh:1};
 const ROLE_TARGET={BAT:18,WK:7,AR:8,BOWL:15};
 const CRICKET_DATE='2026-11-04';
@@ -2108,7 +2852,7 @@ Mustafizur Rahman|Bangladesh|BOWL|31|Left-arm Fast Bowler`.trim();
 const defaultPool=()=>CRICKET_ROWS.split('\n').map((line,i)=>{const [name,country,role,age,type]=line.split('|');return{id:'c'+(i+1),name,country,role,age:Number(age),type:type||''};});
 const freshCricket=()=>({version:1,referenceDate:CRICKET_DATE,pool:defaultPool(),started:false,order:[],cursor:0,round:'initial',recallOrder:[],reentryOrder:[],reentryPending:[],reentryTrackedEntryIds:[],passed:{a:false,b:false},resolution:'pending',appearances:[],complete:false,awaitingEnd:false});
 const cr=()=>state.cricket;
-const crfmt=u=>'₹'+(Number(u)/100).toFixed(2)+' Cr';
+const crfmt=u=>{const n=Number(u)/100;return '₹'+(Number.isInteger(n)?String(n):n.toFixed(2))+' Cr';};
 const crCurrent=()=>{
   if(!isAdvanced()||!cr().started||cr().complete||cr().awaitingEnd)return null;
   const order=cr().round==='initial'?cr().order:cr().round==='reentry'?cr().reentryOrder:cr().recallOrder;
@@ -2172,25 +2916,26 @@ function crValidatePool(){
     if(!Number.isSafeInteger(Number(p.age))||Number(p.age)<=0||Number(p.age)>110)errors.push('Player '+line+': enter a valid whole-number age.');
     if(!Object.hasOwn(COUNTRY_TARGET,p.country))errors.push('Player '+line+': invalid full country name.');
     if(!Object.hasOwn(ROLE_TARGET,p.role))errors.push('Player '+line+': invalid role.');
+    if(!String(p.type||'').trim())errors.push('Player '+line+': player type is required.');
     totals[p.country]=(totals[p.country]||0)+1;roles[p.role]=(roles[p.role]||0)+1;
   });
   for(const [country,count] of Object.entries(COUNTRY_TARGET))if(totals[country]!==count)errors.push(country+': expected '+count+', found '+(totals[country]||0)+'.');
   for(const [role,count] of Object.entries(ROLE_TARGET))if(roles[role]!==count)errors.push(role+': expected '+count+', found '+(roles[role]||0)+'.');
   if(!errors.length){
-    const first=cricketXI('a',pool,10000,[]);
+    const first=cricketXI('a',pool,state.budget,[]);
     const allocated=new Set(first?.ids||[]);
-    const second=first&&cricketXI('b',pool.filter(p=>!allocated.has(p.id)),10000,[]);
+    const second=first&&cricketXI('b',pool.filter(p=>!allocated.has(p.id)),state.budget,[]);
     if(!first||!second)errors.push('Player pool cannot provide two disjoint legal Playing XIs.');
   }
   return errors;
 }
 function crValidateUI(){
   if(!isAdvanced()||cr().started)return;
-  const errors=crValidatePool(),out=$('cricket-validation');out.replaceChildren();
+  const errors=crValidatePool(),out=$('cricket-validation');if(state.budget<1100)errors.unshift('Starting purse must be at least ₹11 Cr per team to afford an initial-round Playing XI.');out.replaceChildren();
   if(!errors.length)out.append(make('div','valid','✓ Valid 48-player pool · 22 Indian · 26 Overseas · All role targets satisfied'));
   else for(const text of errors.slice(0,18))out.append(make('div','',text));
   if(errors.length>18)out.append(make('div','','Plus '+(errors.length-18)+' additional validation errors.'));
-  $('cricket-start').disabled=!!errors.length||manageOn;
+  $('cricket-start').disabled=!!errors.length||manageOn||!Number.isSafeInteger(state.budget)||state.budget<1100;
 }
 function crPoolTable(){
   if(!isAdvanced()||cr().started)return;
@@ -2221,10 +2966,17 @@ function crParseCSV(text){
   row.push(cell);if(row.some(v=>v.trim()))rows.push(row);
   if(!rows.length)throw Error('CSV file is empty.');
   const headers=rows.shift().map(v=>v.trim().toLowerCase().replace(/^\ufeff/,''));
-  for(const key of ['player_name','age','country','role'])if(!headers.includes(key))throw Error('Missing required column: '+key);
+  const required=['player_name','age','country','role','player_type'];
+  for(const key of required)if(!headers.includes(key)){
+    const alias=key==='player_name'?headers.find(h=>['name','player name','playername','player'].includes(h)):undefined;
+    throw Error('Missing required column: '+key+'.'+(alias?' Found "'+alias+'" — rename it to "'+key+'".':' Found columns: '+headers.join(', ')+'.')+' Required header: '+required.join(', '));
+  }
   for(let i=0;i<rows.length;i++){
     const r=rows[i],get=k=>String(r[headers.indexOf(k)]??'').trim();
-    records.push({id:uid(),name:get('player_name'),age:get('age')?Number(get('age')):0,country:get('country'),role:get('role').toUpperCase(),type:headers.includes('player_type')?get('player_type'):''});
+    for(const key of required)if(!get(key))throw Error('Row '+(i+2)+': '+key+' must not be blank.');
+    const age=Number(get('age'));
+    if(!Number.isSafeInteger(age)||age<1||age>110)throw Error('Row '+(i+2)+': age must be a whole number from 1 to 110.');
+    records.push({id:uid(),name:get('player_name'),age,country:get('country'),role:get('role').toUpperCase(),type:get('player_type')});
   }
   return records;
 }
@@ -2287,6 +3039,7 @@ function crScore(team){
   const remain=state.budget-spent(team),purse=cr().complete?(remain>=3000?20:remain>=2000?15:remain>=1000?10:0):0;
   return{purse,streak:streakPoints,low,countries,total:purse+streakPoints+low+countries};
 }
+function crCountryCode(country){return ({India:'IN',Australia:'AU',England:'EN','South Africa':'SA','New Zealand':'NZ','West Indies':'WI',Afghanistan:'AF','Sri Lanka':'SL',Bangladesh:'BD'})[country]||String(country||'--').slice(0,2).toUpperCase();}
 function crFlag(country){return({India:'🇮🇳',Australia:'🇦🇺',England:'🏴','South Africa':'🇿🇦','New Zealand':'🇳🇿','West Indies':'🏝️',Afghanistan:'🇦🇫','Sri Lanka':'🇱🇰',Bangladesh:'🇧🇩'})[country]||'🌐';}
 // Online portraits are optional: Wikimedia supplies a thumbnail only when one is available.
 // Failed/offline image requests leave the player details and a local silhouette intact.
@@ -2388,6 +3141,30 @@ function crRenderCard(){
   if(resolved)out.append(next);
   next.hidden=!resolved;
 }
+// GMP is a signing-time financial snapshot; history UI corrections do not revalue it.
+function crGmpValue(bid,purseBefore,starting){
+ if(!(bid>0&&purseBefore>0&&starting>0))return null;
+ return Math.sqrt((bid/purseBefore*100)*(bid/starting*100));
+}
+function crGmp(entry){return Number.isFinite(entry?.gmpAtSigning)?entry.gmpAtSigning:null;}
+function crHighestGmp(team){
+ return crActiveTeam(team).filter(e=>crGmp(e)!==null).sort((a,b)=>crGmp(b)-crGmp(a)||a.number-b.number)[0]||null;
+}
+function crGmpText(entry){return entry?(crGmp(entry).toFixed(2)+'%'):'—';}
+function crCompletedCardGmp(team){
+ const original=$('highest-'+team),panel=original?.closest('.metric');if(!panel)return;
+ let extra=panel.querySelector('.cricket-gmp-half');
+ const complete=!!cr().complete;
+ panel.classList.toggle('cricket-completed-stat-panel',complete);
+ if(!complete){extra?.remove();return;}
+ if(!extra){extra=make('div','cricket-gmp-half');
+   extra.append(make('span','cricket-stat-pill','Highest GMP'),make('strong','cricket-gmp-value','—'),make('small','cricket-gmp-name','—'));
+   panel.append(extra);
+ }
+ const best=crHighestGmp(team);
+ extra.querySelector('.cricket-gmp-value').textContent=crGmpText(best);
+ extra.querySelector('.cricket-gmp-name').textContent=best?.purchase||'No signing';
+}
 function crStatus(){
   const c=cr();
   if(!c.started)return 'Player pool setup';
@@ -2400,7 +3177,7 @@ function crStats(){
   const c=cr();
   if(c.awaitingEnd&&c.reentryPending?.length)crAdvanceToReentry();
   const total=c.round==='initial'?48:c.round==='reentry'?c.reentryOrder.length:c.recallOrder.length;
-  $('cricket-progress').textContent=c.complete?'Auction completed. Final results calculated.':c.awaitingEnd?'All player appearances resolved. Select End Auction to calculate final points.':'Appearance '+(c.cursor+1)+' of '+total+' ·';
+  $('cricket-progress').textContent=c.complete?'Auction completed. Final results calculated.':c.awaitingEnd?'All player appearances resolved. Select End Auction to calculate final points.':'Appearance '+(c.cursor+1)+' of '+total;
   $('cricket-stage').textContent=crStatus();
   for(const team of ['a','b']){
     const list=crActiveTeam(team),money=state.budget-spent(team),best=list.reduce((v,e)=>!v||e.cents>v.cents?e:v,null);
@@ -2420,8 +3197,8 @@ function crStats(){
         tr.append(make('td','squad-number',String(index+1)));
         const nameCell=make('td','squad-player-cell'),inner=make('div','squad-player-inner');
         const country=p?.country||'';
-        const code=country==='England'?'EN':country==='South Africa'?'SA':crFlag(country);
-        inner.append(make('span','squad-country'+(code==='EN'||code==='SA'?' is-text':''),code),make('span','squad-player-name',e.purchase));
+        const code=crCountryCode(country);
+        inner.append(make('span','squad-country is-text',code),make('span','squad-player-name',e.purchase));
         nameCell.append(inner);tr.append(nameCell);
         tr.append(make('td','squad-role',p?.role||'—'));
         tr.append(make('td','squad-price','₹'+(e.cents/100).toFixed(2)));
@@ -2434,6 +3211,7 @@ function crStats(){
       $('sign-'+team).before(status);
     }
     $('cricket-card-status-'+team).textContent=list.length>=15?'Squad full · 15 / 15':c.passed[team]?'Passed on this player':(cricketXI(team)?'Legal XI remains feasible':'Playing XI needs attention');
+    crCompletedCardGmp(team);
     $('sign-'+team).type='button';$('sign-'+team).textContent='✓ Confirm Purchase';
     $('sign-'+team).disabled=manageOn||c.resolution!=='pending'||c.complete||c.awaitingEnd||c.passed[team]||list.length>=15;
   }
@@ -2562,7 +3340,21 @@ function crShowFinal(){
   function stat(parent,label,value){const box=make('div','result-summary-box');box.append(make('span','',label),make('strong','',value));parent.append(box);}
   stat(grid,'Total Auction Spending',crfmt(totalSpent));
   stat(grid,'Total Players Sold',String(validSold.length));
-  stat(grid,'Unsold Players',String(totalUnsold));
+  // Use the displayed two-decimal GMP when recognizing ties, across every active signing.
+  const allGmp=teams.flatMap(team=>crActiveTeam(team).filter(entry=>crGmp(entry)!==null).map(entry=>({team,entry})));
+  const topRounded=allGmp.length?Math.max(...allGmp.map(x=>Number(crGmp(x.entry).toFixed(2)))):null;
+  const gmpLeaders=topRounded===null?[]:allGmp.filter(x=>Number(crGmp(x.entry).toFixed(2))===topRounded);
+  const gmpSummary=make('div','result-summary-box result-overview-gmp');
+  gmpSummary.append(make('span','','Highest GMP %'),make('strong','',gmpLeaders.length?topRounded.toFixed(2)+'%':'—'));
+  if(gmpLeaders.length){
+    const names=make('small','gmp-tied-players');
+    names.dataset.tieCount=String(gmpLeaders.length);
+    for(const {entry,team} of gmpLeaders){
+      names.append(make('span','gmp-tied-player',entry.purchase+' · '+niceName(state,team)));
+    }
+    gmpSummary.append(names);
+  }
+  grid.append(gmpSummary);
   stat(grid,'Indian Players Sold',String(indian.length));
   stat(grid,'Overseas Players Sold',String(overseas.length));
   stat(grid,'Total Purse Left',crfmt(teams.reduce((sum,team)=>sum+(state.budget-spent(team)),0)));
@@ -2630,8 +3422,8 @@ function cricketHistoryTable(){
     tr.append(make('td','cr-history-num',String(e.number)));
     const playerCell=make('td','cr-history-player');
     const wrap=make('div','cr-history-player-inner');
-    const country=p?.country==='England'?'EN':p?.country==='South Africa'?'SA':crFlag(p?.country);
-    wrap.append(make('span','cr-history-country'+(country==='EN'||country==='SA'?' is-text':''),country));
+    const country=crCountryCode(p?.country);
+    wrap.append(make('span','cr-history-country is-text',country));
     const playerStack=make('span','cr-history-player-stack');
     playerStack.append(make('span','cr-history-name'+(deleted?' crossed':''),e.purchase));
     if(deleted)playerStack.append(make('span','deleted-chip','Deleted'));
@@ -2660,7 +3452,7 @@ function cricketHistoryTable(){
 
 function renderCricket(){
   const enabled=isAdvanced(),setup=enabled&&!cr().started,live=enabled&&cr().started;
-  document.body.classList.toggle('cricket-roster-mode',enabled);
+  document.body.classList.toggle('cricket-roster-mode',enabled);document.body.classList.toggle('cricket-setup-active',setup);
   $('cricket-setup').hidden=!setup;$('cricket-live').hidden=!live;
   // Cricket-only presentation order: Playing XI, Squad, Achievements, Final Results, History.
   // Restore the original nodes to their Cricket container when the mode is inactive.
@@ -2694,11 +3486,13 @@ function renderCricket(){
     for(const p of ['a','b']){$('sign-'+p).type='submit';$('sign-'+p).textContent='＋ Sign player & deduct bid';$('cricket-card-status-'+p)?.remove();}
     return;
   }
-  $('mode-chip').textContent='🏏 Cricket';$('current-budget-note').textContent='Starting purse: ₹100.00 Cr per team';
+  $('mode-chip').textContent='🏏 Cricket';$('current-budget-note').textContent='Starting purse: '+crfmt(state.budget)+' per team';
   {const cards=document.querySelector('section.cards');if(live&&cards.parentElement.id!=='cricket-bidding-layout')$('cricket-bidding-layout').append(cards);else if(!live&&cards.parentElement.id==='cricket-bidding-layout')$('cricket-live').after(cards);}
-  if(setup){document.body.classList.remove('cricket-completed-lock');$('cricket-title').value=state.title;$('cricket-name-a').value=state.names.a;$('cricket-name-b').value=state.names.b;crPoolTable();crValidateUI();return;}
+  if(setup){document.body.classList.remove('cricket-completed-lock');if(document.activeElement!==$('cricket-setup-budget'))$('cricket-setup-budget').value=(state.budget/100).toFixed(2);$('cricket-title').value=state.title;$('cricket-name-a').value=state.names.a;$('cricket-name-b').value=state.names.b;crPoolTable();crValidateUI();return;}
   const config=$('cricket-live-config');config.replaceChildren();
-  config.append(make('div','','Auction: '+state.title),make('div','','Team 1: '+niceName(state,'a')+' · Team 2: '+niceName(state,'b')),make('div','','Starting purse: ₹100.00 Cr per team'),make('div','','Player pool: '+cr().pool.length+' players · Frozen after Start Auction'));
+  const configRow=(label,value)=>{const el=make('div','cr-config-row');el.append(make('span','cr-config-label',label),document.createTextNode(value));return el;};
+  const poolConfigRow=configRow('Player pool: ',cr().pool.length+' players · ');poolConfigRow.append(make('span','cr-config-freeze','Frozen after Start Auction'));
+  config.append(configRow('Auction: ',state.title),configRow('Team 1: ',niceName(state,'a')+' · Team 2: '+niceName(state,'b')),configRow('Starting purse: ',crfmt(state.budget)+' per team'),poolConfigRow);
   $('cricket-bidding-layout').classList.toggle('auction-is-complete',!!cr().complete);
   $('cricket-final').hidden=!cr().complete;
   $('cricket-unsold').hidden=!!cr().complete;
@@ -2716,7 +3510,8 @@ function cricketPurchase(team){
   }
   const problem=crPossibleAfter(team,player.id,units);if(problem){crError(problem);return;}
   if(crBoughtIds().has(player.id)){crError('Player has already been purchased.');return;}
-  const entry={id:uid(),number:state.nextNumber++,player:team,teamAtSigning:niceName(state,team),purchase:player.name,poolId:player.id,cents:units,time:Date.now(),editedAt:null,deletedAt:null,round:cr().round,appearance:cr().cursor};
+  const purseBefore=state.budget-spent(team);
+  const entry={id:uid(),number:state.nextNumber++,player:team,teamAtSigning:niceName(state,team),purchase:player.name,poolId:player.id,cents:units,time:Date.now(),editedAt:null,deletedAt:null,round:cr().round,appearance:cr().cursor,purseAtSigning:purseBefore,originalBidAtSigning:units,gmpAtSigning:crGmpValue(units,purseBefore,state.budget)};
   const event={round:cr().round,cursor:cr().cursor,poolId:player.id,result:'sold',team,price:units,entryId:entry.id,time:Date.now(),passes:{...cr().passed}};
   state.entries.push(entry);cr().appearances.push(event);cr().resolution='sold';$('cricket-price-shared').value='0';save();crError('');render();
 }
@@ -2758,8 +3553,10 @@ function cricketStart(){
   const errors=crValidatePool();if(errors.length){crValidateUI();return;}
   const title=$('cricket-title').value.trim(),a=$('cricket-name-a').value.trim(),b=$('cricket-name-b').value.trim();
   if(!title||!a||!b){$('cricket-validation').prepend(make('div','','Provide an auction title and both team names.'));return;}
+  if(!Number.isSafeInteger(state.budget)||state.budget<1100){$('cricket-validation').prepend(make('div','','Please enter a valid starting purse of at least ₹11 Cr.'));return;}
+  if(!confirm('Start this Cricket auction with '+crfmt(state.budget)+' per team? The starting purse will be permanently locked after starting.'))return;
   state.title=title;state.names={a:a.slice(0,35),b:b.slice(0,35)};
-  const c=cr();c.order=crRandomize(c.pool.map(p=>p.id));c.started=true;c.cursor=0;c.round='initial';c.recallOrder=[];c.reentryOrder=[];c.reentryPending=[];c.reentryTrackedEntryIds=[];c.resolution='pending';c.passed={a:false,b:false};c.appearances=[];c.complete=false;c.awaitingEnd=false;c.completedAt=null;state.budget=10000;
+  const c=cr();c.order=crRandomize(c.pool.map(p=>p.id));c.started=true;c.cursor=0;c.round='initial';c.recallOrder=[];c.reentryOrder=[];c.reentryPending=[];c.reentryTrackedEntryIds=[];c.resolution='pending';c.passed={a:false,b:false};c.appearances=[];c.complete=false;c.awaitingEnd=false;c.completedAt=null;
   save();render();
 }
 function cricketEditSigning(id){
@@ -2816,18 +3613,50 @@ function cricketUndo(){
   if(cr().awaitingEnd)crAdvanceToReentry();
   save();render();
 }
+// Configuration remains a native details panel, but dismisses when focus moves elsewhere.
+const crConfigDetails=document.querySelector('#cricket-live .cricket-inline-config');
+document.addEventListener('pointerdown',event=>{
+ if(crConfigDetails?.open&&!crConfigDetails.contains(event.target))crConfigDetails.open=false;
+},true);
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&crConfigDetails?.open)crConfigDetails.open=false;});
+for(const team of ['a','b']){
+ const input=$('name-'+team),card=input.closest('.card');
+ input.addEventListener('focus',()=>{if(isAdvanced()&&!cr().complete)card.classList.add('cricket-name-editing');});
+ input.addEventListener('blur',()=>card.classList.remove('cricket-name-editing'));
+}
 for(const team of ['a','b'])$('sign-'+team).addEventListener('click',()=>{if(isAdvanced())cricketPurchase(team);});
 $('cricket-copy-prompt').onclick=async()=>{try{await navigator.clipboard.writeText(CRICKET_PROMPT);$('cricket-copy-prompt').textContent='✓ Copied ChatGPT Prompt';}catch{const box=make('textarea');box.value=CRICKET_PROMPT;document.body.append(box);box.select();document.execCommand('copy');box.remove();$('cricket-copy-prompt').textContent='✓ Copied ChatGPT Prompt';}};
 $('cricket-upload').onchange=async e=>{const file=e.target.files[0];if(!file||!isAdvanced()||cr().started)return;try{cr().pool=crParseCSV(await file.text());save();crPoolTable();crValidateUI();}catch(err){$('cricket-validation').prepend(make('div','','CSV upload failed: '+err.message));}e.target.value='';};
 $('cricket-add-player').onclick=()=>{if(!isAdvanced()||cr().started||manageOn)return;cr().pool.push({id:uid(),name:'',age:0,country:'India',role:'BAT',type:''});save();$('cricket-search').value='';$('cricket-role-filter').value='';crPoolTable();crValidateUI();$('cricket-pool-rows tr').last()?.scrollIntoView({block:'nearest'});};
 $('cricket-restore').onclick=()=>{if(!isAdvanced()||cr().started)return;if(!confirm('Restore the original 48-player list? Your current edits will be replaced.'))return;cr().pool=defaultPool();save();crPoolTable();crValidateUI();};
 $('cricket-search').oninput=crPoolTable;$('cricket-role-filter').onchange=crPoolTable;
+$('cricket-setup-budget').addEventListener('change',()=>{if(!isAdvanced()||cr().started)return;const input=$('cricket-setup-budget'),value=Number(input.value),units=Math.round(value*100);if(input.value.trim()&&!Number.isNaN(value)&&value>=11&&Number.isSafeInteger(units)&&units<=100000000&&Math.abs(value*100-units)<1e-6){state.budget=units;save();}else{input.value=(state.budget/100).toFixed(2);$('cricket-validation').prepend(make('div','','Invalid purse. Enter at least ₹11 Cr, with up to two decimal places.'));}crValidateUI();});
 $('cricket-start').onclick=cricketStart;
 $('cricket-unsold').onclick=cricketUnsold;$('cricket-next').onclick=cricketNext;$('cricket-end').onclick=crEndAuction;
 
 render();syncHover();
 })();
 
+</script>
+<script>
+/* V29.4 mobile-only theme switch; local preference is independent from auction data. */
+(function(){
+ const themeButton=document.getElementById('mobile-theme-toggle');
+ if(!themeButton)return;
+ let active=false;
+ try{active=localStorage.getItem('dream-draft-mobile-dark')==='1';}catch(e){}
+ function applyTheme(){
+   document.body.classList.toggle('mobile-dark',active);
+   themeButton.textContent=active?'☀ Light':'☾ Dark';
+   themeButton.setAttribute('aria-pressed',String(active));
+   themeButton.setAttribute('aria-label',active?'Enable mobile light mode':'Enable mobile dark mode');
+ }
+ applyTheme();
+ themeButton.addEventListener('click',function(){
+   active=!active;applyTheme();
+   try{localStorage.setItem('dream-draft-mobile-dark',active?'1':'0');}catch(e){}
+ });
+})();
 </script>
 </body>
 </html>
