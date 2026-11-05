@@ -2212,6 +2212,69 @@ body.cricket-setup-active .manage #manage-toggle,body.cricket-setup-active .mana
  }
 }
 
+
+/* V29.8 approved changes — dialogs, purse controls, and desktop star only. */
+@media (min-width:761px){
+  .history .change-star, .change-star{font-size:11px!important;}
+}
+/* Explicit-action dialogs: reflow the new auction card without an inner scrollbar. */
+.modal-layer:has(.dialog.new-setup-dialog){overflow-y:auto;overscroll-behavior:contain;align-items:safe center;}
+.dialog.new-setup-dialog{
+  overflow:visible!important;
+  max-height:none!important;
+  box-sizing:border-box;
+  padding:19px 23px!important;
+}
+.dialog.new-setup-dialog .dialog-top{margin-bottom:9px;}
+.dialog.new-setup-dialog .new-setup-step{margin:9px 0 6px;font-size:10px;}
+.dialog.new-setup-dialog .new-mode-tiles{gap:9px;}
+.dialog.new-setup-dialog .new-mode-tile{min-height:73px;padding:8px 7px;gap:3px;border-radius:13px;}
+.dialog.new-setup-dialog .new-mode-emoji{font-size:21px;}
+.dialog.new-setup-dialog .new-mode-tile strong{font-size:13px;}
+.dialog.new-setup-dialog .new-mode-tile small{font-size:10px;}
+.dialog.new-setup-dialog .new-setup-details{margin-top:9px;padding-top:0;}
+.dialog.new-setup-dialog .new-setup-row{gap:9px;}
+.dialog.new-setup-dialog .field-label{font-size:11px;}
+.dialog.new-setup-dialog .dialog-input{padding:8px 10px;margin:3px 0 8px;font-size:14px;min-height:35px;}
+.dialog.new-setup-dialog .new-setup-hint{font-size:10px;margin:0 0 6px;line-height:1.3;}
+.dialog.new-setup-dialog .muted{font-size:11px;line-height:1.35;margin:3px 0 0;}
+.dialog.new-setup-dialog .dialog-actions{margin-top:10px;}
+.dialog.new-setup-dialog .dialog-actions #new-cancel,
+.dialog.new-setup-dialog .dialog-actions #new-create{
+  border-radius:999px!important;padding:10px 19px!important;
+  font-size:13px!important;font-weight:800!important;
+  min-height:38px!important;line-height:1.2!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 7px 16px rgba(29,32,50,.12)!important;
+}
+.dialog.new-setup-dialog .dialog-actions #new-cancel{
+  background:linear-gradient(120deg,rgba(170,89,67,.26),rgba(195,111,83,.14))!important;
+  color:#9e503d!important;border:1px solid rgba(181,91,69,.49)!important;
+}
+.dialog.new-setup-dialog .dialog-actions #new-create:not(:disabled){
+  background:linear-gradient(120deg,rgba(25,138,80,.85),rgba(43,173,103,.76))!important;
+  color:#fff!important;border:1px solid rgba(59,175,110,.63)!important;
+}
+.dialog.new-setup-dialog .dialog-actions #new-create:disabled{opacity:.45!important;}
+@media(max-width:760px){
+  .modal-layer:has(.dialog.new-setup-dialog){align-items:start!important;padding:10px 12px 24px!important;}
+  .dialog.new-setup-dialog{width:100%!important;max-width:530px!important;padding:15px!important;margin:0 auto;}
+  .dialog.new-setup-dialog .dialog-input{font-size:16px!important;}
+  .dialog.new-setup-dialog .new-setup-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+  .dialog.new-setup-dialog .new-mode-tile{min-height:65px;}
+  /* Keep the original viewport and regular overlay scrolling for short displays. */
+  .dialog.new-setup-dialog .dialog-actions{flex-wrap:nowrap;}
+  .dialog.new-setup-dialog .dialog-actions button{flex:1;}
+}
+@media(max-width:350px){.dialog.new-setup-dialog .new-setup-row{grid-template-columns:1fr;}}
+/* Preserve clearly legible actions in the existing mobile dark theme. */
+body.mobile-dark .dialog.new-setup-dialog .dialog-actions #new-cancel{
+ color:#f0b2a0!important;background:rgba(165,74,58,.27)!important;border-color:rgba(232,135,107,.53)!important;
+}
+body.mobile-dark .dialog.new-setup-dialog .dialog-actions #new-create:not(:disabled){
+ color:#ebfff4!important;background:linear-gradient(120deg,rgba(19,126,71,.92),rgba(40,167,96,.83))!important;
+ border-color:rgba(96,215,148,.56)!important;
+}
+
 </style>
 </head>
 <body>
@@ -2331,7 +2394,7 @@ body.cricket-setup-active .manage #manage-toggle,body.cricket-setup-active .mana
       <label for="cricket-upload" class="cricket-upload"><span class="cricket-upload-icon">☁</span><strong>Upload Generated CSV</strong><span>48 players · CSV format</span><span>Required: Name, Age, Country, Role, Player Type</span><span>All five columns mandatory</span></label>
       <input type="file" id="cricket-upload" accept=".csv,text/csv" hidden>
     </div>
-    <div class="cricket-config glass"><h3>Auction configuration</h3><label class="field-label" for="cricket-title">Auction title</label><input id="cricket-title" maxlength="55" class="dialog-input"><div class="cricket-config-two"><div><label class="field-label" for="cricket-name-a">Team 1</label><input id="cricket-name-a" maxlength="35" class="dialog-input"></div><div><label class="field-label" for="cricket-name-b">Team 2</label><input id="cricket-name-b" maxlength="35" class="dialog-input"></div></div><div class="cricket-start-purse"><label for="cricket-setup-budget">Starting purse per team (₹ Cr)</label><input id="cricket-setup-budget" type="number" min="11" max="100000" step="0.01" inputmode="decimal" aria-label="Starting purse per cricket team"></div><h3>Player pool validation</h3><div id="cricket-validation" class="cricket-validation" aria-live="polite"></div><button id="cricket-restore" class="cricket-secondary" type="button">↻ Restore Default Players</button><button id="cricket-start" class="cricket-primary" type="button" disabled>Start Auction</button></div>
+    <div class="cricket-config glass"><h3>Auction configuration</h3><label class="field-label" for="cricket-title">Auction title</label><input id="cricket-title" maxlength="55" class="dialog-input"><div class="cricket-config-two"><div><label class="field-label" for="cricket-name-a">Team 1</label><input id="cricket-name-a" maxlength="35" class="dialog-input"></div><div><label class="field-label" for="cricket-name-b">Team 2</label><input id="cricket-name-b" maxlength="35" class="dialog-input"></div></div><div class="cricket-start-purse"><label for="cricket-setup-budget">Starting purse per team (₹ Cr)</label><input id="cricket-setup-budget" type="number" min="11" max="100000" step="1" inputmode="numeric" aria-label="Starting purse per cricket team"></div><h3>Player pool validation</h3><div id="cricket-validation" class="cricket-validation" aria-live="polite"></div><button id="cricket-restore" class="cricket-secondary" type="button">↻ Restore Default Players</button><button id="cricket-start" class="cricket-primary" type="button" disabled>Start Auction</button></div>
   </div>
   <div class="cricket-pool-box glass"><div class="cricket-pool-head"><h3>Manage player pool</h3><div class="cricket-pool-tools"><input id="cricket-search" type="search" placeholder="Search a player or country" aria-label="Search player pool"><select id="cricket-role-filter" aria-label="Filter role"><option value="">All roles</option><option>BAT</option><option>WK</option><option>AR</option><option>BOWL</option></select><button id="cricket-add-player" type="button" class="cricket-secondary">＋ Add Player</button></div></div><div class="cricket-pool-scroll"><table class="cricket-pool-table"><thead><tr><th>#</th><th>Player name</th><th>Age</th><th>Country</th><th>Role</th><th>Player type</th><th></th></tr></thead><tbody id="cricket-pool-rows"></tbody></table></div></div>
 </section>
@@ -2678,8 +2741,16 @@ function render(){renderTabs();suggestions();syncEditLock();$('manage-toggle').s
 function showDialog(title,markup,handler){$('modal-title').textContent=title;document.querySelector('.dialog').classList.toggle('audit-dialog',title==='Edit / Delete History');document.querySelector('.dialog').classList.toggle('delete-confirm',title==='Delete Auction');document.querySelector('.dialog').classList.toggle('new-setup-dialog',title==='Create New Auction');$('modal-body').innerHTML=markup;$('modal-layer').hidden=false;$('modal-layer').classList.add('open');modalCallback=handler;const focus=$('modal-body').querySelector('input:not([type=file]),button');if(focus && title!=='Edit / Delete History')focus.focus();}
 function closeDialog(){document.querySelector('.dialog').classList.remove('audit-dialog','delete-confirm','new-setup-dialog');$('modal-layer').classList.remove('open');$('modal-layer').hidden=true;$('modal-body').replaceChildren();modalCallback=null;}
 $('modal-close').onclick=closeDialog;
-$('modal-layer').addEventListener('click',e=>{if(e.target===$('modal-layer'))closeDialog();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('modal-layer').hidden)closeDialog();});
+// V29.8: Backdrop taps must never dismiss active dialogs; users choose an explicit action.
+$('modal-layer').addEventListener('click',e=>{if(e.target===$('modal-layer'))e.stopPropagation();});
+// V29.8: Escape no longer silently dismisses an unsaved dialog.
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('modal-layer').hidden)e.preventDefault();});
+// V29.8: Prevent browser-native wheel stepping on all numerical inputs.
+// Blur only the focused numeric input, then let the wheel scroll the page normally.
+document.addEventListener('wheel',e=>{
+  const field=e.target.closest?.('input[type="number"]');
+  if(field && document.activeElement===field)field.blur();
+}, {passive:true,capture:true});
 function modalError(msg){const e=$('modal-error');if(e)e.textContent=msg;}
 function promptAction(title,description,options){showDialog(title,`<p class="dialog-copy">${description}</p><div class="dialog-actions"><button id="dialog-back" type="button">Cancel</button><button id="dialog-export" type="button">Export &amp; ${title.startsWith('Reset')?'Reset':'Delete'}</button><button id="dialog-just" class="danger-button" type="button">${title.startsWith('Reset')?'Reset':'Delete'} without export</button></div>`,()=>{});
   $('dialog-back').onclick=closeDialog;
@@ -2806,7 +2877,7 @@ function startNewAuction(){
  <div class="new-setup-details" id="new-setup-details" hidden><div class="new-setup-step">Step 2 · Auction details</div>
   <label class="field-label" for="new-title">Auction name</label><input class="dialog-input" id="new-title" maxlength="55">
   <div class="new-setup-row"><div class="new-setup-col"><label class="field-label" for="new-team-a">Team 1</label><input class="dialog-input" id="new-team-a" maxlength="35"></div><div class="new-setup-col"><label class="field-label" for="new-team-b">Team 2</label><input class="dialog-input" id="new-team-b" maxlength="35"></div></div>
-  <label class="field-label" for="new-budget">Starting purse per team</label><div class="new-setup-budget-row"><input class="dialog-input" id="new-budget" type="number" inputmode="decimal" min="0.01" step="0.01"><span class="new-setup-currency" id="new-budget-currency"></span></div>
+  <label class="field-label" for="new-budget">Starting purse per team</label><div class="new-setup-budget-row"><input class="dialog-input" id="new-budget" type="number" inputmode="numeric" min="1" step="1"><span class="new-setup-currency" id="new-budget-currency"></span></div>
   <p class="new-setup-hint" id="new-budget-hint"></p>
   <label class="field-label" for="new-import">Import existing auction data (optional)</label><input class="dialog-input file-input" id="new-import" type="file" accept=".json,application/json"><p class="muted">Leave empty for a fresh auction. Importing existing data preserves its saved settings and signings.</p>
  </div><p id="modal-error" class="error" role="alert"></p><div class="dialog-actions"><button id="new-cancel">Cancel</button><button id="new-create" class="new-auction" disabled>Create Auction</button></div>`,()=>{});
@@ -2820,15 +2891,15 @@ function startNewAuction(){
    if(mode!==lastMode){$('new-budget').value=mode==='cricket'?'100':'700';userChangedBudget=false;lastMode=mode;}
    $('new-budget-currency').textContent=mode==='cricket'?'₹ Cr':'USD ($)';
    $('new-budget-hint').textContent=mode==='cricket'?'Default ₹100 Cr · Adjustable until Start Auction. Minimum ₹11 Cr for a legal XI.':'Default $700 · Adjustable before creation. Whole-dollar budgets.';
-   $('new-budget').step=mode==='cricket'?'0.01':'1';$('new-budget').min=mode==='cricket'?'11':'1';
+   $('new-budget').step='1';$('new-budget').min=mode==='cricket'?'11':'1';
  };
  modeInputs.forEach(el=>el.addEventListener('change',sync));sync();
  $('new-create').onclick=async()=>{
    const mode=document.querySelector('input[name=new-mode]:checked')?.value,name=$('new-title').value.trim(),teamA=$('new-team-a').value.trim(),teamB=$('new-team-b').value.trim(),raw=$('new-budget').value.trim(),value=Number(raw),file=$('new-import').files[0];
    if(!mode){modalError('Choose Football or Cricket first.');return;}
    if(!name||!teamA||!teamB){modalError('Enter the auction name and both team names.');return;}
-   const valid=raw!==''&&Number.isFinite(value)&&value>0&&(mode==='cricket'?value>=11&&Number.isSafeInteger(Math.round(value*100))&&Math.abs(value*100-Math.round(value*100))<1e-6:value>=1&&Number.isSafeInteger(value));
-   if(!valid){modalError(mode==='cricket'?'Enter a starting purse of at least ₹11 Cr, with at most two decimal places.':'Enter a positive whole-dollar starting purse.');return;}
+   const valid=raw!==''&&/^\d+$/.test(raw)&&Number.isSafeInteger(value)&&value>0&&(mode==='cricket'?value>=11:value>=1);
+   if(!valid){modalError(mode==='cricket'?'Enter a whole-number starting purse of at least ₹11 Cr.':'Enter a positive whole-dollar starting purse.');return;}
    const units=mode==='cricket'?Math.round(value*100):value*100;
    if(!Number.isSafeInteger(units)||units>1e9){modalError('Starting purse is too large.');return;}
    let auction=fresh(uid(),name,units,mode);auction.names={a:teamA.slice(0,35),b:teamB.slice(0,35)};
@@ -3590,7 +3661,7 @@ function renderCricket(){
   }
   $('mode-chip').textContent='🏏 Cricket';$('current-budget-note').textContent='Starting purse: '+crfmt(state.budget)+' per team';
   {const cards=document.querySelector('section.cards');if(live&&cards.parentElement.id!=='cricket-bidding-layout')$('cricket-bidding-layout').append(cards);else if(!live&&cards.parentElement.id==='cricket-bidding-layout')$('cricket-live').after(cards);}
-  if(setup){document.body.classList.remove('cricket-completed-lock');if(document.activeElement!==$('cricket-setup-budget'))$('cricket-setup-budget').value=(state.budget/100).toFixed(2);$('cricket-title').value=state.title;$('cricket-name-a').value=state.names.a;$('cricket-name-b').value=state.names.b;crPoolTable();crValidateUI();return;}
+  if(setup){document.body.classList.remove('cricket-completed-lock');if(document.activeElement!==$('cricket-setup-budget'))$('cricket-setup-budget').value=String(state.budget/100);$('cricket-title').value=state.title;$('cricket-name-a').value=state.names.a;$('cricket-name-b').value=state.names.b;crPoolTable();crValidateUI();return;}
   const config=$('cricket-live-config');config.replaceChildren();
   const configRow=(label,value)=>{const el=make('div','cr-config-row');el.append(make('span','cr-config-label',label),document.createTextNode(value));return el;};
   const poolConfigRow=configRow('Player pool: ',cr().pool.length+' players · ');poolConfigRow.append(make('span','cr-config-freeze','Frozen after Start Auction'));
@@ -3732,7 +3803,7 @@ $('cricket-upload').onchange=async e=>{const file=e.target.files[0];if(!file||!i
 $('cricket-add-player').onclick=()=>{if(!isAdvanced()||cr().started||manageOn)return;cr().pool.push({id:uid(),name:'',age:0,country:'India',role:'BAT',type:''});save();$('cricket-search').value='';$('cricket-role-filter').value='';crPoolTable();crValidateUI();$('cricket-pool-rows tr').last()?.scrollIntoView({block:'nearest'});};
 $('cricket-restore').onclick=()=>{if(!isAdvanced()||cr().started)return;if(!confirm('Restore the original 48-player list? Your current edits will be replaced.'))return;cr().pool=defaultPool();save();crPoolTable();crValidateUI();};
 $('cricket-search').oninput=crPoolTable;$('cricket-role-filter').onchange=crPoolTable;
-$('cricket-setup-budget').addEventListener('change',()=>{if(!isAdvanced()||cr().started)return;const input=$('cricket-setup-budget'),value=Number(input.value),units=Math.round(value*100);if(input.value.trim()&&!Number.isNaN(value)&&value>=11&&Number.isSafeInteger(units)&&units<=100000000&&Math.abs(value*100-units)<1e-6){state.budget=units;save();}else{input.value=(state.budget/100).toFixed(2);$('cricket-validation').prepend(make('div','','Invalid purse. Enter at least ₹11 Cr, with up to two decimal places.'));}crValidateUI();});
+$('cricket-setup-budget').addEventListener('change',()=>{if(!isAdvanced()||cr().started)return;const input=$('cricket-setup-budget'),value=Number(input.value),units=Math.round(value*100);if(/^\d+$/.test(input.value.trim())&&Number.isSafeInteger(value)&&value>=11&&Number.isSafeInteger(units)&&units<=100000000){state.budget=units;save();}else{input.value=String(state.budget/100);$('cricket-validation').prepend(make('div','','Invalid purse. Enter a whole-number amount of at least ₹11 Cr.'));}crValidateUI();});
 $('cricket-start').onclick=cricketStart;
 $('cricket-unsold').onclick=cricketUnsold;$('cricket-next').onclick=cricketNext;$('cricket-end').onclick=crEndAuction;
 
