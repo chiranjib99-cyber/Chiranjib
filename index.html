@@ -2275,6 +2275,208 @@ body.mobile-dark .dialog.new-setup-dialog .dialog-actions #new-create:not(:disab
  border-color:rgba(96,215,148,.56)!important;
 }
 
+
+/* V29.9: narrow, explicitly approved mobile-dark-only visual fixes. */
+@media (max-width:760px){
+  /* Live Cricket Team A/B: keep name input out of the top-right Total Signings zone.
+     Override the older full-grid !important CSS, including hover/rerender states. */
+  body.mobile-dark #cricket-bidding-layout:not(.auction-is-complete) > .cards > .card .name-input,
+  body.mobile-dark #cricket-bidding-layout:not(.auction-is-complete) > .cards > .card .name-input:hover,
+  body.mobile-dark #cricket-bidding-layout:not(.auction-is-complete) > .cards > .card .name-input:focus {
+    grid-column:1 / -1 !important;
+    width:50% !important;
+    max-width:50% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+    clip-path:none !important;
+  }
+  /* Clear green glass only on the mobile dark End Auction button.
+     Keep the native disabled property and existing criteria/handlers. */
+  body.mobile-dark #cricket-finish-panel #cricket-end{
+    background:linear-gradient(115deg,rgba(22,126,81,.24),rgba(33,160,98,.15))!important;
+    border:1px solid rgba(90,211,142,.70)!important;
+    color:#a0eac1!important;
+    box-shadow:inset 0 1px rgba(112,222,169,.10),0 3px 15px rgba(0,0,0,.10)!important;
+  }
+  body.mobile-dark #cricket-finish-panel #cricket-end:disabled{
+    opacity:.46!important;cursor:not-allowed!important;box-shadow:none!important;
+  }
+  /* Match already-correct mobile light-mode overview text layout; never stack numbers onto titles. */
+  body.mobile-dark #cricket-final .overview-section .result-summary-box:not(.result-overview-gmp){
+    display:flex!important;flex-direction:column!important;
+    align-items:center!important;justify-content:flex-start!important;min-width:0;
+  }
+  body.mobile-dark #cricket-final .overview-section .result-summary-box:not(.result-overview-gmp)>span{
+    position:static!important;flex:0 0 auto;margin-bottom:0!important;
+  }
+  body.mobile-dark #cricket-final .overview-section .result-summary-box:not(.result-overview-gmp)>strong{
+    position:static!important;top:auto!important;left:auto!important;right:auto!important;
+    transform:none!important;flex:0 0 auto;margin-top:9px!important;
+  }
+  /* History search: one seamless navy-glass field, without the pale outer shell. */
+  body.mobile-dark .dialog.audit-dialog .audit-search-wrap{
+    background:rgba(19,39,62,.74)!important;
+    border:1px solid rgba(156,192,230,.34)!important;
+    box-shadow:inset 0 1px rgba(184,215,247,.08)!important;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    gap:10px;align-items:center;
+  }
+  body.mobile-dark .dialog.audit-dialog .audit-search-wrap .search-symbol{
+    color:#aac0db!important;flex:0 0 auto;line-height:1;
+  }
+  body.mobile-dark .dialog.audit-dialog .audit-search-wrap #audit-search{
+    background:transparent!important;border:0!important;box-shadow:none!important;
+    color:#eaf2ff!important;font-size:16px!important;
+    padding:0!important;margin:0!important;min-width:0;width:100%;
+    outline:0!important;
+  }
+  body.mobile-dark .dialog.audit-dialog .audit-search-wrap #audit-search::placeholder{color:#9eafc8!important}
+  /* Completed Team A/B highest-bid pill: sufficient contrast without touching the gold value. */
+  body.mobile-dark #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel > span{
+    color:#f3eaff!important;
+    background:rgba(66,83,113,.80)!important;
+    border:1px solid rgba(189,208,235,.57)!important;
+    opacity:1!important;
+  }
+}
+
+
+
+/* ================================================================
+   DREAM DRAFT V30 — PHASE 2 FINAL
+   Presentation-only changes. Keep all original click handlers,
+   confirmation checks, data persistence and desktop management bar.
+   ================================================================ */
+
+/* Internal buttons of Management dialogs, not toolbar or signing dialogs.
+   Retain existing modal background, placement and behaviour. */
+.dialog .dialog-actions :is(#dialog-back,#dialog-export,#dialog-just,
+                             #export-cancel,#export-confirm,#audit-close){
+  box-sizing:border-box!important;
+  min-width:0!important;
+  min-height:44px!important;
+  border-radius:999px!important;
+  padding:10px 13px!important;
+  font-size:12px!important;
+  font-weight:750!important;
+  line-height:1.25!important;
+  text-align:center!important;
+  text-shadow:none!important;
+  backdrop-filter:blur(16px) saturate(130%)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(130%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.43),
+             inset 0 -1px 0 rgba(30,30,40,.035),
+             0 3px 10px rgba(44,33,65,.065)!important;
+}
+.dialog .dialog-actions :is(#dialog-back,#export-cancel,#audit-close){
+  background:linear-gradient(150deg,rgba(255,255,255,.40),rgba(111,132,163,.12))!important;
+  border:1px solid rgba(117,135,167,.45)!important;
+  color:#48566e!important;
+}
+.dialog .dialog-actions #dialog-export{
+  background:linear-gradient(150deg,rgba(255,237,198,.39),rgba(190,143,72,.12))!important;
+  border:1px solid rgba(170,129,71,.50)!important;
+  color:#755329!important;
+}
+.dialog .dialog-actions #dialog-just{
+  background:linear-gradient(150deg,rgba(255,221,220,.37),rgba(183,99,109,.11))!important;
+  border:1px solid rgba(185,110,121,.48)!important;
+  color:#934452!important;
+}
+.dialog .dialog-actions #export-confirm{
+  background:linear-gradient(150deg,rgba(198,240,219,.35),rgba(91,170,139,.12))!important;
+  border:1px solid rgba(93,156,132,.47)!important;
+  color:#346c5b!important;
+}
+/* Apply uniform button width to each supported popup's action group. */
+.dialog:has(#dialog-back) .dialog-actions,
+.dialog:has(#export-cancel) .dialog-actions{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:8px!important;
+}
+.dialog:has(#export-cancel) .dialog-actions{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+.dialog:has(#audit-close) .dialog-actions{display:grid!important;grid-template-columns:minmax(0,1fr)!important}
+
+@media(max-width:760px){
+  /* Pre-start Cricket: only the three existing controls, compact single row.
+     During auction inherits ALL unchanged V29.9 declarations. */
+  body.cricket-setup-active .manage.glass .management-actions{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:5px!important;
+    overflow:visible!important;
+  }
+  body.cricket-setup-active .manage.glass .management-actions button{
+    min-width:0!important;width:100%!important;
+    font-size:clamp(9px,2.6vw,10.5px)!important;
+    line-height:1.12!important;
+    padding:3px 3px!important;
+    height:42px!important;min-height:42px!important;
+    overflow-wrap:anywhere!important;
+  }
+  /* Completed Cricket: the original three disabled controls remain disabled
+     and in the DOM; hide them VISUALLY on mobile only. */
+  body.cricket-completed-lock .manage.glass .management-actions :is(#manage-toggle,#import-btn,#reset-btn){
+    display:none!important;
+  }
+  body.cricket-completed-lock .manage.glass .management-actions{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:6px!important;
+    overflow:visible!important;
+  }
+  body.cricket-completed-lock .manage.glass .management-actions button{
+    min-width:0!important;width:100%!important;
+    height:42px!important;min-height:42px!important;
+    font-size:clamp(9px,2.6vw,10.5px)!important;
+    line-height:1.12!important;
+    padding:3px 3px!important;
+    overflow-wrap:anywhere!important;
+  }
+  /* Exactly three equal oval buttons across the narrow mobile modal.
+     No modal horizontal scrollbar and no second row. */
+  .dialog:has(#dialog-back) .dialog-actions{gap:5px!important;flex-wrap:nowrap!important}
+  .dialog:has(#dialog-back) .dialog-actions :is(#dialog-back,#dialog-export,#dialog-just){
+    width:100%!important;min-width:0!important;
+    min-height:46px!important;height:46px!important;
+    padding:6px 3px!important;
+    font-size:clamp(9px,2.5vw,10.5px)!important;
+    line-height:1.14!important;
+    overflow-wrap:anywhere!important;
+  }
+  /* Dark overlay uses the approved navy glass and faint slate/gold/rose tints. */
+  body.mobile-dark .dialog .dialog-actions :is(#dialog-back,#dialog-export,#dialog-just,
+                                                #export-cancel,#export-confirm,#audit-close){
+    border-radius:999px!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.085),
+               inset 0 -1px 0 rgba(0,0,0,.13),
+               0 3px 10px rgba(0,0,0,.12)!important;
+  }
+  body.mobile-dark .dialog .dialog-actions :is(#dialog-back,#export-cancel,#audit-close){
+    background:linear-gradient(150deg,rgba(104,131,160,.16),rgba(52,80,111,.075))!important;
+    border:1px solid rgba(113,142,177,.53)!important;
+    color:#e1eaf7!important;
+  }
+  body.mobile-dark .dialog .dialog-actions #dialog-export{
+    background:linear-gradient(150deg,rgba(212,164,82,.15),rgba(180,135,66,.07))!important;
+    border:1px solid rgba(187,156,98,.55)!important;
+    color:#ffe0a8!important;
+  }
+  body.mobile-dark .dialog .dialog-actions #dialog-just{
+    background:linear-gradient(150deg,rgba(197,115,122,.15),rgba(156,81,96,.07))!important;
+    border:1px solid rgba(189,119,129,.54)!important;
+    color:#ffd2d1!important;
+  }
+  body.mobile-dark .dialog .dialog-actions #export-confirm{
+    background:linear-gradient(150deg,rgba(98,181,147,.15),rgba(54,118,106,.07))!important;
+    border:1px solid rgba(105,171,150,.52)!important;
+    color:#b8f2de!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3518,7 +3720,7 @@ function crShowFinal(){
   const topRounded=allGmp.length?Math.max(...allGmp.map(x=>Number(crGmp(x.entry).toFixed(2)))):null;
   const gmpLeaders=topRounded===null?[]:allGmp.filter(x=>Number(crGmp(x.entry).toFixed(2))===topRounded);
   const gmpSummary=make('div','result-summary-box result-overview-gmp');
-  gmpSummary.append(make('span','','Highest GMP %'),make('strong','',gmpLeaders.length?topRounded.toFixed(2)+'%':'—'));
+  gmpSummary.append(make('span','','Highest GMP'),make('strong','',gmpLeaders.length?topRounded.toFixed(2)+'%':'—'));
   if(gmpLeaders.length){
     const names=make('small','gmp-tied-players');
     names.dataset.tieCount=String(gmpLeaders.length);
