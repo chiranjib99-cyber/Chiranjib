@@ -2110,6 +2110,108 @@ body.cricket-setup-active .manage #manage-toggle,body.cricket-setup-active .mana
 /* Put appearance status under the Cricket Auction text, not under the cricket bat emoji. */
 #cricket-live .cricket-live-heading>p#cricket-progress{padding-left:37px!important;box-sizing:border-box}
 
+
+/* V29.7: six iPhone-only presentation corrections; no desktop/football logic changes. */
+@media(max-width:760px){
+ /* 1: Squad Compliance — readable columns and navy-glass panels. */
+ body.mobile-dark #cricket-xi-view .cricket-xi-team{
+   background:linear-gradient(120deg,rgba(22,42,67,.86),rgba(13,27,47,.85))!important;
+   border:1px solid rgba(159,186,224,.25)!important;
+   color:#eaf1fc!important;
+ }
+ body.mobile-dark #cricket-xi-view .cricket-xi-team h4{color:#f4f6ff!important}
+ body.mobile-dark #cricket-xi-view .cricket-xi-verdict.met{color:#7de6b5!important}
+ body.mobile-dark #cricket-xi-view .cricket-xi-verdict.unmet{color:#ff98a6!important}
+ #cricket-xi-view .cricket-requirement-row{
+   grid-template-columns:minmax(0,1fr) minmax(0,125px)!important;
+   gap:7px!important;align-items:center!important;min-width:0;
+ }
+ #cricket-xi-view .cricket-requirement-label{min-width:0;overflow-wrap:break-word}
+ #cricket-xi-view .cricket-xi-amount{
+   grid-template-columns:22px minmax(0,1fr)!important;gap:4px!important;
+   min-width:0;width:100%;align-items:center!important;
+ }
+ #cricket-xi-view .cricket-xi-amount small{
+   width:auto!important;min-width:0!important;font-size:9px!important;
+   white-space:normal!important;overflow-wrap:break-word;line-height:1.2;
+ }
+ /* 2: Live team card — reserve the top-right signings area, and keep the team's tint. */
+ body.mobile-dark #cricket-bidding-layout:not(.auction-is-complete)>.cards>.card.a{
+   background:linear-gradient(105deg,rgba(115,82,30,.66),rgba(28,39,60,.86) 57%,rgba(19,32,52,.9))!important;
+ }
+ body.mobile-dark #cricket-bidding-layout:not(.auction-is-complete)>.cards>.card.b{
+   background:linear-gradient(105deg,rgba(87,58,128,.63),rgba(28,39,60,.87) 57%,rgba(19,32,52,.9))!important;
+ }
+ #cricket-bidding-layout:not(.auction-is-complete)>.cards>.card .name-input{
+   grid-column:1/-1!important;min-width:0!important;
+   max-width:calc(100% - 5px)!important;
+ }
+ #cricket-bidding-layout:not(.auction-is-complete)>.cards>.card .metric:first-child{
+   z-index:2;position:relative;
+ }
+ body.mobile-dark #cricket-bidding-layout:not(.auction-is-complete)>.cards>.card .name-input:not(:focus){
+   background:rgba(13,27,45,.24)!important;border-color:rgba(185,203,227,.10)!important;
+ }
+ body.mobile-dark #cricket-bidding-layout:not(.auction-is-complete)>.cards>.card .metric:first-child{
+   background:rgba(30,45,66,.86)!important;border-color:rgba(186,202,228,.35)!important;
+ }
+ /* 3: Final Results — address inner gray tiles and inherited low-contrast labels. */
+ body.mobile-dark #cricket-final :is(.result-summary-box,.result-role-box,.result-spend-box,.result-record-box,.result-winner){
+   background:linear-gradient(135deg,rgba(25,45,70,.88),rgba(13,29,49,.82))!important;
+   border-color:rgba(169,193,224,.30)!important;
+   color:#e9f1fd!important;
+ }
+ body.mobile-dark #cricket-final :is(.result-summary-box span,.result-role-box small,.result-spend-box>span,.result-record-label,.result-record-box small,.result-record-player,.result-winner span:last-child,.result-overview-gmp small,.gmp-tied-player){
+   color:#d2deef!important;opacity:1!important;
+ }
+ body.mobile-dark #cricket-final :is(.result-summary-box strong,.result-role-box strong,.result-spend-box>strong,.result-record-price){color:#f5d38d!important}
+ body.mobile-dark #cricket-final .result-record-player{font-weight:800;color:#f0f3ff!important}
+ body.mobile-dark #cricket-final .result-winner strong{color:#ffe1a4!important}
+ body.mobile-dark #cricket-final .result-completed{
+   color:#80eaba!important;background:rgba(18,91,69,.6)!important;border-color:rgba(76,205,148,.46)!important;
+ }
+ /* 4: Completed team cards — bright player names and pill titles. */
+ body.mobile-dark #cricket-bidding-layout.auction-is-complete .card .name-input{
+   color:#f2f5ff!important;background:rgba(15,30,49,.28)!important;
+ }
+ body.mobile-dark #cricket-bidding-layout.auction-is-complete .card.a{
+   background:linear-gradient(105deg,rgba(104,76,31,.58),rgba(23,42,67,.86) 60%,rgba(15,30,50,.9))!important;
+ }
+ body.mobile-dark #cricket-bidding-layout.auction-is-complete .card.b{
+   background:linear-gradient(105deg,rgba(79,55,119,.58),rgba(23,42,67,.86) 60%,rgba(15,30,50,.9))!important;
+ }
+ body.mobile-dark #cricket-bidding-layout.auction-is-complete .card .player-label{color:#f7f0db!important}
+ body.mobile-dark #cricket-bidding-layout.auction-is-complete .card .metric:first-child>span{
+   color:#94edc4!important;background:rgba(19,93,72,.48)!important;border-color:rgba(100,211,165,.39)!important;
+ }
+ body.mobile-dark #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel :is(.cricket-stat-pill){
+   color:#f1e9fb!important;background:rgba(67,79,106,.78)!important;border-color:rgba(188,205,231,.36)!important;
+ }
+ body.mobile-dark #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>strong,body.mobile-dark #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-gmp-value{color:#f6d48d!important}
+ body.mobile-dark #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel>small,
+ body.mobile-dark #cricket-bidding-layout.auction-is-complete .cricket-completed-stat-panel .cricket-gmp-name{color:#edf3ff!important;opacity:1!important}
+ /* 5: iOS Safari History dialog — viewport safe and never auto-zoom on tiny inputs. */
+ .modal-layer{padding:12px!important;box-sizing:border-box;width:100%;max-width:100vw}
+ .dialog.audit-dialog{
+   width:100%!important;max-width:min(530px,calc(100vw - 24px))!important;
+   box-sizing:border-box;min-width:0;max-height:calc(100dvh - 24px)!important;
+   padding:18px 15px!important;overflow-x:hidden!important;
+ }
+ .dialog.audit-dialog :is(#modal-body,.audit-scroll,.audit-item,.audit-search-row,.audit-search-wrap){min-width:0;max-width:100%;box-sizing:border-box}
+ .dialog.audit-dialog :is(.audit-item,.dialog-copy){overflow-wrap:anywhere}
+ .dialog.audit-dialog #audit-search{font-size:16px!important;min-height:24px}
+ /* 6: Mobile Light Mode Auction Overview — separate heading and value flow. */
+ body:not(.mobile-dark) #cricket-final .overview-section .result-summary-box:not(.result-overview-gmp){
+   display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-width:0;
+ }
+ body:not(.mobile-dark) #cricket-final .overview-section .result-summary-box:not(.result-overview-gmp)>span{
+   flex:0 0 auto;margin-bottom:0;
+ }
+ body:not(.mobile-dark) #cricket-final .overview-section .result-summary-box:not(.result-overview-gmp)>strong{
+   position:static;top:auto;left:auto;right:auto;transform:none;flex:0 0 auto;margin-top:9px;
+ }
+}
+
 </style>
 </head>
 <body>
@@ -2573,7 +2675,7 @@ function render(){renderTabs();suggestions();syncEditLock();$('manage-toggle').s
   }
   renderCricket();
 }
-function showDialog(title,markup,handler){$('modal-title').textContent=title;document.querySelector('.dialog').classList.toggle('audit-dialog',title==='Edit / Delete History');document.querySelector('.dialog').classList.toggle('delete-confirm',title==='Delete Auction');document.querySelector('.dialog').classList.toggle('new-setup-dialog',title==='Create New Auction');$('modal-body').innerHTML=markup;$('modal-layer').hidden=false;$('modal-layer').classList.add('open');modalCallback=handler;const focus=$('modal-body').querySelector('input:not([type=file]),button');if(focus)focus.focus();}
+function showDialog(title,markup,handler){$('modal-title').textContent=title;document.querySelector('.dialog').classList.toggle('audit-dialog',title==='Edit / Delete History');document.querySelector('.dialog').classList.toggle('delete-confirm',title==='Delete Auction');document.querySelector('.dialog').classList.toggle('new-setup-dialog',title==='Create New Auction');$('modal-body').innerHTML=markup;$('modal-layer').hidden=false;$('modal-layer').classList.add('open');modalCallback=handler;const focus=$('modal-body').querySelector('input:not([type=file]),button');if(focus && title!=='Edit / Delete History')focus.focus();}
 function closeDialog(){document.querySelector('.dialog').classList.remove('audit-dialog','delete-confirm','new-setup-dialog');$('modal-layer').classList.remove('open');$('modal-layer').hidden=true;$('modal-body').replaceChildren();modalCallback=null;}
 $('modal-close').onclick=closeDialog;
 $('modal-layer').addEventListener('click',e=>{if(e.target===$('modal-layer'))closeDialog();});
