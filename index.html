@@ -3956,6 +3956,10 @@ function crEndAuction(){
   if(!confirm('End this Cricket auction and calculate final achievement points? No further purchases will be possible.'))return;
   cr().complete=true;cr().completedAt=Date.now();cr().awaitingEnd=false;
   save();crError('');render();
+  window.dispatchEvent(new CustomEvent('dreamdraft:offline-cricket-completed',{detail:{
+    teams:{a:niceName(state,'a'),b:niceName(state,'b')},
+    xi:Object.fromEntries(['a','b'].map(t=>{const squad=crActiveTeam(t).map(e=>crPoolById(e.poolId)).filter(Boolean),ids=cricketXI(t,[],0,squad)?.ids||[];return [t,ids.map(id=>squad.find(p=>p.id===id)).filter(Boolean)];}))
+  }}));
 }
 function crUndoCompletion(){
   if(!isAdvanced()||!cr().complete||manageOn)return;
@@ -4053,7 +4057,9 @@ function crShowFinal(){
   const actions=make('div','undo-completion-wrap');
   const undoComplete=make('button','undo-completion-btn','↶ Undo Auction Complete (Temporary)');
   undoComplete.type='button';undoComplete.onclick=crUndoCompletion;
-  actions.append(undoComplete);report.append(actions);
+  const replay=make('button','undo-completion-btn','🏏 Simulate T20 Match');
+  replay.type='button';replay.onclick=()=>window.dispatchEvent(new CustomEvent('dreamdraft:offline-cricket-completed',{detail:{teams:{a:niceName(state,'a'),b:niceName(state,'b')},xi:Object.fromEntries(['a','b'].map(t=>{const squad=crActiveTeam(t).map(e=>crPoolById(e.poolId)).filter(Boolean),ids=cricketXI(t,[],0,squad)?.ids||[];return [t,ids.map(id=>squad.find(p=>p.id===id)).filter(Boolean)];}))}}));
+  actions.append(replay,undoComplete);report.append(actions);
 
 }
 
@@ -4352,7 +4358,7 @@ function row(title,fields){return fields.map(([label,id,val])=>`<div class="v31-
 function renderCreate(){screen='create';content.innerHTML=`<div class="v31-lobbyhead"><h3 class="v31-title">Create Multiplayer Room</h3><span class="v31-badge">Cricket Only</span></div>
 <form id="v31-create-form"><div class="v31-form">
 ${row('',[['Auction name','v31-title','Cricket Championship'],['Starting purse (₹ Cr)','v31-budget','100'],['Team A — Creator','v31-team-a','Milan Strikers'],['Team B — Joiner','v31-team-b','Taiwan Avengers']])}
-<div class="v31-field v31-wide"><div class="v31-upload-card"><div class="v31-upload-card-top"><div><div class="v31-kicker">PLAYER LIST</div><strong class="v31-upload-card-title">Upload Player List</strong><div class="v31-hint">Same V30-style card: copy the ChatGPT prompt, generate the CSV, then upload it here.</div></div><button type="button" id="v31-copy-prompt" class="v31-btn">⧉ Copy ChatGPT Prompt</button></div><label for="v31-csv" class="v31-upload-drop"><span class="v31-upload-icon">☁</span><strong>Upload Generated CSV</strong><span>Required header: player_name,age,country,role,player_type</span><span>Exactly 48 valid players required · Leave empty to use the default V30 pool</span></label><input type="file" id="v31-csv" accept=".csv,text/csv" hidden><div class="v31-hint">Default V30 player pool stays available if you do not upload a CSV.</div></div></div></div>
+<div class="v31-field v31-wide"><div class="v31-upload-card"><div class="v31-upload-card-top"><div><div class="v31-kicker">PLAYER LIST</div><strong class="v31-upload-card-title">Upload Player List</strong><div class="v31-hint">Same V30-style card: copy the ChatGPT prompt, generate the CSV, then upload it here.</div></div><button type="button" id="v31-copy-prompt" class="v31-btn">⧉ Copy ChatGPT Prompt</button></div><label for="v31-csv" class="v31-upload-drop"><span class="v31-upload-icon">☁</span><strong>Upload Generated CSV</strong><span>Required: name, age, country, role · Optional: player_type (also accepts player_name)</span><span>Exactly 48 valid players required · Leave empty to use the default V30 pool</span></label><input type="file" id="v31-csv" accept=".csv,text/csv" hidden><div class="v31-hint">Default V30 player pool stays available if you do not upload a CSV.</div></div></div></div>
 <div class="v31-help">Team A is controlled by the creator. Team B is controlled by the joiner. A tiny 🔁 swap becomes available in the lobby only after the other player joins, with approval required from both.</div>
 <div class="v31-actions">${btn('v31-cancel','Cancel')}<button class="v31-btn primary" id="v31-submit" type="submit">Create Online Room</button></div></form>`;
  $('v31-cancel').onclick=renderHome;
@@ -4368,10 +4374,12 @@ ${row('',[['Auction name','v31-title','Cricket Championship'],['Starting purse (
  };
 }
 function parseCSV(text){const lines=[];let record=[],cell='',q=false;for(let i=0;i<text.length;i++){const c=text[i];if(q){if(c==='"'&&text[i+1]==='"'){cell+='"';i++;}else if(c==='"')q=false;else cell+=c;}else if(c==='"')q=true;else if(c===','){record.push(cell);cell='';}else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;record.push(cell);if(record.some(x=>x.trim()))lines.push(record);record=[];cell='';}else cell+=c;}record.push(cell);if(record.some(x=>x.trim()))lines.push(record);
- const cols=(lines.shift()||[]).map(x=>x.trim().replace(/^\ufeff/,''));const required=['player_name','age','country','role','player_type'];if(required.join(',')!==cols.join(','))throw Error('CSV header must be exactly: '+required.join(','));
- return lines.map((r,i)=>({id:'c'+(i+1),name:(r[0]||'').trim(),age:Number(r[1]),country:(r[2]||'').trim(),role:(r[3]||'').trim(),type:(r[4]||'').trim()}));}
+ const cols=(lines.shift()||[]).map(x=>x.trim().toLowerCase().replace(/^\ufeff/,''));
+ const idx=x=>cols.indexOf(x),nameIdx=idx('name')>=0?idx('name'):idx('player_name');
+ if(nameIdx<0||['age','country','role'].some(x=>idx(x)<0))throw Error('CSV needs name (or player_name), age, country and role. player_type is optional.');
+ return lines.map((r,i)=>({id:'c'+(i+1),name:(r[nameIdx]||'').trim(),age:Number(r[idx('age')]),country:(r[idx('country')]||'').trim(),role:(r[idx('role')]||'').trim(),type:idx('player_type')>=0?(r[idx('player_type')]||'').trim():''}));}
 function validatePool(pool){const errors=[];if(pool.length!==48)errors.push('The player pool must contain exactly 48 players.');const roles={BAT:18,WK:7,AR:8,BOWL:15};const countries={'India':22,'Australia':6,'England':5,'South Africa':5,'New Zealand':4,'West Indies':3,'Afghanistan':1,'Sri Lanka':1,'Bangladesh':1};
- const names=new Set();for(const p of pool){if(!p.name||!p.type||!Number.isInteger(p.age)||p.age<1||p.age>110||!Object.hasOwn(roles,p.role)||!Object.hasOwn(countries,p.country))errors.push('Invalid player information: '+(p.name||'unnamed'));
+ const names=new Set();for(const p of pool){if(!p.name||!Number.isInteger(p.age)||p.age<1||p.age>110||!Object.hasOwn(roles,p.role)||!Object.hasOwn(countries,p.country))errors.push('Invalid player information: '+(p.name||'unnamed'));
  const name=p.name.toLowerCase();if(names.has(name))errors.push('Duplicate player: '+p.name);names.add(name);}
  for(const [k,v] of Object.entries(roles)){if(pool.filter(p=>p.role===k).length!==v)errors.push('Expected '+v+' '+k+' players.');}
  for(const [k,v] of Object.entries(countries)){if(pool.filter(p=>p.country===k).length!==v)errors.push('Expected '+v+' players from '+k+'.');}return errors;}
@@ -4401,7 +4409,7 @@ function connectRoom(id,s){closeSocket();lastRoomPhase=null;session={id,...s};sc
 const send=(type,details={})=>{if(!ws||ws.readyState!==WebSocket.OPEN){setMsg('Not connected to room service.');return;}ws.send(JSON.stringify({type,...details}));};
 function fmtMoney(v){return '₹'+(Number(v||0)/100).toFixed(2)+' Cr';}
 function teamSales(r,t){return (r.sales||[]).filter(x=>x.team===t);}
-function teamStats(r,t){const sales=teamSales(r,t),spent=sales.reduce((n,p)=>n+p.amount,0),foreign=sales.filter(x=>r.pool.find(p=>p.id===x.id)?.country!=='India').length;let streak=0,best=0;for(const x of r.sales||[]){if(x.team===t){streak++;best=Math.max(best,streak);}else streak=0;}const countries={};for(const x of sales){const p=r.pool.find(v=>v.id===x.id);if(p?.country!=='India')countries[p.country]=(countries[p.country]||0)+1;}const left=r.budget-spent;const points=(left>=3000?20:left>=2000?15:left>=1000?10:0)+(best>=5?30:best>=4?20:0)+sales.filter(x=>x.amount<=100).length*5+Object.values(countries).filter(v=>v>=3).length*5;return{sales,spent,left,foreign,points};}
+function teamStats(r,t){const sales=teamSales(r,t),spent=sales.reduce((n,p)=>n+p.amount,0),foreign=sales.filter(x=>r.pool.find(p=>p.id===x.id)?.country!=='India').length;let streak=0,best=0;for(const x of r.sales||[]){if(x.team===t){streak++;best=Math.max(best,streak);}else streak=0;}const countries={};for(const x of sales){const p=r.pool.find(v=>v.id===x.id);if(p?.country!=='India')countries[p.country]=(countries[p.country]||0)+1;}const left=r.budget-spent;const points=(r.phase==='completed'?(left>=3000?20:left>=2000?15:left>=1000?10:0):0)+(best>=5?30:best>=4?20:0)+sales.filter(x=>x.amount<=100).length*5+Object.values(countries).filter(v=>v>=3).length*5;return{sales,spent,left,foreign,points};}
 function xiReport(r,t){const p=(r.xi?.[t]||[]).map(id=>r.pool.find(z=>z.id===id)).filter(Boolean),count=k=>p.filter(x=>x.role===k).length,ind=p.filter(x=>x.country==='India').length,foreign=p.length-ind;return{size:p.length,ind,foreign,bat:count('BAT'),wk:count('WK'),ar:count('AR'),bowl:count('BOWL'),valid:p.length===11&&ind>=5&&foreign>=3&&foreign<=6&&count('BAT')>=3&&count('WK')>=1&&count('AR')>=1&&count('BOWL')>=3};}
 function makeTeam(r,t,team){const z=teamStats(r,t),x=xiReport(r,t),canXI=r.phase==='finalizing'&&team===t;return `<section class="v35-team"><div class="v35-team-head"><div><small>TEAM ${t.toUpperCase()}</small><h4>${escape(r.teams[t])}</h4></div><strong>${z.points} pts</strong></div><div class="v35-team-numbers"><span>Balance <b>${fmtMoney(z.left)}</b></span><span>Spent <b>${fmtMoney(z.spent)}</b></span><span>Squad <b>${z.sales.length}/15</b></span><span>Overseas <b>${z.foreign}/8</b></span></div><p class="v35-xi ${x.valid?'ok':''}">Playing XI (${x.size}/11): ${x.valid?'✓ Eligible':'Not yet eligible'} · BAT ${x.bat} · WK ${x.wk} · AR ${x.ar} · BOWL ${x.bowl}</p><div class="v35-roster">${z.sales.map((item,i)=>{const p=r.pool.find(x=>x.id===item.id);return `<div><span>${canXI?`<input class="v35-xi-pick" type="checkbox" data-xi="${escape(item.id)}" ${(r.xi?.[t]||[]).includes(item.id)?'checked':''} aria-label="Select ${escape(p?.name||item.id)} for Playing XI">`:''}${i+1}. ${escape(p?.name||item.id)} <small>${escape(p?.role||'')}</small></span><b>${fmtMoney(item.amount)}</b></div>`;}).join('')||'<p class="v31-muted">No signings yet.</p>'}</div></section>`;}
 function renderRoom(){if(!session)return;screen='room';const r=session.room;if(!r){content.innerHTML='<p class="v31-muted">Connecting to room…</p>';return;}
@@ -4422,10 +4430,27 @@ function renderRoom(){if(!session)return;screen='room';const r=session.room;if(!
  if(r.pauseRequest)html+=`<div class="v35-notice"><strong>${r.pauseRequest.resume?'Resume':'Pause'} approval required</strong><p>Waiting for both players.</p>${!spectator&&!r.pauseRequest.approvals[role]?`${btn('v35-approve-pause','Approve','primary')} ${btn('v35-decline-pause','Decline')}`:''}</div>`;
  if(r.phase==='live'&&l){html+=`<div class="v35-auction-grid"><div class="v35-lot"><div class="v35-lot-eyebrow"><span>LOT ${l.sequence}</span><span class="v35-${l.status}">${l.status.toUpperCase()}</span></div><div class="v35-lot-inner"><h2>${escape(p?.name||'Player')}</h2><div class="v35-meta"><span>${escape(p?.country||'')}</span><span>${escape(p?.role||'')}</span><span>Age ${escape(p?.age||'—')}</span></div><p>${escape(p?.type||'')}</p></div><div class="v35-lot-price"><span>${l.status==='sold'?'Sold for':l.status==='unsold'?'Unsold · recall eligible':l.leader?'Current bid':'Base price'}</span><strong>${l.status==='unsold'?'—':fmtMoney(l.amount||l.base)}</strong></div>${l.leader?`<p class="v35-leader">Leading: ${escape(r.teams[l.leader])}</p>`:''}</div>
  <div class="v35-bidbox"><h3>${l.status==='current'?'Live Bidding':'Lot Resolved'}</h3><p class="v31-muted">${l.status==='current'?`Minimum ${fmtMoney(l.amount?l.amount+l.step:l.base)} · Increase ${fmtMoney(l.step)}`:'Both players see the same result.'}</p>${!spectator&&l.status==='current'&&!r.paused?`<label class="v31-label" for="v35-amount">Your bid (₹ Cr)</label><input class="v35-bid-input" id="v35-amount" type="number" min="${(l.amount?l.amount+l.step:l.base)/100}" step="${l.step/100}" value="${(l.amount?l.amount+l.step:l.base)/100}"/><div class="v35-controls"><button id="v35-bid" class="v31-btn primary" ${l.leader===team||l.passes.includes(team)?'disabled':''}>Confirm Bid · Team ${escape(team?.toUpperCase())}</button><button id="v35-pass" class="v31-btn" ${l.passes.includes(team)||l.leader===team?'disabled':''}>${l.passes.includes(team)?'✓ Passed':l.leader===team?'Leading bid':'Pass (final)'}</button></div>`:''}${!spectator&&l.status!=='current'&&!r.paused?btn('v35-next-lot','Next Player →','primary'):''}<div class="v35-passlog">Passed: ${l.passes.map(t=>escape(r.teams[t])).join(', ')||'None'}</div></div></div>`;}
- if(!spectator&&r.phase==='live'&&!r.paused)html+=`<div class="v35-foot-actions">${btn('v35-pause','Request Pause')}</div>`;
+ if(!spectator&&r.phase==='live'&&!r.paused)html+=`<div class="v35-foot-actions">${btn('v35-pause','Request Pause')}${l?.status!=='current'&&!r.finishRequest?btn('v35-finish-early','🏆 Request End Auction'):''}</div>`;
+ if(r.phase==='live'&&r.finishRequest)html+=`<div class="v35-notice"><strong>🏆 End Auction requested</strong><p>Both teams need 11–15 purchased players and a valid Playing XI. Both participants must agree before the final selection screen opens.</p>${!spectator&&!r.finishRequest.approvals[role]?`${btn('v35-finish-approve','Approve End Auction','primary')} ${btn('v35-finish-decline','Decline')}`:''}</div>`;
  if(r.phase==='finalizing')html+=`<div class="v35-notice"><h3>Finish auction</h3><p>Each team must select exactly 11 players from its squad (India ≥5, overseas 3–6, BAT ≥3, WK ≥1, AR ≥1, BOWL ≥3). Tick the selections on your own team card. ${spectator?'Spectators cannot finish auctions.':'The server validates squad eligibility before completion.'}</p>${!spectator?btn('v35-complete','Complete Auction','primary'):''}</div>`;
  html+=`<div class="v35-teams">${makeTeam(r,'a',team)}${makeTeam(r,'b',team)}</div>`;
+ if(final){html+=`<div class="v35-notice"><h3>🏏 Optional T20 Match Simulation</h3><p>Both auction teams can play an interactive, synchronized cricket match using their purchased Playing XIs. The bowling team selects each over’s bowler; the batting team plays deliveries and selects incoming batters. ${r.match?.phase==='declined'?'Simulation skipped.':''}</p>${!spectator&&!r.match?btn('v35-match-start','Simulate T20 Match','primary')+btn('v35-match-decline','Not Now'):''}</div>`;
+ if(r.match&&r.match.phase!=='declined'){
+ const m=r.match,xiBowling=r.xi?.[m.bowling]||[];
+ html+=`<div class="v35-results"><h3>🏏 T20 Match · ${escape(m.phase.toUpperCase())}</h3>`;
+ if(m.phase==='toss')html+=`<p>Select who bats first. The choice is synchronized to both players.</p>${!spectator?btn('v35-toss-a',r.teams.a+' Bat First','primary')+btn('v35-toss-b',r.teams.b+' Bat First'):''}`;
+ if(m.phase==='playing'||m.phase==='finished'){
+ html+=`<p><b>${escape(r.teams[m.batting])}</b> ${m.score}/${m.wickets} (${Math.floor(m.balls/6)}.${m.balls%6} ov) · Innings ${m.innings+1}${m.target!==null?' · Target '+m.target:''}</p>`;
+ if(m.phase==='playing'&&m.awaitingBatter){const available=(r.xi[m.batting]||[]).slice(m.next);html+=`<p>Wicket! ${escape(r.teams[m.batting])} must choose the incoming batter.</p><div class="v35-controls">${available.map((id,i)=>{const p=r.pool.find(p=>p.id===id);return !spectator&&team===m.batting?`<button type="button" class="v31-btn v35-next-batter" data-index="${m.next+i}">${escape(p?.name||id)}</button>`:''}).join('')}</div>`;}
+ if(m.phase==='playing'&&!m.bowler&&!m.awaitingBatter)html+=`<p>Choose this over’s bowler from <b>${escape(r.teams[m.bowling])}</b></p><div class="v35-controls">${xiBowling.filter(id=>(m.bowlerOvers?.[id]||0)<24).map(id=>{const p=r.pool.find(p=>p.id===id);return !spectator&&team===m.bowling?`<button type="button" class="v31-btn v35-bowler" data-bowler="${escape(id)}">${escape(p?.name||id)}</button>`:''}).join('')}</div>`;
+ if(m.phase==='playing'&&m.bowler&&!m.awaitingBatter&&!spectator&&team===m.batting)html+=btn('v35-match-ball','Bowl Next Ball','primary');
+ if(m.phase==='finished')html+=`<p class="v35-winner">🏆 ${escape(m.result)}</p>`;
+ }
+ html+=`<div class="v35-roster" style="max-height:240px;overflow:auto">${(m.log||[]).slice(-20).reverse().map(x=>`<p>${escape(x)}</p>`).join('')}</div></div>`;
+ }
+ }
  if(final){const a=teamStats(r,'a'),b=teamStats(r,'b'),winner=a.points===b.points?'Tie':a.points>b.points?r.teams.a:r.teams.b;html+=`<div class="v35-results"><h2>Final Results</h2><p class="v35-winner">${winner==='Tie'?'🏆 Draw':`🏆 ${escape(winner)} wins`} · ${a.points}–${b.points} achievement points</p><div class="v35-result-grid"><div><small>Sold</small><strong>${r.sales.length}</strong></div><div><small>Unsold</small><strong>${r.pool.length-r.sales.length}</strong></div><div><small>${escape(r.teams.a)} spent</small><strong>${fmtMoney(a.spent)}</strong></div><div><small>${escape(r.teams.b)} spent</small><strong>${fmtMoney(b.spent)}</strong></div></div><div class="v35-result-details">${['a','b'].map(t=>{const sales=teamSales(r,t),role=k=>sales.filter(x=>r.pool.find(p=>p.id===x.id)?.role===k).length,ind=sales.filter(x=>r.pool.find(p=>p.id===x.id)?.country==='India'),foreign=sales.filter(x=>r.pool.find(p=>p.id===x.id)?.country!=='India');return `<div><h4>${escape(r.teams[t])}</h4><p>BAT ${role('BAT')} · WK ${role('WK')} · AR ${role('AR')} · BOWL ${role('BOWL')}</p><p>Indian spend: ${fmtMoney(ind.reduce((n,x)=>n+x.amount,0))} · Overseas spend: ${fmtMoney(foreign.reduce((n,x)=>n+x.amount,0))}</p><p>Purse left: ${fmtMoney(teamStats(r,t).left)}</p></div>`;}).join('')}</div>${r.sales.length?(()=>{const sorted=[...r.sales].sort((a,b)=>b.amount-a.amount),high=sorted[0],low=sorted.at(-1),detail=x=>{const p=r.pool.find(y=>y.id===x.id);return `${escape(p?.name||x.id)} (${escape(p?.role||'')}, ${escape(p?.country||'')}, ${escape(r.teams[x.team])}) · ${fmtMoney(x.amount)}`};return `<p class="v35-records"><b>Highest signing</b> ${detail(high)}<br><b>Cheapest signing</b> ${detail(low)}</p>`})():''}<p class="v31-muted">Scores include remaining purse, consecutive signings, value signings and overseas-country combinations.</p></div>`;}
+ if(final){let purseBefore={a:r.budget,b:r.budget};const rows=(r.sales||[]).map((entry,i)=>{const p=r.pool.find(x=>x.id===entry.id),start=purseBefore[entry.team];const gmp=start>0&&r.budget>0?Math.sqrt((entry.amount/start*100)*(entry.amount/r.budget*100)):0;purseBefore[entry.team]-=entry.amount;return `<div class="v31-playeritem"><strong>${i+1}. ${escape(p?.name||entry.id)}</strong><span>${escape(r.teams[entry.team])} · ${fmtMoney(entry.amount)} · GMP ${gmp.toFixed(2)}%</span></div>`;});html+=`<details class="v35-pool"><summary>Sold Player History & GMP (${rows.length}) <span>⌄</span></summary><div class="v31-playerpool">${rows.join('')}</div></details>`;}
  html+=`<details class="v35-pool"><summary>All ${r.pool.length} players · Sold ${r.sales.length} <span>⌄</span></summary><div class="v31-playerpool">${r.pool.map(p=>{const sold=r.sales.find(x=>x.id===p.id);return `<div class="v31-playeritem"><strong>${escape(p.name)}</strong><span>${escape(p.role)} · ${sold?escape(r.teams[sold.team])+' · '+fmtMoney(sold.amount):'Not sold'}</span></div>`}).join('')}</div></details>`;
  }
  html+=`<div class="v31-actions">${btn('v31-copy','Copy Room Details')}${btn('v31-return','Room List')}</div>`;
@@ -4444,14 +4469,57 @@ function renderRoom(){if(!session)return;screen='room';const r=session.room;if(!
  act('v31-next',()=>send('ready'));act('v31-swap',()=>send('swap-request'));act('v31-approve',()=>send('swap-approve'));act('v31-decline',()=>send('swap-reject'));
  act('v35-bid',()=>{const v=Number($('v35-amount')?.value);if(!Number.isFinite(v)||v<=0){setMsg('Enter a valid bid.');return;}send('bid',{amount:v});});
  act('v35-pass',()=>{if(confirm('Pass is final for this player. Continue?'))send('pass')});act('v35-next-lot',()=>send('next-lot'));
+ act('v35-finish-early',()=>send('finish-request'));act('v35-finish-approve',()=>send('finish-approve'));act('v35-finish-decline',()=>send('finish-reject'));
  act('v35-pause',()=>send('pause-request'));act('v35-approve-pause',()=>send(r.pauseRequest?.resume?'resume-approve':'pause-approve'));act('v35-decline-pause',()=>send('pause-reject'));act('v35-resume',()=>send('resume-request'));
  content.querySelectorAll('.v35-xi-pick').forEach(input=>input.onchange=()=>send('xi-toggle',{id:input.dataset.xi}));
  act('v35-complete',()=>{if(confirm('Complete this auction and lock its results?'))send('complete')});
+ act('v35-match-start',()=>send('match-start'));act('v35-match-decline',()=>send('match-decline'));
+ act('v35-toss-a',()=>send('match-toss',{batting:'a'}));act('v35-toss-b',()=>send('match-toss',{batting:'b'}));
+ act('v35-match-ball',()=>send('match-ball'));
+ content.querySelectorAll('.v35-bowler').forEach(b=>b.onclick=()=>send('match-bowler',{id:b.dataset.bowler}));content.querySelectorAll('.v35-next-batter').forEach(b=>b.onclick=()=>send('match-batter',{index:Number(b.dataset.index)}));
  act('v31-copy',async()=>{const t='Dream Draft Multiplayer Room\nRoom ID: '+r.id+'\nPassword: '+(session.password||'')+'\nOpen your Dream Draft V35 website and select Join or Spectate.';try{await navigator.clipboard.writeText(t);setMsg('Room details copied.',false);}catch{setMsg('Copy the room details manually.')}});
  act('v31-return',()=>{closeSocket();session=null;renderHome();});
 }
 function updateCountdown(){if(!session?.room)return;const r=session.room,el=$('v31-clock');if(!el)return;let sec=null;if(r.phase==='lobby')sec=Math.max(0,Math.ceil((r.reviewEndsAt-Date.now())/1000));if(r.phase==='live'&&r.lot?.status==='current')sec=Math.max(0,Math.ceil(((r.paused?.remaining??(r.deadline-Date.now())))/1000));el.textContent=sec===null?(r.phase==='waiting'?'…':'✓'):sec+'s';el.classList.toggle('red',sec!==null&&sec<=15);el.classList.toggle('frozen',!!r.paused);}
 $('v31-open').onclick=openPanel;$('v31-exit').onclick=exitPanel;
+})();
+</script>
+
+<style>
+#dd-match-backdrop{position:fixed;inset:0;z-index:999999;background:rgba(4,11,25,.78);display:grid;place-items:center;padding:15px;overflow:auto}
+#dd-match-backdrop[hidden]{display:none}
+#dd-match-card{background:linear-gradient(145deg,#111d33,#203956);color:#f3f7ff;border:1px solid #6988ac;border-radius:22px;padding:24px;width:min(600px,100%);max-height:90vh;overflow:auto;box-shadow:0 24px 85px #0008;font:inherit}
+#dd-match-card button{cursor:pointer;border:1px solid #829fc1;background:#e7efff;color:#10223d;border-radius:12px;padding:10px 14px;margin:5px 5px 5px 0;font:inherit;font-weight:700}
+#dd-match-card .dd-match-log{height:180px;overflow:auto;background:#0c1729;padding:12px;border-radius:12px;line-height:1.65}
+#dd-match-card .dd-match-muted{color:#a9bdd9;font-size:13px}
+</style>
+<div id="dd-match-backdrop" hidden role="dialog" aria-modal="true" aria-label="T20 Match Simulator"><div id="dd-match-card"></div></div>
+<script>
+/* V35.1 optional offline simulation, isolated from football, auction storage and multiplayer. */
+(()=>{'use strict';
+const back=document.getElementById('dd-match-backdrop'),card=document.getElementById('dd-match-card');let ctx=null,game=null;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const button=(label,action)=>`<button type="button" data-do="${action}">${esc(label)}</button>`;
+const eligible=s=>s.length>=11;
+function show(){back.hidden=false;render();}function hide(){back.hidden=true;}
+function start(batting){game={phase:'playing',batting,bowling:batting==='a'?'b':'a',innings:0,score:0,wickets:0,balls:0,target:null,striker:0,nonStriker:1,next:2,bowler:null,usage:{},log:['Toss: '+ctx.teams[batting]+' bat first'],result:null};render();}
+function delivery(){const g=game,outs=[0,0,0,1,1,1,1,2,2,3,4,4,4,6,6,'W'],pick=outs[Math.floor(Math.random()*outs.length)];const current=ctx.xi[g.batting][g.striker];const player=current?.name||current?.player_name||'Batter';const ball=Math.floor(g.balls/6)+'.'+(g.balls%6+1);g.balls++;g.usage[g.bowler]=(g.usage[g.bowler]||0)+1;if(pick==='W'){g.wickets++;g.log.push(ball+' '+player+' OUT!');if(g.wickets<10){g.striker=null;g.awaitingBatter=true;}}else{g.score+=pick;g.log.push(ball+' '+player+': '+(pick===0?'dot':pick+' run'+(pick===1?'':'s')));if(pick%2)[g.striker,g.nonStriker]=[g.nonStriker,g.striker];}
+ const reached=g.target!==null&&g.score>=g.target,done=reached||g.wickets===10||g.balls===120;
+ if(g.balls%6===0){if(!g.awaitingBatter)[g.striker,g.nonStriker]=[g.nonStriker,g.striker];g.bowler=null;}
+ if(done&&g.innings===0){g.target=g.score+1;g.innings=1;[g.batting,g.bowling]=[g.bowling,g.batting];g.score=0;g.wickets=0;g.balls=0;g.striker=0;g.nonStriker=1;g.next=2;g.awaitingBatter=false;g.bowler=null;g.usage={};g.log.push('Innings break — target '+g.target);}
+ else if(done){g.awaitingBatter=false;g.phase='finished';g.result=reached?ctx.teams[g.batting]+' won by '+(10-g.wickets)+' wickets':g.score===g.target-1?'Match tied':ctx.teams[g.bowling]+' won by '+(g.target-g.score-1)+' runs';g.log.push(g.result);}
+ render();}
+function render(){if(!ctx)return;let h='<h2>🏏 Dream Draft · T20 Match</h2>';
+ if(!game){h+='<p>Your auction is complete! Would you like to simulate a cricket match using the purchased squads?</p>'+button('Simulate Match','toss')+button('Not Now','close');}
+ else if(game.phase==='toss'){h+='<p>Choose the team batting first.</p>'+button(ctx.teams.a+' bats first','bat-a')+button(ctx.teams.b+' bats first','bat-b')+button('Cancel','close');}
+ else{const g=game;h+=`<h3>${esc(ctx.teams[g.batting])}: ${g.score}/${g.wickets} (${Math.floor(g.balls/6)}.${g.balls%6} overs)</h3><p>Innings ${g.innings+1} ${g.target===null?'':`· Target ${g.target}`}</p>`;
+ if(g.phase==='playing'&&g.awaitingBatter){h+='<p>Wicket! Choose the next batter</p>';ctx.xi[g.batting].slice(g.next,11).forEach((p,i)=>h+=button(p.name||p.player_name||'Player '+(i+1),'batter-'+(g.next+i)));}
+ if(g.phase==='playing'&&!g.bowler&&!g.awaitingBatter){h+='<p>Choose the bowler for this over</p>';ctx.xi[g.bowling].slice(0,11).forEach((p,i)=>{if((g.usage[i]||0)<24)h+=button(p.name||p.player_name||'Player '+(i+1),'bowler-'+i);});}
+ if(g.phase==='playing'&&g.bowler&&!g.awaitingBatter)h+=button('Bowl Next Ball','ball');
+ if(g.phase==='finished')h+=`<h3>🏆 ${esc(g.result)}</h3>`;
+ h+='<div class="dd-match-log">'+g.log.slice(-25).reverse().map(x=>'<div>'+esc(x)+'</div>').join('')+'</div>'+button('Close','close');}
+ card.innerHTML=h;card.querySelectorAll('[data-do]').forEach(b=>b.onclick=()=>{const cmd=b.dataset.do;if(cmd==='close')hide();else if(cmd==='toss'){game={phase:'toss'};render();}else if(cmd.startsWith('bat-'))start(cmd.slice(-1));else if(cmd.startsWith('batter-')){const i=Number(cmd.slice(7)),g=game;[ctx.xi[g.batting][g.next],ctx.xi[g.batting][i]]=[ctx.xi[g.batting][i],ctx.xi[g.batting][g.next]];g.striker=g.next++;g.awaitingBatter=false;render();}else if(cmd.startsWith('bowler-')){game.bowler=cmd.slice(7);render();}else if(cmd==='ball')delivery();});}
+ window.addEventListener('dreamdraft:offline-cricket-completed',e=>{ctx=e.detail;game=null;show();});
 })();
 </script>
 </body>
