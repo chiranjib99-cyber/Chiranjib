@@ -2538,6 +2538,13 @@ body.dd-simulation-page .dd-sim-ready{padding-top:18px}
 .dd-venue-number{font-size:10px;font-weight:850;letter-spacing:.1em;opacity:.72}.dd-venue-name{font-size:14px;font-weight:900;line-height:1.35;overflow-wrap:anywhere}.dd-venue-city{font-size:11px;opacity:.75}.dd-venue-check{position:absolute;right:11px;top:9px;font-weight:950;color:#14815e}.dd-venue-actions{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;position:sticky;bottom:9px;padding:14px;margin-top:18px;border-radius:16px;border:1px solid rgba(255,255,255,.46);background:rgba(231,235,244,.90);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
 .dd-venue-primary{border:1px solid rgba(170,235,205,.7)!important;background:linear-gradient(130deg,#11815d,#2eb185)!important;color:#fff!important;font-weight:850!important}.dd-venue-primary:disabled{opacity:.48;cursor:not-allowed}.dd-venue-stage{margin:28px auto 18px;max-width:780px;border:1px solid rgba(255,255,255,.72);border-radius:24px;padding:24px;background:linear-gradient(128deg,rgba(254,244,205,.32),rgba(226,217,255,.32));box-shadow:0 15px 35px rgba(63,59,111,.08)}
 .dd-venue-option{display:flex;flex-direction:column;gap:6px;text-align:left;width:100%;margin:11px 0;padding:17px 18px;border:1px solid rgba(125,125,167,.23);border-radius:15px;background:rgba(255,255,255,.23);color:inherit}.dd-venue-option.active{border:2px solid rgba(31,157,115,.7);background:rgba(70,180,130,.15)}.dd-venue-option small{opacity:.8}.dd-venue-stage select{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(120,132,164,.5);margin:9px 0;background:rgba(255,255,255,.84);color:#29354c}
+/* ===============================================================
+   TEMPORARY MATCH ENGINE UI — START (V30.5)
+   Match screen, delivery controls and scorecard styling are placeholders.
+   After toss + match confirmation, replace the ENTIRE match experience
+   with a new premium automatic Next Delivery engine in a future phase.
+   Preserve stadium selection, toss setup, and all auction workflows.
+   =============================================================== */
 .dd-match-scoreline{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.dd-match-score{padding:18px;border-radius:17px;border:1px solid rgba(255,255,255,.6);background:rgba(255,255,255,.2)}.dd-match-score strong{display:block;font-size:23px;margin-top:6px}.dd-match-score small{opacity:.8}.dd-match-score.active{box-shadow:inset 0 0 0 2px rgba(32,154,111,.39)}
 .dd-match-controls{display:flex;flex-wrap:wrap;gap:10px;margin:13px 0}.dd-match-controls button{min-width:57px;padding:12px;border-radius:12px;font-weight:850}.dd-match-controls .wicket{background:rgba(190,55,75,.16);border:1px solid rgba(190,55,75,.44)}.dd-match-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.dd-match-info{padding:13px;border:1px solid rgba(128,121,159,.18);border-radius:12px;background:rgba(255,255,255,.15);font-size:12px;line-height:1.65}
 .dd-match-table-wrap{overflow-x:auto}.dd-match-table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap;margin:8px 0 22px}.dd-match-table th,.dd-match-table td{text-align:left;border-bottom:1px solid rgba(123,133,160,.21);padding:9px 10px}.dd-match-table th{font-size:10px;letter-spacing:.05em;opacity:.75}.dd-match-table td:first-child{font-weight:700}.dd-match-report{padding:17px;border-radius:16px;border:1px solid rgba(120,122,160,.25);background:rgba(255,255,255,.15);margin:14px 0}.dd-match-report h4{margin:6px 0 12px}.dd-match-result{font-weight:900;font-size:22px;margin:16px 0}
@@ -4073,6 +4080,17 @@ function crLiveMatchRender(panel,sim){
     sim.screen='confirm';save();crSimulationRender();window.scrollTo(0,0);
   }));panel.append(box);return;
  }
+ // ===============================================================
+ // TEMPORARY POST-TOSS MATCH FLOW — START (V30.5)
+ // Everything from Match Confirmation onward (confirmation UI, match
+ // state, scoring controls, scorecard, related helpers) is provisional.
+ // Future phase: replace with a premium match interface and automatic
+ // NEXT DELIVERY outcome prediction based on V37.1. Rules required:
+ // 4 overs max per bowler, no consecutive overs, 6 legal balls/over,
+ // correct strike changes, wicket/batter selection and innings ending.
+ // Stadium selection, toss controls and upstream auction code STAY.
+ // Remove/replace this section only after the new engine is approved.
+ // ===============================================================
  if(sim.screen==='confirm'){
   ddLiveHeading(panel,'🏏 Match Confirmation','Check the venue and batting order before starting',()=>{sim.screen='toss';save();crSimulationRender();});ddLiveProgress(panel,'toss');
   const box=make('div','dd-venue-stage');box.append(make('h3','',ground?ground.name:'Stadium'),make('p','dd-sim-note',ground?ground.city+', '+ground.country:''),make('h3','','🏏 '+niceName(state,sim.batFirst||'a')+' — Bat First'),make('p','',niceName(state,(sim.batFirst||'a')==='a'?'b':'a')+' — Bowl First'));
@@ -4156,6 +4174,11 @@ function ddMatchScorecard(panel,sim,ground){
  else panel.append(make('p','dd-sim-note','Basic manual scorekeeping: advanced dismissal types, fielding events and full extras breakdown are reserved for the next engine phase.'));
 }
 function ddMatchTable(parent,headers,rows){const wrap=make('div','dd-match-table-wrap'),table=make('table','dd-match-table'),thead=make('thead'),tr=make('tr');for(const h of headers)tr.append(make('th','',h));thead.append(tr);table.append(thead);const body=make('tbody');for(const data of rows){const row=make('tr');for(const value of data)row.append(make('td','',String(value)));body.append(row);}table.append(body);wrap.append(table);parent.append(wrap);}
+
+// ===============================================================
+// TEMPORARY POST-TOSS MATCH FLOW — END (V30.5)
+// Keep all code below (auction history, admin security, Football, etc.).
+// ===============================================================
 
 function cricketHistoryTable(){
   // Cricket-only history: every SOLD transaction, including deleted purchases
