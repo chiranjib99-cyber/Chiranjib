@@ -2517,6 +2517,7 @@ body.dd-simulation-page .dd-sim-ready{padding-top:18px}
 .dd-sim-stadium-country{border-radius:13px;border:1px solid rgba(255,255,255,.65);background:rgba(255,255,255,.22);padding:12px 14px}
 .dd-sim-stadium-country h4{margin:0 0 5px;font-size:13px}
 .dd-sim-stadium-country p{margin:4px 0;font-size:12px}
+.dd-sim-stadium-item{min-height:74px;display:flex;flex-direction:column;justify-content:center}.dd-sim-stadium-item h4{font-size:11px;color:#786397;text-transform:uppercase;letter-spacing:.045em}.dd-sim-stadium-item p{font-size:13px;font-weight:750;color:#2c3148}
 @media(max-width:680px){body.dd-simulation-page .dd-simulation-panel{padding:14px;width:calc(100% - 16px);margin:8px auto 25px}.dd-sim-stadium-grid{grid-template-columns:1fr}}
 
 /* V30.3 Offline Cricket-only administrator confirmation and security log */
@@ -2526,6 +2527,23 @@ body.dd-simulation-page .dd-sim-ready{padding-top:18px}
 .dd-admin-detail[hidden]{display:none!important}.dd-admin-detail p{margin:5px 0}
 .dd-admin-panel{margin:10px 0 14px}.dd-admin-code{letter-spacing:.14em;font-size:20px!important;max-width:100%}
 .dd-admin-note{font-size:11px;color:#806879;line-height:1.5}
+
+
+/* V30.5: premium venue selection, toss, and simple scorekeeping UI. */
+.dd-venue-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0 16px;flex-wrap:wrap}
+.dd-venue-progress{display:flex;gap:7px;flex-wrap:wrap}.dd-venue-progress span{font-size:10px;font-weight:850;letter-spacing:.06em;border:1px solid rgba(125,128,162,.24);border-radius:99px;padding:7px 11px;background:rgba(255,255,255,.13)}.dd-venue-progress span.on{color:#16745a;border-color:rgba(31,146,109,.42);background:rgba(39,159,117,.12)}
+.dd-venue-country{margin:22px 0 12px}.dd-venue-country h4{font-size:14px;font-weight:850;margin:0 0 10px;display:flex;align-items:center;gap:9px}.dd-venue-country h4 .flag{font-size:23px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.1))}.dd-venue-country-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.dd-venue-card{position:relative;display:flex;flex-direction:column;gap:9px;min-height:123px;padding:17px 15px;text-align:left;border-radius:18px;border:1px solid rgba(255,255,255,.68);background:linear-gradient(135deg,rgba(255,255,255,.39),rgba(255,250,232,.18) 48%,rgba(218,212,255,.24));backdrop-filter:blur(18px) saturate(155%);-webkit-backdrop-filter:blur(18px) saturate(155%);box-shadow:0 10px 25px rgba(55,65,117,.08),inset 0 1px 0 rgba(255,255,255,.4);color:inherit;transition:transform .15s,border-color .15s,box-shadow .15s;cursor:pointer}
+.dd-venue-card:hover{transform:translateY(-2px);box-shadow:0 14px 27px rgba(60,64,116,.13)}.dd-venue-card.selected{border:2px solid rgba(28,151,106,.85);background:linear-gradient(135deg,rgba(118,214,169,.22),rgba(245,235,169,.21));box-shadow:0 0 0 3px rgba(34,166,115,.12),0 14px 32px rgba(33,130,94,.14)}
+.dd-venue-number{font-size:10px;font-weight:850;letter-spacing:.1em;opacity:.72}.dd-venue-name{font-size:14px;font-weight:900;line-height:1.35;overflow-wrap:anywhere}.dd-venue-city{font-size:11px;opacity:.75}.dd-venue-check{position:absolute;right:11px;top:9px;font-weight:950;color:#14815e}.dd-venue-actions{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;position:sticky;bottom:9px;padding:14px;margin-top:18px;border-radius:16px;border:1px solid rgba(255,255,255,.46);background:rgba(231,235,244,.90);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.dd-venue-primary{border:1px solid rgba(170,235,205,.7)!important;background:linear-gradient(130deg,#11815d,#2eb185)!important;color:#fff!important;font-weight:850!important}.dd-venue-primary:disabled{opacity:.48;cursor:not-allowed}.dd-venue-stage{margin:28px auto 18px;max-width:780px;border:1px solid rgba(255,255,255,.72);border-radius:24px;padding:24px;background:linear-gradient(128deg,rgba(254,244,205,.32),rgba(226,217,255,.32));box-shadow:0 15px 35px rgba(63,59,111,.08)}
+.dd-venue-option{display:flex;flex-direction:column;gap:6px;text-align:left;width:100%;margin:11px 0;padding:17px 18px;border:1px solid rgba(125,125,167,.23);border-radius:15px;background:rgba(255,255,255,.23);color:inherit}.dd-venue-option.active{border:2px solid rgba(31,157,115,.7);background:rgba(70,180,130,.15)}.dd-venue-option small{opacity:.8}.dd-venue-stage select{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(120,132,164,.5);margin:9px 0;background:rgba(255,255,255,.84);color:#29354c}
+.dd-match-scoreline{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.dd-match-score{padding:18px;border-radius:17px;border:1px solid rgba(255,255,255,.6);background:rgba(255,255,255,.2)}.dd-match-score strong{display:block;font-size:23px;margin-top:6px}.dd-match-score small{opacity:.8}.dd-match-score.active{box-shadow:inset 0 0 0 2px rgba(32,154,111,.39)}
+.dd-match-controls{display:flex;flex-wrap:wrap;gap:10px;margin:13px 0}.dd-match-controls button{min-width:57px;padding:12px;border-radius:12px;font-weight:850}.dd-match-controls .wicket{background:rgba(190,55,75,.16);border:1px solid rgba(190,55,75,.44)}.dd-match-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.dd-match-info{padding:13px;border:1px solid rgba(128,121,159,.18);border-radius:12px;background:rgba(255,255,255,.15);font-size:12px;line-height:1.65}
+.dd-match-table-wrap{overflow-x:auto}.dd-match-table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap;margin:8px 0 22px}.dd-match-table th,.dd-match-table td{text-align:left;border-bottom:1px solid rgba(123,133,160,.21);padding:9px 10px}.dd-match-table th{font-size:10px;letter-spacing:.05em;opacity:.75}.dd-match-table td:first-child{font-weight:700}.dd-match-report{padding:17px;border-radius:16px;border:1px solid rgba(120,122,160,.25);background:rgba(255,255,255,.15);margin:14px 0}.dd-match-report h4{margin:6px 0 12px}.dd-match-result{font-weight:900;font-size:22px;margin:16px 0}
+body.mobile-dark .dd-venue-card{background:linear-gradient(135deg,rgba(44,57,86,.86),rgba(70,51,87,.67));border-color:rgba(203,214,245,.22)}body.mobile-dark .dd-venue-card.selected{background:linear-gradient(130deg,rgba(30,115,90,.65),rgba(89,74,43,.48));border-color:#60d5ac}body.mobile-dark .dd-venue-actions{background:rgba(28,39,59,.95);border-color:rgba(255,255,255,.2)}body.mobile-dark .dd-venue-stage{background:linear-gradient(140deg,rgba(44,57,77,.9),rgba(63,47,84,.9))}body.mobile-dark .dd-venue-option,body.mobile-dark .dd-match-score,body.mobile-dark .dd-match-info,body.mobile-dark .dd-match-report{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2)}
+@media(max-width:700px){.dd-venue-country-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dd-venue-stage{padding:14px}.dd-venue-actions{bottom:3px}.dd-match-pair{grid-template-columns:1fr}}@media(max-width:430px){.dd-venue-country-grid{grid-template-columns:1fr}.dd-match-scoreline{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -3967,30 +3985,7 @@ function crSimulationRender(){
     grid.append(teamBox);
   }
   if(sim.step==='done'&&sim.livePlay){
-    panel.replaceChildren();
-    const bar=make('div','dd-sim-heading');
-    const label=make('div');label.append(make('h3','','🏟 Start Live Play · Stadium Selection'),make('p','','30 real grounds across 14 countries · proposed venues for review'));
-    const back=make('button','dd-sim-close','← Back to Playing XIs');back.onclick=()=>{sim.livePlay=false;save();crSimulationRender();};
-    bar.append(label,back);panel.append(bar);
-    const stadiums=[
-      ['India',['Narendra Modi Stadium · Ahmedabad','Eden Gardens · Kolkata','Wankhede Stadium · Mumbai']],
-      ['Australia',['Melbourne Cricket Ground · Melbourne','Sydney Cricket Ground · Sydney','Adelaide Oval · Adelaide']],
-      ['England',["Lord’s Cricket Ground · London",'The Oval · London']],
-      ['Pakistan',['Gaddafi Stadium · Lahore','National Bank Cricket Arena · Karachi']],
-      ['South Africa',['Newlands · Cape Town','Wanderers Stadium · Johannesburg']],
-      ['New Zealand',['Eden Park · Auckland','Hagley Oval · Christchurch']],
-      ['Sri Lanka',['R. Premadasa Stadium · Colombo','Pallekele International Cricket Stadium · Kandy']],
-      ['Bangladesh',['Sher-e-Bangla National Cricket Stadium · Dhaka','Zahur Ahmed Chowdhury Stadium · Chattogram']],
-      ['United Arab Emirates',['Dubai International Cricket Stadium · Dubai','Sharjah Cricket Stadium · Sharjah']],
-      ['West Indies',['Kensington Oval · Bridgetown, Barbados','Providence Stadium · Georgetown, Guyana']],
-      ['Zimbabwe',['Harare Sports Club · Harare','Queens Sports Club · Bulawayo']],
-      ['Ireland',['Malahide Cricket Club Ground · Malahide','Clontarf Cricket Club Ground · Dublin']],
-      ['United States',['Grand Prairie Stadium · Texas','Central Broward Park · Lauderhill, Florida']],
-      ['Netherlands',['VRA Cricket Ground · Amstelveen','Hazelaarweg · Rotterdam']]
-    ];
-    const list=make('div','dd-sim-stadium-grid');
-    for(const [country,grounds] of stadiums){const box=make('div','dd-sim-stadium-country');box.append(make('h4','',country));for(const ground of grounds)box.append(make('p','',ground));list.append(box);}
-    panel.append(list,make('p','dd-sim-note','Venue list is a preview; live match simulation engine is not yet implemented.'));
+    crLiveMatchRender(panel,sim);
     return;
   }
   if(sim.step==='done'){
@@ -4017,6 +4012,150 @@ function crSimulationRender(){
   }
 }
 
+
+
+// V30.5 additive match flow. A simple MANUAL ball-by-ball scorekeeper;
+// existing auction, Football, and player bidding calculations are unchanged.
+const DD_STADIUMS=[
+  ['India','🇮🇳',[['HPCA Stadium','Dharamshala'],['Eden Gardens','Kolkata'],['Wankhede Stadium','Mumbai']]],
+  ['Australia','🇦🇺',[['Melbourne Cricket Ground','Melbourne'],['Sydney Cricket Ground','Sydney'],['Adelaide Oval','Adelaide']]],
+  ['England','🇬🇧',[["Lord’s Cricket Ground",'London'],['The Oval','London']]],
+  ['Pakistan','🇵🇰',[['Gaddafi Stadium','Lahore'],['National Bank Cricket Arena','Karachi']]],
+  ['South Africa','🇿🇦',[['Newlands','Cape Town'],['Wanderers Stadium','Johannesburg']]],
+  ['New Zealand','🇳🇿',[['Eden Park','Auckland'],['Hagley Oval','Christchurch']]],
+  ['Sri Lanka','🇱🇰',[['R. Premadasa Stadium','Colombo'],['Pallekele International Cricket Stadium','Kandy']]],
+  ['Bangladesh','🇧🇩',[['Sher-e-Bangla National Cricket Stadium','Dhaka'],['Zahur Ahmed Chowdhury Stadium','Chattogram']]],
+  ['United Arab Emirates','🇦🇪',[['Dubai International Cricket Stadium','Dubai'],['Sharjah Cricket Stadium','Sharjah']]],
+  ['West Indies','🏝️',[['Kensington Oval','Bridgetown, Barbados'],['Providence Stadium','Georgetown, Guyana']]],
+  ['Zimbabwe','🇿🇼',[['Harare Sports Club','Harare'],['Queens Sports Club','Bulawayo']]],
+  ['Ireland','🇮🇪',[['Malahide Cricket Club Ground','Malahide'],['Clontarf Cricket Club Ground','Dublin']]],
+  ['United States','🇺🇸',[['Grand Prairie Stadium','Texas'],['Central Broward Park','Lauderhill, Florida']]],
+  ['Netherlands','🇳🇱',[['VRA Cricket Ground','Amstelveen'],['Hazelaarweg','Rotterdam']]]
+];
+function ddGrounds(){let i=0;return DD_STADIUMS.flatMap(([country,flag,venues])=>venues.map(([name,city])=>({id:'ground-'+(++i),country,flag,name,city})));}
+function ddLiveProgress(panel,active){
+ const p=make('div','dd-venue-progress');for(const [id,t] of [['stadium','01 · STADIUM'],['toss','02 · TOSS'],['match','03 · MATCH'],['score','04 · SCORECARD']]){p.append(make('span',active===id?'on':'',t));}panel.append(p);
+}
+function ddLiveHeading(panel,title,description,back){
+ const header=make('div','dd-sim-heading'),label=make('div');label.append(make('h3','',title),make('p','',description));const btn=make('button','dd-sim-close','← '+(back?'Back':'Close'));
+ btn.type='button';btn.onclick=()=>{back?back():(()=>{const sim=crSimData();sim.livePlay=false;save();crSimulationRender();})()};header.append(label,btn);panel.append(header);
+}
+function ddLiveButton(label,handler,klass='dd-venue-primary'){let b=make('button',klass,label);b.type='button';b.onclick=handler;return b;}
+function crLiveMatchRender(panel,sim){
+ panel.replaceChildren();sim.screen=sim.screen||'stadium';
+ const ground=ddGrounds().find(g=>g.id===sim.stadium);
+ if(sim.screen==='stadium'){
+  ddLiveHeading(panel,'🏟 Choose Your Stadium','30 unique grounds · 14 countries · select one venue',()=>{sim.livePlay=false;save();crSimulationRender();});ddLiveProgress(panel,'stadium');
+  const top=make('div','dd-venue-top');top.append(make('p','dd-sim-note',ground?'✓ '+ground.name+' · '+ground.city:'Choose your match venue below.'));panel.append(top);
+  let number=0;
+  for(const [country,flag,venues] of DD_STADIUMS){
+    const group=make('section','dd-venue-country'),heading=make('h4');heading.append(make('span','flag',flag),document.createTextNode(country+' · '+venues.length+' stadiums'));group.append(heading);
+    const grid=make('div','dd-venue-country-grid');for(const [name,city] of venues){number++;
+      const id='ground-'+number,selected=sim.stadium===id,card=make('button','dd-venue-card'+(selected?' selected':''));card.type='button';card.setAttribute('aria-pressed',String(selected));
+      card.append(make('span','dd-venue-number','STADIUM '+String(number).padStart(2,'0')),make('span','dd-venue-name',name),make('span','dd-venue-city',city));if(selected)card.append(make('span','dd-venue-check','✓ Selected'));
+      card.onclick=()=>{sim.stadium=id;save();crSimulationRender();};grid.append(card);
+    }group.append(grid);panel.append(group);
+  }
+  const foot=make('div','dd-venue-actions');foot.append(make('span','dd-sim-note',ground?'Selected: '+ground.name:'No stadium selected yet'));
+  const next=ddLiveButton('Continue to Toss →',()=>{if(!sim.stadium)return;sim.screen='toss';save();crSimulationRender();window.scrollTo(0,0);});next.disabled=!ground;foot.append(next);panel.append(foot);return;
+ }
+ if(sim.screen==='toss'){
+  ddLiveHeading(panel,'🪙 Toss & Batting Order',ground?ground.name+' · '+ground.city:'Choose who bats first',()=>{sim.screen='stadium';save();crSimulationRender();});ddLiveProgress(panel,'toss');
+  const box=make('div','dd-venue-stage');box.append(make('h3','','How should the first batting team be decided?'));
+  for(const [mode,title,desc] of [['auto','🎲 Automatic','Randomly decide which team bats first.'],['manual','✋ Select Who Bats First','Choose Milan Strikers or Taiwan Avengers yourself.']]){
+    const option=make('button','dd-venue-option'+((sim.tossMode||'auto')===mode?' active':''));option.type='button';option.append(make('strong','',title),make('small','',desc));option.onclick=()=>{sim.tossMode=mode;save();crSimulationRender();};box.append(option);
+  }
+  if(sim.tossMode==='manual'){
+    const select=make('select');for(const t of ['a','b']){let opt=make('option','',niceName(state,t));opt.value=t;select.append(opt);}select.value=sim.batFirst||'a';select.onchange=()=>{sim.batFirst=select.value;save();};box.append(make('label','','Choose batting-first team'),select);
+  }
+  box.append(ddLiveButton('Confirm Batting Order →',()=>{
+    if(sim.tossMode!=='manual')sim.batFirst=Math.random()<.5?'a':'b';else sim.batFirst=sim.batFirst||'a';
+    sim.screen='confirm';save();crSimulationRender();window.scrollTo(0,0);
+  }));panel.append(box);return;
+ }
+ if(sim.screen==='confirm'){
+  ddLiveHeading(panel,'🏏 Match Confirmation','Check the venue and batting order before starting',()=>{sim.screen='toss';save();crSimulationRender();});ddLiveProgress(panel,'toss');
+  const box=make('div','dd-venue-stage');box.append(make('h3','',ground?ground.name:'Stadium'),make('p','dd-sim-note',ground?ground.city+', '+ground.country:''),make('h3','','🏏 '+niceName(state,sim.batFirst||'a')+' — Bat First'),make('p','',niceName(state,(sim.batFirst||'a')==='a'?'b':'a')+' — Bowl First'));
+  box.append(ddLiveButton('▶ Start Basic Match',()=>{if(!sim.match){sim.match=ddMatchCreate(sim);}sim.screen='match';save();crSimulationRender();window.scrollTo(0,0);}));panel.append(box);return;
+ }
+ if(!sim.match){sim.screen='confirm';save();crSimulationRender();return;}
+ if(sim.match.complete||sim.screen==='score')return ddMatchScorecard(panel,sim,ground);
+ return ddMatchPlay(panel,sim,ground);
+}
+function ddMatchCreate(sim){
+ const first=sim.batFirst||'a',second=first==='a'?'b':'a';
+ const createInnings=(bat,bowl)=>({bat,bowl,runs:0,wickets:0,legal:0,extras:0,striker:0,nonStriker:1,nextBatter:2,bowler:null,lastBowler:null,batStats:sim.choices[bat].map(id=>({id,runs:0,balls:0,fours:0,sixes:0,out:false})),bowlStats:sim.choices[bowl].map(id=>({id,balls:0,runs:0,wickets:0,maidens:0})),events:[],overRuns:0,overWickets:0,fall:[]});
+ return {innings:[createInnings(first,second),createInnings(second,first)],current:0,complete:false};
+}
+function ddOvers(balls){return Math.floor(balls/6)+'.'+(balls%6);}
+function ddBatId(inn,index){return inn.batStats[index]?.id;}
+function ddBatName(inn,index){const p=crPoolById(ddBatId(inn,index));return p?p.name:'—';}
+function ddBowlerStats(inn,id){return inn.bowlStats.find(x=>x.id===id);}
+function ddMatchCanBowl(inn,id){const s=ddBowlerStats(inn,id);return !!s&&s.balls<24&&(!inn.lastBowler||inn.lastBowler!==id)&&s.balls%6===0;}
+function ddMatchScoreline(match){return match.innings.map((inn,i)=>({inn,i,team:niceName(state,inn.bat),score:inn.runs+'/'+inn.wickets,overs:ddOvers(inn.legal)}));}
+function ddMatchHeader(panel,sim,ground,stage){ddLiveHeading(panel,stage==='score'?'🏆 Full Match Scorecard':'🏏 Live Match · Basic Engine',(ground?ground.name+' · '+ground.city+' · ':'')+'20-over T20',()=>{sim.screen='confirm';save();crSimulationRender();});ddLiveProgress(panel,stage);}
+function ddMatchScoreBoxes(panel,match){const grid=make('div','dd-match-scoreline');for(const row of ddMatchScoreline(match)){const box=make('div','dd-match-score'+(row.i===match.current&&!match.complete?' active':''));box.append(make('div','',row.team),make('strong','',row.score),make('small','','Overs '+row.overs+(row.i===1?' · Target '+(match.innings[0].runs+1):'')));grid.append(box);}panel.append(grid);}
+function ddMatchPlay(panel,sim,ground){
+ const match=sim.match,inn=match.innings[match.current];ddMatchHeader(panel,sim,ground,'match');ddMatchScoreBoxes(panel,match);
+ const pair=make('div','dd-match-pair');const bats=make('div','dd-match-info');for(const [idx,star] of [[inn.striker,'🏏 * '],[inn.nonStriker,'   ']]){
+  const s=inn.batStats[idx];if(s)bats.append(make('div','',star+ddBatName(inn,idx)+' — '+s.runs+' ('+s.balls+')'));
+ }const bowlerInfo=make('div','dd-match-info');const b=inn.bowler?ddBowlerStats(inn,inn.bowler):null;bowlerInfo.append(make('div','',b?('🎯 '+(crPoolById(inn.bowler)?.name||'Bowler')+' · '+ddOvers(b.balls)+' overs · '+b.runs+' runs · '+b.wickets+' wickets'):'🎯 Choose a bowler to start the over'));pair.append(bats,bowlerInfo);panel.append(pair);
+ if(inn.legal%6===0&&!inn.bowler){
+  const choice=make('div','dd-venue-stage');choice.append(make('h3','','Select Bowler · Over '+(Math.floor(inn.legal/6)+1)));
+  const select=make('select');const valid=inn.bowlStats.filter(x=>ddMatchCanBowl(inn,x.id));
+  // Any Playing XI member except the acting WK can bowl, including part-time batters.
+  for(const s of valid){const p=crPoolById(s.id);if(p?.role==='WK')continue;const opt=make('option','',(p?.name||'Player')+' · '+(p?.role||'')+' · '+ddOvers(s.balls)+'/4.0 overs');opt.value=s.id;select.append(opt);}
+  if(!select.options.length){choice.append(make('p','dd-sim-feedback','No eligible bowler: check Playing XI. A bowler can bowl at most 4 overs and never successive overs.'));}else{
+    choice.append(make('p','dd-sim-note','Maximum 4 overs per bowler. Previous-over bowler is excluded. BAT players may bowl part-time.'));choice.append(select,ddLiveButton('Confirm Bowler',()=>{if(!ddMatchCanBowl(inn,select.value))return;inn.bowler=select.value;save();crSimulationRender();}));
+  }panel.append(choice);return;
+ }
+ const ctl=make('div','dd-venue-stage');ctl.append(make('h3','','Record Ball · Over '+(Math.floor(inn.legal/6)+1)),make('p','dd-sim-note','Select the actual outcome. Wides and no-balls add an extra and do not count as legal deliveries.'));
+ const buttons=make('div','dd-match-controls');for(const event of ['0','1','2','3','4','6','W','Wide','No-ball']){
+  const btn=ddLiveButton(event,()=>{ddRecordBall(sim,event);save();crSimulationRender();},event==='W'?'wicket':'');buttons.append(btn);
+ }ctl.append(buttons);panel.append(ctl);
+ const recent=inn.events.slice(-12).reverse();if(recent.length){const log=make('div','dd-match-info');log.append(make('strong','','Recent deliveries'));for(const ev of recent){log.append(make('div','',ev));}panel.append(log);}
+}
+function ddRecordBall(sim,event){
+ const match=sim.match,inn=match.innings[match.current];if(match.complete||!inn.bowler)return false;
+ const bowler=ddBowlerStats(inn,inn.bowler),batter=inn.batStats[inn.striker];if(!bowler||!batter)return false;
+ const extra=event==='Wide'||event==='No-ball',wicket=event==='W',runs=/^[0-6]$/.test(event)?Number(event):0,legal=!extra;
+ inn.runs+=runs+(extra?1:0);bowler.runs+=runs+(extra?1:0);inn.overRuns+=runs+(extra?1:0);
+ if(extra)inn.extras++;
+ if(legal){inn.legal++;bowler.balls++;batter.balls++;}
+ batter.runs+=runs;if(runs===4)batter.fours++;if(runs===6)batter.sixes++;
+ if(wicket){inn.wickets++;bowler.wickets++;batter.out=true;inn.fall.push(inn.wickets+'-'+inn.runs+' ('+ddOvers(inn.legal)+')');if(inn.wickets<10&&inn.nextBatter<inn.batStats.length)inn.striker=inn.nextBatter++;}
+ else if(runs%2===1){const tmp=inn.striker;inn.striker=inn.nonStriker;inn.nonStriker=tmp;}
+ inn.events.push(ddOvers(inn.legal)+' · '+(crPoolById(inn.bowler)?.name||'Bowler')+' to '+(crPoolById(batter.id)?.name||'Batter')+' — '+event);
+ const chase=match.current===1&&inn.runs>match.innings[0].runs;
+ const done=inn.legal>=120||inn.wickets>=10||chase;
+ if(!done&&legal&&inn.legal%6===0){
+  if(inn.overRuns===0)bowler.maidens++;
+  const t=inn.striker;inn.striker=inn.nonStriker;inn.nonStriker=t;
+  inn.lastBowler=inn.bowler;inn.bowler=null;inn.overRuns=0;inn.overWickets=0;
+ }
+ if(done){inn.lastBowler=inn.bowler;inn.bowler=null;if(match.current===0)match.current=1;else{match.complete=true;sim.screen='score';}}
+ return true;
+}
+function ddMatchScorecard(panel,sim,ground){
+ const match=sim.match;ddMatchHeader(panel,sim,ground,'score');ddMatchScoreBoxes(panel,match);
+ const [a,b]=match.innings;let result='Match in progress';
+ if(match.complete){result=b.runs>a.runs?niceName(state,b.bat)+' won by '+(10-b.wickets)+' wickets':a.runs>b.runs?niceName(state,a.bat)+' won by '+(a.runs-b.runs)+' runs':'Match tied';}
+ panel.append(make('div','dd-match-result',result));
+ for(let i=0;i<match.innings.length;i++){
+  const inn=match.innings[i];if(i===1&&match.current===0)continue;
+  const section=make('section','dd-match-report');section.append(make('h3','','Innings '+(i+1)+' · '+niceName(state,inn.bat)),make('p','dd-sim-note','Score '+inn.runs+'/'+inn.wickets+' · '+ddOvers(inn.legal)+' overs · RR '+(inn.legal?((inn.runs*6)/inn.legal).toFixed(2):'0.00')+' · Extras '+inn.extras));
+  const heading=make('h4','','Batting');section.append(heading);
+  const batRows=inn.batStats.map(x=>{const p=crPoolById(x.id);return [p?.name||'Player',x.out?'Out':x.balls?'Not out':'Did not bat',x.runs,x.balls,x.fours,x.sixes,x.balls?(100*x.runs/x.balls).toFixed(1):'—'];});
+  ddMatchTable(section,['Batter','Status','R','B','4s','6s','SR'],batRows);
+  section.append(make('h4','','Bowling'));
+  const bowlRows=inn.bowlStats.filter(x=>x.balls).map(x=>{const p=crPoolById(x.id);return [p?.name||'Player',ddOvers(x.balls),x.maidens,x.runs,x.wickets,x.balls?(x.runs*6/x.balls).toFixed(2):'—'];});
+  ddMatchTable(section,['Bowler','O','M','R','W','Econ'],bowlRows);
+  section.append(make('p','dd-sim-note','Fall of wickets: '+(inn.fall.join(' · ')||'None')));panel.append(section);
+ }
+ if(!match.complete)panel.append(ddLiveButton('← Return to Match',()=>{sim.screen='match';save();crSimulationRender();}));
+ else panel.append(make('p','dd-sim-note','Basic manual scorekeeping: advanced dismissal types, fielding events and full extras breakdown are reserved for the next engine phase.'));
+}
+function ddMatchTable(parent,headers,rows){const wrap=make('div','dd-match-table-wrap'),table=make('table','dd-match-table'),thead=make('thead'),tr=make('tr');for(const h of headers)tr.append(make('th','',h));thead.append(tr);table.append(thead);const body=make('tbody');for(const data of rows){const row=make('tr');for(const value of data)row.append(make('td','',String(value)));body.append(row);}table.append(body);wrap.append(table);parent.append(wrap);}
 
 function cricketHistoryTable(){
   // Cricket-only history: every SOLD transaction, including deleted purchases
