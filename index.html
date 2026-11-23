@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dream Draft · Two-Team Auction Tracker</title>
+<title>Dream Draft V31 · Live Auction Implemented Till Toss</title>
 <style>
 :root{
   color-scheme: light;
@@ -2478,79 +2478,87 @@ body.mobile-dark .dialog.new-setup-dialog .dialog-actions #new-create:not(:disab
 }
 
 
-/* Additive Phase 2 Cricket simulation setup. Existing auction styles untouched. */
-.dd-simulation-launch{background:linear-gradient(120deg,rgba(34,153,96,.26),rgba(97,195,143,.20))!important;border-color:rgba(38,145,91,.36)!important;color:#176548!important}
-#cricket-final .undo-completion-wrap{gap:9px;flex-wrap:wrap}
-.dd-simulation-panel{margin:16px 0 20px;padding:20px;border:1px solid rgba(255,255,255,.72);border-radius:23px;background:linear-gradient(135deg,rgba(248,228,162,.34),rgba(236,224,254,.48));box-shadow:0 18px 44px rgba(76,58,117,.12);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);color:#2b2a3d}
-.dd-sim-heading,.dd-sim-team-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.dd-sim-heading h3{margin:0;font-size:20px}.dd-sim-heading p,.dd-sim-note{margin:5px 0 12px;color:#666078;font-size:12px;line-height:1.5}
-.dd-sim-close{padding:7px 12px}.dd-sim-progress{margin:12px 0;color:#526078;font-size:11px;font-weight:850;letter-spacing:.08em}
-.dd-sim-teams,.dd-sim-xi-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.dd-sim-team,.dd-sim-xi{min-width:0;border-radius:17px;padding:15px;border:1px solid rgba(255,255,255,.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.dd-sim-a{background:linear-gradient(130deg,rgba(248,213,110,.50),rgba(255,250,225,.30))}.dd-sim-b{background:linear-gradient(130deg,rgba(183,151,239,.43),rgba(244,234,255,.30))}
-.dd-sim-team.is-selecting{outline:2px solid rgba(82,123,159,.35)}
-.dd-sim-team h4,.dd-sim-xi h4{margin:0;font-size:17px;overflow-wrap:anywhere}
-.dd-sim-count{white-space:nowrap;font-size:12px;font-weight:850}.dd-sim-squad{display:flex;flex-direction:column;gap:5px;max-height:320px;overflow:auto;padding:2px}
-.dd-sim-player{display:flex;gap:8px;align-items:center;border-radius:10px;padding:8px 9px;border:1px solid rgba(255,255,255,.44);background:rgba(255,255,255,.30);font-size:12px;cursor:pointer}
-.dd-sim-player.selected{background:rgba(99,181,134,.18);border-color:rgba(47,139,85,.32)}.dd-sim-player input{accent-color:#18895e}.dd-sim-player-name{flex:1;min-width:0;overflow-wrap:anywhere}.dd-sim-role{font-size:10px;font-weight:850;color:#615b71}
-.dd-sim-captain-label{display:block;margin:13px 0 6px;font-size:12px;font-weight:850}.dd-sim-captain{width:100%;padding:11px;background:rgba(255,255,255,.77);border:1px solid rgba(131,140,169,.4);border-radius:11px;color:#29364d}
-.dd-sim-rules,.dd-sim-feedback{font-size:11px;color:#555873;line-height:1.4}.dd-sim-confirm{width:100%;background:linear-gradient(125deg,#168c60,#31b17f);color:white;border:1px solid rgba(255,255,255,.65)}.dd-sim-confirm:disabled{opacity:.42}.dd-sim-captain-confirm{font-size:12px;font-weight:800;margin-top:10px}
-.dd-sim-ready{margin-top:17px;border-top:1px solid rgba(125,112,157,.2);padding-top:14px}.dd-sim-ready h3{font-size:19px;text-align:center}.dd-sim-xi ol{margin:11px 0 2px;padding-left:25px;font-size:12px;line-height:1.9}.dd-sim-revise{display:block;margin:14px auto 0}
-body.mobile-dark .dd-simulation-panel{background:linear-gradient(130deg,rgba(24,39,65,.96),rgba(39,29,66,.93));color:#f3f5ff;border-color:rgba(180,194,222,.28)}
-body.mobile-dark .dd-sim-a{background:linear-gradient(130deg,rgba(123,89,26,.44),rgba(50,44,48,.5))}body.mobile-dark .dd-sim-b{background:linear-gradient(130deg,rgba(97,70,155,.48),rgba(44,39,68,.5))}
-body.mobile-dark .dd-sim-heading p,body.mobile-dark .dd-sim-note,body.mobile-dark .dd-sim-rules,body.mobile-dark .dd-sim-feedback,body.mobile-dark .dd-sim-role{color:#d2d5e5}
-body.mobile-dark .dd-sim-player{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.17)}body.mobile-dark .dd-sim-captain-confirm{color:#fff}
-@media(max-width:680px){.dd-sim-teams,.dd-sim-xi-grid{grid-template-columns:minmax(0,1fr)}.dd-simulation-panel{padding:13px}.dd-sim-squad{max-height:340px}}
-
-/* V30.2: standalone simulation page, all signed players visible without nested scroll. */
-body.dd-simulation-page > main.wrap,body.dd-simulation-page > .floral-wallpaper{display:none!important}
-body.dd-simulation-page{overflow-x:hidden}
-body.dd-simulation-page .dd-simulation-panel{width:min(1200px,calc(100% - 28px));margin:20px auto 40px;min-height:calc(100vh - 60px);padding:24px;position:relative;z-index:5}
-body.dd-simulation-page .dd-sim-squad{max-height:none!important;overflow:visible!important;padding:0!important}
-body.dd-simulation-page .dd-sim-team{align-self:start}
-body.dd-simulation-page .dd-sim-player{min-height:38px}
-body.dd-simulation-page .dd-sim-ready{padding-top:18px}
-.dd-sim-final-actions{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:17px}
-.dd-sim-final-actions .dd-sim-revise{margin:0}
-.dd-sim-liveplay{background:linear-gradient(125deg,#158b60,#26b581)!important;color:white!important;border:1px solid rgba(189,248,219,.7)!important}
-.dd-sim-stadium-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
-.dd-sim-stadium-country{border-radius:13px;border:1px solid rgba(255,255,255,.65);background:rgba(255,255,255,.22);padding:12px 14px}
-.dd-sim-stadium-country h4{margin:0 0 5px;font-size:13px}
-.dd-sim-stadium-country p{margin:4px 0;font-size:12px}
-.dd-sim-stadium-item{min-height:74px;display:flex;flex-direction:column;justify-content:center}.dd-sim-stadium-item h4{font-size:11px;color:#786397;text-transform:uppercase;letter-spacing:.045em}.dd-sim-stadium-item p{font-size:13px;font-weight:750;color:#2c3148}
-@media(max-width:680px){body.dd-simulation-page .dd-simulation-panel{padding:14px;width:calc(100% - 16px);margin:8px auto 25px}.dd-sim-stadium-grid{grid-template-columns:1fr}}
-
-/* V30.3 Offline Cricket-only administrator confirmation and security log */
-.dd-admin-lock{border:1px solid rgba(185,61,83,.32);background:rgba(201,62,91,.10);border-radius:13px;padding:11px 13px;margin-bottom:12px;color:#a03854;cursor:pointer;width:100%;text-align:left;display:block}
-.dd-admin-lock strong{display:block;font-size:13px}.dd-admin-lock small{font-size:11px;line-height:1.5;color:#99576b}
-.dd-admin-detail{padding:12px;border-radius:12px;background:rgba(255,255,255,.32);border:1px solid rgba(185,61,83,.22);font-size:12px;line-height:1.65;margin-bottom:12px;overflow-wrap:anywhere}
-.dd-admin-detail[hidden]{display:none!important}.dd-admin-detail p{margin:5px 0}
-.dd-admin-panel{margin:10px 0 14px}.dd-admin-code{letter-spacing:.14em;font-size:20px!important;max-width:100%}
-.dd-admin-note{font-size:11px;color:#806879;line-height:1.5}
-
-
-/* V30.5: premium venue selection, toss, and simple scorekeeping UI. */
-.dd-venue-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0 16px;flex-wrap:wrap}
-.dd-venue-progress{display:flex;gap:7px;flex-wrap:wrap}.dd-venue-progress span{font-size:10px;font-weight:850;letter-spacing:.06em;border:1px solid rgba(125,128,162,.24);border-radius:99px;padding:7px 11px;background:rgba(255,255,255,.13)}.dd-venue-progress span.on{color:#16745a;border-color:rgba(31,146,109,.42);background:rgba(39,159,117,.12)}
-.dd-venue-country{margin:22px 0 12px}.dd-venue-country h4{font-size:14px;font-weight:850;margin:0 0 10px;display:flex;align-items:center;gap:9px}.dd-venue-country h4 .flag{font-size:23px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.1))}.dd-venue-country-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
-.dd-venue-card{position:relative;display:flex;flex-direction:column;gap:9px;min-height:123px;padding:17px 15px;text-align:left;border-radius:18px;border:1px solid rgba(255,255,255,.68);background:linear-gradient(135deg,rgba(255,255,255,.39),rgba(255,250,232,.18) 48%,rgba(218,212,255,.24));backdrop-filter:blur(18px) saturate(155%);-webkit-backdrop-filter:blur(18px) saturate(155%);box-shadow:0 10px 25px rgba(55,65,117,.08),inset 0 1px 0 rgba(255,255,255,.4);color:inherit;transition:transform .15s,border-color .15s,box-shadow .15s;cursor:pointer}
-.dd-venue-card:hover{transform:translateY(-2px);box-shadow:0 14px 27px rgba(60,64,116,.13)}.dd-venue-card.selected{border:2px solid rgba(28,151,106,.85);background:linear-gradient(135deg,rgba(118,214,169,.22),rgba(245,235,169,.21));box-shadow:0 0 0 3px rgba(34,166,115,.12),0 14px 32px rgba(33,130,94,.14)}
-.dd-venue-number{font-size:10px;font-weight:850;letter-spacing:.1em;opacity:.72}.dd-venue-name{font-size:14px;font-weight:900;line-height:1.35;overflow-wrap:anywhere}.dd-venue-city{font-size:11px;opacity:.75}.dd-venue-check{position:absolute;right:11px;top:9px;font-weight:950;color:#14815e}.dd-venue-actions{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;position:sticky;bottom:9px;padding:14px;margin-top:18px;border-radius:16px;border:1px solid rgba(255,255,255,.46);background:rgba(231,235,244,.90);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-.dd-venue-primary{border:1px solid rgba(170,235,205,.7)!important;background:linear-gradient(130deg,#11815d,#2eb185)!important;color:#fff!important;font-weight:850!important}.dd-venue-primary:disabled{opacity:.48;cursor:not-allowed}.dd-venue-stage{margin:28px auto 18px;max-width:780px;border:1px solid rgba(255,255,255,.72);border-radius:24px;padding:24px;background:linear-gradient(128deg,rgba(254,244,205,.32),rgba(226,217,255,.32));box-shadow:0 15px 35px rgba(63,59,111,.08)}
-.dd-venue-option{display:flex;flex-direction:column;gap:6px;text-align:left;width:100%;margin:11px 0;padding:17px 18px;border:1px solid rgba(125,125,167,.23);border-radius:15px;background:rgba(255,255,255,.23);color:inherit}.dd-venue-option.active{border:2px solid rgba(31,157,115,.7);background:rgba(70,180,130,.15)}.dd-venue-option small{opacity:.8}.dd-venue-stage select{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(120,132,164,.5);margin:9px 0;background:rgba(255,255,255,.84);color:#29354c}
-/* ===============================================================
-   TEMPORARY MATCH ENGINE UI — START (V30.5)
-   Match screen, delivery controls and scorecard styling are placeholders.
-   After toss + match confirmation, replace the ENTIRE match experience
-   with a new premium automatic Next Delivery engine in a future phase.
-   Preserve stadium selection, toss setup, and all auction workflows.
-   =============================================================== */
-.dd-match-scoreline{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.dd-match-score{padding:18px;border-radius:17px;border:1px solid rgba(255,255,255,.6);background:rgba(255,255,255,.2)}.dd-match-score strong{display:block;font-size:23px;margin-top:6px}.dd-match-score small{opacity:.8}.dd-match-score.active{box-shadow:inset 0 0 0 2px rgba(32,154,111,.39)}
-.dd-match-controls{display:flex;flex-wrap:wrap;gap:10px;margin:13px 0}.dd-match-controls button{min-width:57px;padding:12px;border-radius:12px;font-weight:850}.dd-match-controls .wicket{background:rgba(190,55,75,.16);border:1px solid rgba(190,55,75,.44)}.dd-match-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.dd-match-info{padding:13px;border:1px solid rgba(128,121,159,.18);border-radius:12px;background:rgba(255,255,255,.15);font-size:12px;line-height:1.65}
-.dd-match-table-wrap{overflow-x:auto}.dd-match-table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap;margin:8px 0 22px}.dd-match-table th,.dd-match-table td{text-align:left;border-bottom:1px solid rgba(123,133,160,.21);padding:9px 10px}.dd-match-table th{font-size:10px;letter-spacing:.05em;opacity:.75}.dd-match-table td:first-child{font-weight:700}.dd-match-report{padding:17px;border-radius:16px;border:1px solid rgba(120,122,160,.25);background:rgba(255,255,255,.15);margin:14px 0}.dd-match-report h4{margin:6px 0 12px}.dd-match-result{font-weight:900;font-size:22px;margin:16px 0}
-body.mobile-dark .dd-venue-card{background:linear-gradient(135deg,rgba(44,57,86,.86),rgba(70,51,87,.67));border-color:rgba(203,214,245,.22)}body.mobile-dark .dd-venue-card.selected{background:linear-gradient(130deg,rgba(30,115,90,.65),rgba(89,74,43,.48));border-color:#60d5ac}body.mobile-dark .dd-venue-actions{background:rgba(28,39,59,.95);border-color:rgba(255,255,255,.2)}body.mobile-dark .dd-venue-stage{background:linear-gradient(140deg,rgba(44,57,77,.9),rgba(63,47,84,.9))}body.mobile-dark .dd-venue-option,body.mobile-dark .dd-match-score,body.mobile-dark .dd-match-info,body.mobile-dark .dd-match-report{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2)}
-@media(max-width:700px){.dd-venue-country-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dd-venue-stage{padding:14px}.dd-venue-actions{bottom:3px}.dd-match-pair{grid-template-columns:1fr}}@media(max-width:430px){.dd-venue-country-grid{grid-template-columns:1fr}.dd-match-scoreline{grid-template-columns:1fr}}
-
+/* V31 — Cricket live simulation setup through the Toss only. V30 auction styles remain intact. */
+#simulation-actions[hidden],#simulation-stage[hidden],#cricket-bidding-layout[hidden],#cricket-live .cricket-live-top[hidden],#cricket-board[hidden],#cricket-xi-view[hidden],#cricket-final[hidden]{display:none!important}
+#simulation-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0 0;padding:13px 16px;background:linear-gradient(105deg,rgba(247,220,143,.45),rgba(214,194,250,.38));border:1px solid rgba(255,255,255,.76);border-radius:20px;backdrop-filter:blur(19px) saturate(144%);box-shadow:0 10px 29px rgba(69,53,103,.12)}
+#simulation-actions button{width:100%;min-height:48px;border-radius:14px;font-size:13px;font-weight:850}
+#simulation-actions .undo-completion-btn{color:#845a1d;background:linear-gradient(125deg,rgba(252,234,188,.9),rgba(255,249,225,.6));border-color:rgba(232,198,115,.65);box-shadow:0 7px 17px rgba(174,138,66,.1)}
+#simulation-actions .undo-completion-btn:disabled{opacity:.44;cursor:not-allowed;filter:grayscale(.58)}
+#simulation-actions .sim-start-btn{background:linear-gradient(130deg,#148957,#27b67b);color:#fff;border:1px solid rgba(187,252,218,.85);box-shadow:0 9px 22px rgba(32,152,95,.22)}
+#simulation-stage{min-width:0;margin:4px 0 20px;padding:21px 24px;border-radius:24px;background:linear-gradient(125deg,rgba(253,241,209,.66),rgba(243,238,253,.62) 52%,rgba(221,202,254,.46));border:1px solid rgba(255,255,255,.83);backdrop-filter:blur(25px) saturate(130%);box-shadow:0 21px 48px rgba(72,55,125,.12)}
+#simulation-stage .sim-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+#simulation-stage .sim-head h2{margin:0;font-size:clamp(20px,2.6vw,27px);letter-spacing:-.04em;color:#28324b}
+#simulation-stage .sim-kicker{font-size:10px;font-weight:900;letter-spacing:.12em;color:#7453a9;text-transform:uppercase;margin-bottom:4px}
+#simulation-stage .sim-step{background:#172a43;color:#f8d994;font-size:11px;font-weight:850;padding:8px 12px;border-radius:100px;white-space:nowrap}
+#simulation-stage .sim-sub{font-size:13px;color:#665e7c;line-height:1.55;margin:0 0 15px}
+#simulation-stage .sim-selection-count{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 13px;margin:9px 0;border-radius:13px;background:rgba(35,113,85,.10);border:1px solid rgba(40,142,101,.20);color:#256b54;font-size:13px;font-weight:850}
+#simulation-stage .sim-stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin:13px 0 16px}
+#simulation-stage .sim-stat{background:rgba(255,255,255,.47);border:1px solid rgba(255,255,255,.83);border-radius:14px;padding:10px 6px;text-align:center}
+#simulation-stage .sim-stat strong{display:block;font-size:22px;color:#37304e;font-variant-numeric:tabular-nums}
+#simulation-stage .sim-stat small{font-size:10px;color:#6d6680;font-weight:800}
+#simulation-stage .sim-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#simulation-stage .sim-role-panel{min-width:0;border-radius:15px;border:1px solid rgba(180,164,207,.28);background:rgba(255,255,255,.30);padding:10px}
+#simulation-stage .sim-role-head{font-size:12px;font-weight:850;display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;color:#524161}
+#simulation-stage .sim-player-list{display:grid;gap:6px}
+#simulation-stage .sim-player{display:flex;gap:9px;align-items:center;min-width:0;padding:9px 10px;border:1px solid rgba(177,162,203,.24);border-radius:10px;background:rgba(255,255,255,.45);cursor:pointer}
+#simulation-stage .sim-player.selected{border-color:rgba(45,160,110,.54);background:rgba(206,245,221,.66)}
+#simulation-stage .sim-player.locked{cursor:default}
+#simulation-stage .sim-player.disabled-choice{opacity:.49;cursor:not-allowed}
+#simulation-stage .sim-player input{accent-color:#199966;width:17px;height:17px;flex:none;margin:0}
+#simulation-stage .sim-player-body{display:flex;flex:1;flex-direction:column;gap:3px;min-width:0}
+#simulation-stage .sim-player-name{font-size:12px;font-weight:800;color:#342e45;overflow-wrap:anywhere}
+#simulation-stage .sim-player-meta{font-size:10px;color:#766d83;overflow-wrap:anywhere}
+#simulation-stage .sim-os{font-size:9px;font-weight:900;color:#866026;border-radius:7px;background:rgba(236,197,108,.31);padding:4px 6px;white-space:nowrap}
+#simulation-stage .sim-rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;background:rgba(255,255,255,.39);border:1px solid rgba(255,255,255,.8);border-radius:15px;padding:13px;margin-top:14px}
+#simulation-stage .sim-rule{font-size:12px;display:flex;align-items:center;justify-content:space-between;gap:8px;line-height:1.3}
+#simulation-stage .sim-rule.good strong{color:#138452}#simulation-stage .sim-rule.bad strong{color:#b23954}
+#simulation-stage .sim-warnings{margin:9px 0 0;color:#a54052;font-size:12px;line-height:1.6}
+#simulation-stage .sim-warnings div{background:rgba(247,216,223,.55);border-radius:8px;padding:5px 9px;margin:4px 0}
+#simulation-stage .sim-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:16px}
+#simulation-stage .sim-nav button{min-width:130px;padding:12px 16px}
+#simulation-stage .sim-next{color:white!important;background:linear-gradient(130deg,#178657,#29b780)!important;border:1px solid #7ae0b5!important}
+#simulation-stage .sim-next:disabled{opacity:.40;filter:grayscale(.55);cursor:not-allowed}
+#simulation-stage .sim-back{color:#40526d!important;background:rgba(255,255,255,.54)!important}
+#simulation-stage .sim-role-form{max-width:630px;margin:8px auto 20px;border:1px solid rgba(255,255,255,.78);border-radius:18px;padding:18px;background:rgba(255,255,255,.40)}
+#simulation-stage .sim-role-form label{display:block;font-size:13px;font-weight:850;color:#394057;margin:10px 0 7px}
+#simulation-stage .sim-role-form select{display:block;width:100%;min-height:46px;padding:11px 12px;border:1px solid #c2b4d6;border-radius:11px;font:inherit;font-size:14px;background:rgba(255,255,255,.88);color:#342c4a}
+#simulation-stage .sim-role-form select:disabled{color:#657487;background:rgba(237,239,243,.69)}
+#simulation-stage .sim-hint{font-size:11px;color:#696078;line-height:1.5;margin:5px 0 11px}
+#simulation-stage .sim-lock-banner{font-size:12px;font-weight:850;background:rgba(29,125,86,.13);color:#176b4e;border:1px solid rgba(29,125,86,.25);border-radius:12px;padding:10px 13px;margin:7px 0 14px}
+#simulation-stage .sim-confirm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#simulation-stage .sim-confirm-team{min-width:0;background:linear-gradient(115deg,rgba(247,224,156,.43),rgba(255,255,255,.24));border:1px solid rgba(194,159,81,.31);border-radius:17px;padding:14px}
+#simulation-stage .sim-confirm-team.b{background:linear-gradient(115deg,rgba(191,157,239,.37),rgba(255,255,255,.24));border-color:rgba(143,113,200,.31)}
+#simulation-stage .sim-confirm-team h3{font-size:17px;overflow-wrap:anywhere;margin:0 0 5px}
+#simulation-stage .sim-confirm-count{font-size:11px;color:#587c64;font-weight:750;margin-bottom:8px}
+#simulation-stage .sim-confirm-subhead{font-size:10px;letter-spacing:.07em;font-weight:900;color:#797084;padding:7px 0 4px;border-bottom:1px solid rgba(119,99,145,.17)}
+#simulation-stage .sim-confirm-row{display:flex;justify-content:space-between;align-items:center;gap:7px;font-size:11px;padding:6px 1px;border-bottom:1px solid rgba(128,112,155,.08)}
+#simulation-stage .sim-confirm-row .sim-markers{font-size:9px;white-space:nowrap;color:#84632b;font-weight:800}
+#simulation-stage .sim-toss{max-width:720px;margin:0 auto;text-align:center}
+#simulation-stage .sim-toss-teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:17px 0}
+#simulation-stage .sim-toss-team{border:1px solid rgba(201,169,98,.38);background:rgba(246,221,154,.30);border-radius:15px;padding:15px;font-size:14px;font-weight:850;overflow-wrap:anywhere}
+#simulation-stage .sim-toss-team.b{border-color:rgba(169,143,215,.42);background:rgba(199,176,246,.27)}
+#simulation-stage .sim-coin{margin:14px auto;width:112px;height:112px;border-radius:50%;display:grid;place-items:center;border:6px double #a57a2a;box-shadow:inset 0 0 0 3px rgba(255,243,175,.7),0 13px 32px rgba(121,90,28,.22);background:linear-gradient(135deg,#fff4bb,#d8a945 52%,#f7d677);font-size:32px;font-weight:950;color:#7b5518;backface-visibility:visible}
+#simulation-stage .sim-coin.flipping{animation:sim-coin-flip 1.0s ease-out both}
+@keyframes sim-coin-flip{0%{transform:translateY(0) rotateY(0) scale(1)}42%{transform:translateY(-35px) rotateY(720deg) scale(1.08)}100%{transform:translateY(0) rotateY(1440deg) scale(1)}}
+#simulation-stage .sim-toss-winner{font-size:21px;font-weight:900;color:#255b4a;margin:14px 0 6px}
+#simulation-stage .sim-toss-choice{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+#simulation-stage .sim-toss-choice button{min-height:60px;background:rgba(255,255,255,.65);border:1px solid rgba(148,134,178,.33);color:#3b4662}
+#simulation-stage .sim-toss-choice button.active{color:white!important;background:linear-gradient(135deg,#247d5d,#32b382)!important;border-color:#86d9b5!important}
+#simulation-stage .sim-toss-result{background:linear-gradient(135deg,rgba(246,218,155,.42),rgba(205,184,244,.35));border:1px solid rgba(255,255,255,.74);border-radius:16px;padding:17px;text-align:left}
+#simulation-stage .sim-toss-result>div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid rgba(141,122,159,.2);padding:9px 0;font-size:12px}
+#simulation-stage .sim-toss-result>div:last-child{border:0}
+#simulation-stage .sim-toss-result strong{text-align:right;overflow-wrap:anywhere}
+#simulation-stage .sim-future{margin-top:12px;font-size:12px;color:#71647e}
+#simulation-stage .sim-blocker{border:1px solid rgba(185,83,94,.3);background:rgba(250,224,232,.7);border-radius:13px;padding:14px;color:#9c3754;line-height:1.6;font-size:13px}
+body.mobile-dark #simulation-stage{background:linear-gradient(135deg,rgba(23,42,67,.93),rgba(40,43,74,.94))!important;color:#e5edfb!important;border-color:rgba(175,194,228,.20)!important}
+body.mobile-dark #simulation-stage :is(h2,h3,.sim-player-name,.sim-stat strong,.sim-role-head,.sim-role-form label,.sim-confirm-team h3){color:#f0f4ff!important}
+body.mobile-dark #simulation-stage :is(.sim-sub,.sim-hint,.sim-player-meta,.sim-future,.sim-stat small){color:#bcc8dc!important}
+body.mobile-dark #simulation-stage :is(.sim-stat,.sim-role-panel,.sim-role-form,.sim-confirm-team,.sim-player,.sim-rules,.sim-toss-result){background:rgba(29,50,79,.79)!important;border-color:rgba(172,194,231,.19)!important}
+body.mobile-dark #simulation-stage .sim-player.selected{background:rgba(19,120,89,.48)!important}
+body.mobile-dark #simulation-stage .sim-rule{color:#e3edfb}
+body.mobile-dark #simulation-stage .sim-toss-team{color:#fff}
+@media(max-width:680px){#simulation-actions{grid-template-columns:1fr;padding:10px;gap:8px}#simulation-stage{padding:14px 12px;border-radius:19px}#simulation-stage .sim-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}#simulation-stage .sim-panels,#simulation-stage .sim-confirm-grid{grid-template-columns:1fr}#simulation-stage .sim-rules{grid-template-columns:1fr}#simulation-stage .sim-nav button{min-width:0}#simulation-stage .sim-confirm-team{padding:10px}}
+@media(max-width:400px){#simulation-stage .sim-toss-teams{gap:6px}#simulation-stage .sim-toss-team{font-size:11px;padding:11px 5px}#simulation-stage .sim-toss-choice{gap:7px}#simulation-stage .sim-toss-choice button{padding:10px 6px;font-size:11px}}
 </style>
 </head>
 <body>
@@ -2621,6 +2629,11 @@ body.mobile-dark .dd-venue-card{background:linear-gradient(135deg,rgba(44,57,86,
   </section>
   <div id="cricket-xi-view" class="cricket-xi-view glass"><div class="cricket-pool-head"><h3>Squad Compliance</h3><p class="muted">Available choices and squad eligibility</p></div><div id="cricket-xi-content"></div></div>
   <div id="cricket-final" class="cricket-final glass" hidden></div>
+  <section id="simulation-actions" class="glass" aria-label="Completed auction actions" hidden>
+    <div id="simulation-undo-slot"></div>
+    <button id="simulation-start" class="sim-start-btn" type="button">▶ Start Live Simulation</button>
+  </section>
+  <section id="simulation-stage" class="glass" aria-label="Live simulation setup and toss" hidden></section>
 </section>
   <section class="cards" aria-label="Team budgets">
     <article class="card glass a">
@@ -2914,7 +2927,7 @@ function cleanAuction(a){
     ...(Number.isFinite(e.gmpAtSigning)&&e.gmpAtSigning>=0?{gmpAtSigning:e.gmpAtSigning}:{})
   }));
   x.audit=(Array.isArray(a.audit)?a.audit:[]).filter(l=>l&&['Edited','Deleted'].includes(l.action)).map(l=>({...l}));
-  if(a.cricket&&typeof a.cricket==='object'&&Array.isArray(a.cricket.pool))x.cricket=JSON.parse(JSON.stringify(a.cricket));
+  if(a.cricket&&typeof a.cricket==='object'&&Array.isArray(a.cricket.pool)){x.cricket=JSON.parse(JSON.stringify(a.cricket));if(['a','b'].includes(x.cricket.simulation?.toss?.winner)){x.cricket.complete=true;x.cricket.started=true;}}
   x.nextNumber=Math.max(Number.isInteger(a.nextNumber)?a.nextNumber:1,1,...x.entries.map(e=>e.number+1));
   return x;
 }
@@ -2943,7 +2956,7 @@ const activeEntries=(auction=state)=>auction.entries.filter(e=>!e.deletedAt);
 const teamEntries=p=>activeEntries().filter(e=>e.player===p);
 const spent=p=>teamEntries(p).reduce((s,e)=>s+e.cents,0);
 const make=(tag,cls,value)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(value!==undefined)e.textContent=value;return e;};
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store));}catch{toast('Browser storage is full. Please export a backup.');}};
+const save=()=>{try{const snapshot=JSON.stringify(store);localStorage.setItem(KEY,snapshot);simLastStored=snapshot;return true;}catch{toast('Browser storage is full or unavailable. Progress was NOT saved. Please export a backup.');return false;}};
 function toast(message){$('auction-error').textContent=message;}
 function clearEntry(){ $('purchase').value='';$('amount').value='';toast('');}
 function syncHover(){for(const p of ['a','b']){const disabled=manageOn||(hoveredTeam!==null&&hoveredTeam!==p)||(isAdvanced()&&(!state.cricket.started||state.cricket.resolution!=='pending'||!!state.cricket.passed?.[p]||(state.cricket.complete||state.cricket.awaitingEnd)));$('sign-'+p).disabled=disabled;cards[p].classList.toggle('inactive-team',disabled&&!manageOn);}}
@@ -2973,7 +2986,7 @@ function syncCompletionLock(){
 }
 function suggestions(){const cricket=$('cricketer-suggestions');$('purchase').setAttribute('list',state.mode==='cricket'?'cricketer-suggestions':'footballer-suggestions');$('purchase-label').textContent=(state.mode==='cricket'?'Cricketer':'Footballer')+' / player bought';$('purchase').placeholder=state.mode==='cricket'?'Start typing Kohli, Dhoni, Bumrah…':'Start typing Messi, Ronaldo, Kane…';$('mode-chip').textContent=state.mode==='cricket'?'🏏 Cricket':'⚽ Football';$('current-budget-note').textContent='Starting budget: '+usd(state.budget)+' per team';}
 function renderTabs(){const area=$('auction-switcher');area.replaceChildren();for(const a of store.auctions){const b=make('button','auction-tab'+(a.id===store.activeId?' active':''),a.title);b.type='button';b.setAttribute('aria-pressed',String(a.id===store.activeId));b.onclick=()=>{if(a.id===store.activeId)return;store.activeId=a.id;state=a;manageOn=false;hoveredTeam=null;clearEntry();save();render();syncHover();};area.append(b);}}
-function render(){if(!isAdvanced()||!cr().complete){document.getElementById('dd-simulation-panel')?.remove();document.body.classList.remove('dd-simulation-page');}renderTabs();suggestions();syncEditLock();$('manage-toggle').setAttribute('aria-pressed',String(manageOn));$('manage-toggle').classList.toggle('chosen',manageOn);$('manage-toggle').textContent=manageOn?'✔ Save Changes':'✎ Edit / Delete Signing';
+function render(){renderTabs();suggestions();syncEditLock();$('manage-toggle').setAttribute('aria-pressed',String(manageOn));$('manage-toggle').classList.toggle('chosen',manageOn);$('manage-toggle').textContent=manageOn?'✔ Save Changes':'✎ Edit / Delete Signing';
   for(const p of ['a','b']){
     const list=teamEntries(p),total=spent(p),remain=state.budget-total,best=list.reduce((m,e)=>!m||e.cents>m.cents?e:m,null);
     if(document.activeElement!==$('name-'+p))$('name-'+p).value=state.names[p];
@@ -3028,53 +3041,10 @@ document.addEventListener('wheel',e=>{
   if(field && document.activeElement===field)field.blur();
 }, {passive:true,capture:true});
 function modalError(msg){const e=$('modal-error');if(e)e.textContent=msg;}
-// Browser-local access guard. It persists across reloads; offline HTML cannot provide server-grade security.
-const DD_ADMIN_KEY='dream-draft-cricket-offline-admin-v1';
-const DD_ADMIN_CODE='9437';
-const DD_LOCK_MS=24*60*60*1000;
-function ddAdminRead(){try{const d=JSON.parse(localStorage.getItem(DD_ADMIN_KEY)||'{}');return {fails:Math.max(0,Math.min(3,Number(d.fails)||0)),until:Number(d.until)||0,logs:Array.isArray(d.logs)?d.logs.slice(-30):[]};}catch{return {fails:0,until:0,logs:[]};}}
-function ddAdminSave(a){try{localStorage.setItem(DD_ADMIN_KEY,JSON.stringify(a));}catch{}}
-function ddAdminCurrent(){const a=ddAdminRead();if(a.until&&a.until<=Date.now()){a.fails=0;a.until=0;ddAdminSave(a);}return a;}
-function ddAdminLocked(){return ddAdminCurrent().until>Date.now();}
-function ddAdminWhen(time){return new Date(time).toLocaleString();}
-function ddAdminVerify(action,onSuccess){
- if(!isAdvanced()){onSuccess();return;}
- const initial=ddAdminCurrent();
- if(initial.until>Date.now()){
-  showDialog('Administrator Access Locked',`<div class="dd-admin-lock"><strong>⛔ Administrator Access Locked</strong><small>Code attempts are unavailable until ${ddAdminWhen(initial.until)}.</small></div><div class="dialog-actions"><button id="dd-auth-close">Close</button></div>`,null);
-  $('dd-auth-close').onclick=closeDialog;return;
- }
- showDialog('Administrator Verification',`<p class="dialog-copy">Confirm ${crEscape(action)} using the administrator code.</p><label class="field-label" for="dd-admin-code">Administrator Code</label><input class="dialog-input dd-admin-code" id="dd-admin-code" type="password" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="Enter 4-digit code"><p id="modal-error" class="error" role="alert"></p><p class="dd-admin-note">Three incorrect attempts lock access for 24 hours. Cancel makes no changes.</p><div class="dialog-actions"><button id="dd-auth-cancel">Cancel</button><button id="dd-auth-confirm" class="primary-btn">Verify & Continue</button></div>`,null);
- $('dd-auth-cancel').onclick=closeDialog;
- $('dd-admin-code').addEventListener('keydown',e=>{if(e.key==='Enter'){$('dd-auth-confirm').click();}});
- $('dd-auth-confirm').onclick=()=>{
-  const a=ddAdminCurrent();if(a.until>Date.now()){modalError('Administrator access locked until '+ddAdminWhen(a.until));$('dd-auth-confirm').disabled=true;return;}
-  if($('dd-admin-code').value===DD_ADMIN_CODE){a.fails=0;ddAdminSave(a);closeDialog();onSuccess();return;}
-  a.fails++;const now=Date.now();
-  a.logs.push({at:now,action,attempt:a.fails,device:navigator.userAgent||'Unknown browser',type:/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)?'Mobile/tablet':'Desktop',ip:'Unavailable in offline HTML'});
-  if(a.fails>=3){a.until=now+DD_LOCK_MS;ddAdminSave(a);modalError('Administrator access locked for 24 hours — until '+ddAdminWhen(a.until));$('dd-admin-code').disabled=true;$('dd-auth-confirm').disabled=true;}
-  else {ddAdminSave(a);modalError('Incorrect code — '+(3-a.fails)+' attempt'+(3-a.fails===1?'':'s')+' remaining');$('dd-admin-code').value='';$('dd-admin-code').focus();}
- };
-}
-function ddAdminLogsUI(){
- if(!isAdvanced())return '';
- const a=ddAdminCurrent();if(!a.logs.length&&!(a.until>Date.now()))return '';
- const locked=a.until>Date.now();
- return `<div class="dd-admin-panel"><button class="dd-admin-lock" type="button" id="dd-admin-log-toggle"><strong>${locked?'⛔ Administrator Access Locked':'🛡 Security Logs'}</strong><small>${locked?'3 incorrect attempts · locked until '+ddAdminWhen(a.until):'Failed administrator verification attempts recorded'} · Tap to expand details</small></button><div class="dd-admin-detail" id="dd-admin-log-detail" hidden><strong>Private Security Logs</strong><p>Administrator authorization is required to view detailed device and attempt records. IP addresses cannot be determined by this offline HTML file. Room ID is not shown.</p><button type="button" id="dd-admin-log-auth">Authorize details</button><div id="dd-admin-log-content"></div></div></div>`;
-}
-function ddAdminWireLogs(){
- const toggle=$('dd-admin-log-toggle'),detail=$('dd-admin-log-detail');if(!toggle||!detail)return;
- toggle.onclick=()=>{detail.hidden=!detail.hidden;};
- $('dd-admin-log-auth').onclick=()=>ddAdminVerify('View private security logs',()=>{
-   showAudit();const d=$('dd-admin-log-detail');if(d){d.hidden=false;const a=ddAdminCurrent();const host=$('dd-admin-log-content');host.replaceChildren();for(const l of [...a.logs].reverse()){
-     const item=make('div','audit-item');item.textContent=`${ddAdminWhen(l.at)} · ${l.action} · Failed attempt ${l.attempt} · ${l.type} · ${l.device} · IP: ${l.ip}`;host.append(item);
-   }$('dd-admin-log-auth').hidden=true;}
- });
-}
 function promptAction(title,description,options){showDialog(title,`<p class="dialog-copy">${description}</p><div class="dialog-actions"><button id="dialog-back" type="button">Cancel</button><button id="dialog-export" type="button">Export &amp; ${title.startsWith('Reset')?'Reset':'Delete'}</button><button id="dialog-just" class="danger-button" type="button">${title.startsWith('Reset')?'Reset':'Delete'} without export</button></div>`,()=>{});
   $('dialog-back').onclick=closeDialog;
-  $('dialog-export').onclick=()=>ddAdminVerify(title,async()=>{const done=await downloadBackup(state);if(done){options();closeDialog();}else{promptAction(title,description,options);}});
-  $('dialog-just').onclick=()=>ddAdminVerify(title,()=>{options();closeDialog();});
+  $('dialog-export').onclick=async()=>{const button=$('dialog-export');button.disabled=true;const done=await downloadBackup(state);if(done){options();closeDialog();}else button.disabled=false;};
+  $('dialog-just').onclick=()=>{options();closeDialog();};
 }
 // Choose D:\Auction CSV in the Chrome folder picker the first time. Browser security
 // prevents the site from hardcoding access to a user's local drive.
@@ -3136,7 +3106,7 @@ async function downloadBackup(auction=state){
 }
 function confirmExport(){
   const chosen=state;
-  showDialog('Export Auction',`<p class="dialog-copy">Do you want to export <strong id="export-auction-name"></strong>?</p><p class="dialog-copy">This backup includes this auction’s teams, budgets, signings, transactions, and edit/delete history only. On first export, select the D: drive root to create or use Auction CSV, or select the existing Auction CSV folder. Later exports reuse the folder where permission allows.</p><div class="dialog-actions"><button id="export-cancel" type="button">Cancel</button><button id="export-confirm" class="primary-btn" type="button"></button></div>`,()=>{});
+  showDialog('Export Auction',`<p class="dialog-copy">Do you want to export <strong id="export-auction-name"></strong>?</p><p class="dialog-copy">This backup includes this auction’s teams, budgets, signings, transactions, audit history and any saved simulation Playing XIs / toss state. On first export, select the D: drive root to create or use Auction CSV, or select the existing Auction CSV folder. Later exports reuse the folder where permission allows.</p><div class="dialog-actions"><button id="export-cancel" type="button">Cancel</button><button id="export-confirm" class="primary-btn" type="button"></button></div>`,()=>{});
   $('export-auction-name').textContent=chosen.title;
   $('export-confirm').textContent='Export '+chosen.title;
   $('export-cancel').onclick=closeDialog;
@@ -3161,8 +3131,8 @@ function deleteSigning(id){if(isAdvanced())return cricketDeleteSigning(id);const
   $('delete-yes').onclick=()=>{record('Deleted',{...e},null);e.deletedAt=Date.now();save();render();closeDialog();};
 }
 function showAudit(){
-  showDialog('Edit / Delete History',`<p class="dialog-copy">Read-only record for this auction. Reset or Delete Auction will remove it.</p>${ddAdminLogsUI()}<div class="audit-search-row"><label class="audit-search-wrap"><span class="search-symbol" aria-hidden="true">⌕</span><input id="audit-search" type="search" aria-label="Search player name or exact transaction number" placeholder="Search player name or #..." autocomplete="off"></label></div><div class="audit-scroll" id="audit-list"></div><div class="dialog-actions"><button id="audit-close">Close</button></div>`,()=>{});
-  $('audit-close').onclick=closeDialog;ddAdminWireLogs();
+  showDialog('Edit / Delete History',`<p class="dialog-copy">Read-only record for this auction. Reset or Delete Auction will remove it.</p><div class="audit-search-row"><label class="audit-search-wrap"><span class="search-symbol" aria-hidden="true">⌕</span><input id="audit-search" type="search" aria-label="Search player name or exact transaction number" placeholder="Search player name or #..." autocomplete="off"></label></div><div class="audit-scroll" id="audit-list"></div><div class="dialog-actions"><button id="audit-close">Close</button></div>`,()=>{});
+  $('audit-close').onclick=closeDialog;
   const target=$('audit-list'),search=$('audit-search');
   const records=[...state.audit].reverse();
   function updateResults(){
@@ -3792,9 +3762,10 @@ function crEndAuction(){
   save();crError('');render();
 }
 function crUndoCompletion(){
-  if(!isAdvanced()||!cr().complete||manageOn)return;
+  if(!isAdvanced()||!cr().complete||manageOn||cr().simulation?.toss?.winner)return;
   if(!confirm('Temporarily undo auction completion? Final results and remaining-purse bonuses will disappear until you complete it again. Purchases and history will be preserved.'))return;
   cr().complete=false;cr().completedAt=null;
+  if(cr().simulation)cr().simulation.view=false;
   // The final resolved lot remains resolved; the operator may complete again.
   save();render();
 }
@@ -3887,298 +3858,11 @@ function crShowFinal(){
   const actions=make('div','undo-completion-wrap');
   const undoComplete=make('button','undo-completion-btn','↶ Undo Auction Complete (Temporary)');
   undoComplete.type='button';undoComplete.onclick=crUndoCompletion;
-  actions.append(undoComplete);
-  const simBtn=make('button','undo-completion-btn dd-simulation-launch','▶ Start Simulation');
-  simBtn.type='button';simBtn.onclick=crSimulationStart;
-  actions.append(simBtn);report.append(actions);
-  crSimulationRender();
+  undoComplete.disabled=!!cr().simulation?.toss?.winner;
+  actions.append(undoComplete);$('simulation-undo-slot').replaceChildren(undoComplete);
 
 }
 
-
-// Phase 2 add-on: simulation XI selection. Independent from auction bidding,
-// score calculation, transaction history and Football.
-function crSimData(){
-  const c=cr();
-  if(!c.simulation||typeof c.simulation!=='object')c.simulation={open:false,step:'a',choices:{a:[],b:[]},captains:{a:null,b:null}};
-  const sim=c.simulation;
-  if(!sim.choices||typeof sim.choices!=='object')sim.choices={a:[],b:[]};
-  if(!sim.captains||typeof sim.captains!=='object')sim.captains={a:null,b:null};
-  for(const team of ['a','b']){
-    if(!Array.isArray(sim.choices[team]))sim.choices[team]=[];
-    sim.choices[team]=[...new Set(sim.choices[team])].filter(id=>typeof id==='string'&&crActiveTeam(team).some(e=>e.poolId===id)).slice(0,11);
-    if(!sim.choices[team].includes(sim.captains[team]))sim.captains[team]=null;
-  }
-  if(!['a','b','done'].includes(sim.step))sim.step='a';
-  return sim;
-}
-function crSimulationStart(){
-  if(!isAdvanced()||!cr().complete)return;
-  const sim=crSimData();sim.open=true;
-  save();crSimulationRender();
-  window.scrollTo({top:0,behavior:'instant'});
-}
-function crSimValidate(team){
-  const sim=crSimData(),ids=sim.choices[team];
-  const picked=ids.map(id=>crPoolById(id)).filter(Boolean);
-  const count=role=>picked.filter(p=>p.role===role).length;
-  if(picked.length!==11)return 'Select exactly 11 players ('+picked.length+'/11).';
-  if(count('BOWL')<3)return 'Select at least 3 bowlers.';
-  if(count('WK')<1)return 'Select at least 1 wicketkeeper.';
-  if(count('BAT')<2)return 'Select at least 2 batsmen.';
-  if(!sim.captains[team]||!ids.includes(sim.captains[team]))return 'Choose a captain from your Playing XI.';
-  return '';
-}
-function crSimulationRender(){
-  const existing=$('dd-simulation-panel');
-  if(!isAdvanced()||!cr().complete){existing?.remove();document.body.classList.remove('dd-simulation-page');return;}
-  const sim=crSimData();
-  if(!sim.open){existing?.remove();document.body.classList.remove('dd-simulation-page');return;}
-  document.body.classList.add('dd-simulation-page');
-  const final=$('cricket-final');
-  let panel=existing;
-  if(!panel){panel=make('section','dd-simulation-panel');panel.id='dd-simulation-panel';panel.setAttribute('aria-label','Cricket simulation Playing XI');document.body.append(panel);}
-  panel.replaceChildren();
-  const header=make('div','dd-sim-heading');
-  const heading=make('div');heading.append(make('h3','','🏏 Match Simulation · Playing XI'),make('p','',sim.step==='done'?'Both captains and Playing XIs are selected.':'All purchased players are listed. Select exactly 11 and a captain. Team A goes first.'));
-  const close=make('button','dd-sim-close','× Close');close.type='button';close.onclick=()=>{sim.open=false;save();panel.remove();document.body.classList.remove('dd-simulation-page');window.scrollTo(0,0);};
-  header.append(heading,close);panel.append(header);
-  const progress=make('div','dd-sim-progress');
-  progress.append(make('span',sim.step==='a'?'STEP 1 · TEAM A':sim.step==='b'?'STEP 2 · TEAM B':'✓ BOTH TEAMS READY'));
-  panel.append(progress);
-  const grid=make('div','dd-sim-teams');panel.append(grid);
-  for(const team of ['a','b']){
-    const active=sim.step===team,done=sim.step==='done'||(team==='a'&&sim.step==='b');
-    const teamBox=make('div','dd-sim-team dd-sim-'+team+(active?' is-selecting':''));
-    const top=make('div','dd-sim-team-head');
-    top.append(make('h4','',niceName(state,team)),make('span','dd-sim-count',sim.choices[team].length+' / 11'));
-    teamBox.append(top);
-    const help=make('p','dd-sim-note',active?'Select players from this squad.':done?'✓ Selection confirmed':'Waiting for Team A to finish.');
-    teamBox.append(help);
-    const list=make('div','dd-sim-squad');
-    const entries=crActiveTeam(team).map(e=>crPoolById(e.poolId)).filter(Boolean);
-    for(const player of entries){
-      const selected=sim.choices[team].includes(player.id);
-      const row=make('label','dd-sim-player'+(selected?' selected':''));
-      const ck=make('input');ck.type='checkbox';ck.checked=selected;ck.disabled=!active||(!selected&&sim.choices[team].length>=11);
-      ck.onchange=()=>{
-        if(ck.checked&&!sim.choices[team].includes(player.id)&&sim.choices[team].length<11)sim.choices[team].push(player.id);
-        if(!ck.checked){sim.choices[team]=sim.choices[team].filter(x=>x!==player.id);if(sim.captains[team]===player.id)sim.captains[team]=null;}
-        save();crSimulationRender();
-      };
-      row.append(ck,make('span','dd-sim-player-name',player.name),make('span','dd-sim-role',player.role));list.append(row);
-    }
-    teamBox.append(list);
-    if(active){
-      const captainLabel=make('label','dd-sim-captain-label','Captain');
-      const captain=make('select','dd-sim-captain');
-      const empty=make('option','','Select captain from Playing XI');empty.value='';captain.append(empty);
-      for(const id of sim.choices[team]){const p=crPoolById(id);if(p){const option=make('option','',p.name);option.value=id;captain.append(option);}}
-      captain.value=sim.captains[team]||'';
-      captain.onchange=()=>{sim.captains[team]=captain.value||null;save();crSimulationRender();};
-      teamBox.append(captainLabel,captain);
-      const counts=sim.choices[team].map(id=>crPoolById(id)).filter(Boolean);
-      teamBox.append(make('p','dd-sim-rules','Required: 3 BOWL · 1 WK · 2 BAT · 11 total'));
-      const msg=crSimValidate(team);
-      const feedback=make('p','dd-sim-feedback',msg||'✓ Ready to confirm');feedback.setAttribute('role','status');teamBox.append(feedback);
-      const next=make('button','dd-sim-confirm',team==='a'?'Confirm Team A →':'Confirm Team B & Show XIs');
-      next.type='button';next.disabled=Boolean(msg);
-      next.onclick=()=>{if(crSimValidate(team))return;sim.step=team==='a'?'b':'done';save();crSimulationRender();window.scrollTo(0,0);};
-      teamBox.append(next);
-    }else if(done){
-      const captain=crPoolById(sim.captains[team]);
-      teamBox.append(make('div','dd-sim-captain-confirm','Captain: '+(captain?.name||'—')));
-    }
-    grid.append(teamBox);
-  }
-  if(sim.step==='done'&&sim.livePlay){
-    crLiveMatchRender(panel,sim);
-    return;
-  }
-  if(sim.step==='done'){
-    const ready=make('div','dd-sim-ready');
-    ready.append(make('h3','','✓ Playing XIs Confirmed'));
-    const teams=make('div','dd-sim-xi-grid');
-    for(const team of ['a','b']){
-      const box=make('div','dd-sim-xi dd-sim-'+team);
-      box.append(make('h4','',niceName(state,team)));
-      const ol=make('ol');
-      for(const id of sim.choices[team]){
-        const p=crPoolById(id);if(!p)continue;
-        const li=make('li','',p.name+' · '+p.role+(id===sim.captains[team]?'  ★ CAPTAIN':''));ol.append(li);
-      }
-      box.append(ol);teams.append(box);
-    }
-    ready.append(teams);
-    const revise=make('button','dd-sim-revise','↶ Change Playing XIs');
-    revise.type='button';revise.onclick=()=>{sim.livePlay=false;sim.step='a';sim.choices={a:[],b:[]};sim.captains={a:null,b:null};save();crSimulationRender();};
-    const live=make('button','dd-sim-liveplay','▶ Start Live Play');
-    live.type='button';live.onclick=()=>{sim.livePlay=true;save();crSimulationRender();window.scrollTo(0,0);};
-    const buttons=make('div','dd-sim-final-actions');buttons.append(revise,live);
-    ready.append(buttons);panel.append(ready);
-  }
-}
-
-
-
-// V30.5 additive match flow. A simple MANUAL ball-by-ball scorekeeper;
-// existing auction, Football, and player bidding calculations are unchanged.
-const DD_STADIUMS=[
-  ['India','🇮🇳',[['HPCA Stadium','Dharamshala'],['Eden Gardens','Kolkata'],['Wankhede Stadium','Mumbai']]],
-  ['Australia','🇦🇺',[['Melbourne Cricket Ground','Melbourne'],['Sydney Cricket Ground','Sydney'],['Adelaide Oval','Adelaide']]],
-  ['England','🇬🇧',[["Lord’s Cricket Ground",'London'],['The Oval','London']]],
-  ['Pakistan','🇵🇰',[['Gaddafi Stadium','Lahore'],['National Bank Cricket Arena','Karachi']]],
-  ['South Africa','🇿🇦',[['Newlands','Cape Town'],['Wanderers Stadium','Johannesburg']]],
-  ['New Zealand','🇳🇿',[['Eden Park','Auckland'],['Hagley Oval','Christchurch']]],
-  ['Sri Lanka','🇱🇰',[['R. Premadasa Stadium','Colombo'],['Pallekele International Cricket Stadium','Kandy']]],
-  ['Bangladesh','🇧🇩',[['Sher-e-Bangla National Cricket Stadium','Dhaka'],['Zahur Ahmed Chowdhury Stadium','Chattogram']]],
-  ['United Arab Emirates','🇦🇪',[['Dubai International Cricket Stadium','Dubai'],['Sharjah Cricket Stadium','Sharjah']]],
-  ['West Indies','🏝️',[['Kensington Oval','Bridgetown, Barbados'],['Providence Stadium','Georgetown, Guyana']]],
-  ['Zimbabwe','🇿🇼',[['Harare Sports Club','Harare'],['Queens Sports Club','Bulawayo']]],
-  ['Ireland','🇮🇪',[['Malahide Cricket Club Ground','Malahide'],['Clontarf Cricket Club Ground','Dublin']]],
-  ['United States','🇺🇸',[['Grand Prairie Stadium','Texas'],['Central Broward Park','Lauderhill, Florida']]],
-  ['Netherlands','🇳🇱',[['VRA Cricket Ground','Amstelveen'],['Hazelaarweg','Rotterdam']]]
-];
-function ddGrounds(){let i=0;return DD_STADIUMS.flatMap(([country,flag,venues])=>venues.map(([name,city])=>({id:'ground-'+(++i),country,flag,name,city})));}
-function ddLiveProgress(panel,active){
- const p=make('div','dd-venue-progress');for(const [id,t] of [['stadium','01 · STADIUM'],['toss','02 · TOSS'],['match','03 · MATCH'],['score','04 · SCORECARD']]){p.append(make('span',active===id?'on':'',t));}panel.append(p);
-}
-function ddLiveHeading(panel,title,description,back){
- const header=make('div','dd-sim-heading'),label=make('div');label.append(make('h3','',title),make('p','',description));const btn=make('button','dd-sim-close','← '+(back?'Back':'Close'));
- btn.type='button';btn.onclick=()=>{back?back():(()=>{const sim=crSimData();sim.livePlay=false;save();crSimulationRender();})()};header.append(label,btn);panel.append(header);
-}
-function ddLiveButton(label,handler,klass='dd-venue-primary'){let b=make('button',klass,label);b.type='button';b.onclick=handler;return b;}
-function crLiveMatchRender(panel,sim){
- panel.replaceChildren();sim.screen=sim.screen||'stadium';
- const ground=ddGrounds().find(g=>g.id===sim.stadium);
- if(sim.screen==='stadium'){
-  ddLiveHeading(panel,'🏟 Choose Your Stadium','30 unique grounds · 14 countries · select one venue',()=>{sim.livePlay=false;save();crSimulationRender();});ddLiveProgress(panel,'stadium');
-  const top=make('div','dd-venue-top');top.append(make('p','dd-sim-note',ground?'✓ '+ground.name+' · '+ground.city:'Choose your match venue below.'));panel.append(top);
-  let number=0;
-  for(const [country,flag,venues] of DD_STADIUMS){
-    const group=make('section','dd-venue-country'),heading=make('h4');heading.append(make('span','flag',flag),document.createTextNode(country+' · '+venues.length+' stadiums'));group.append(heading);
-    const grid=make('div','dd-venue-country-grid');for(const [name,city] of venues){number++;
-      const id='ground-'+number,selected=sim.stadium===id,card=make('button','dd-venue-card'+(selected?' selected':''));card.type='button';card.setAttribute('aria-pressed',String(selected));
-      card.append(make('span','dd-venue-number','STADIUM '+String(number).padStart(2,'0')),make('span','dd-venue-name',name),make('span','dd-venue-city',city));if(selected)card.append(make('span','dd-venue-check','✓ Selected'));
-      card.onclick=()=>{sim.stadium=id;save();crSimulationRender();};grid.append(card);
-    }group.append(grid);panel.append(group);
-  }
-  const foot=make('div','dd-venue-actions');foot.append(make('span','dd-sim-note',ground?'Selected: '+ground.name:'No stadium selected yet'));
-  const next=ddLiveButton('Continue to Toss →',()=>{if(!sim.stadium)return;sim.screen='toss';save();crSimulationRender();window.scrollTo(0,0);});next.disabled=!ground;foot.append(next);panel.append(foot);return;
- }
- if(sim.screen==='toss'){
-  ddLiveHeading(panel,'🪙 Toss & Batting Order',ground?ground.name+' · '+ground.city:'Choose who bats first',()=>{sim.screen='stadium';save();crSimulationRender();});ddLiveProgress(panel,'toss');
-  const box=make('div','dd-venue-stage');box.append(make('h3','','How should the first batting team be decided?'));
-  for(const [mode,title,desc] of [['auto','🎲 Automatic','Randomly decide which team bats first.'],['manual','✋ Select Who Bats First','Choose Milan Strikers or Taiwan Avengers yourself.']]){
-    const option=make('button','dd-venue-option'+((sim.tossMode||'auto')===mode?' active':''));option.type='button';option.append(make('strong','',title),make('small','',desc));option.onclick=()=>{sim.tossMode=mode;save();crSimulationRender();};box.append(option);
-  }
-  if(sim.tossMode==='manual'){
-    const select=make('select');for(const t of ['a','b']){let opt=make('option','',niceName(state,t));opt.value=t;select.append(opt);}select.value=sim.batFirst||'a';select.onchange=()=>{sim.batFirst=select.value;save();};box.append(make('label','','Choose batting-first team'),select);
-  }
-  box.append(ddLiveButton('Confirm Batting Order →',()=>{
-    if(sim.tossMode!=='manual')sim.batFirst=Math.random()<.5?'a':'b';else sim.batFirst=sim.batFirst||'a';
-    sim.screen='confirm';save();crSimulationRender();window.scrollTo(0,0);
-  }));panel.append(box);return;
- }
- // ===============================================================
- // TEMPORARY POST-TOSS MATCH FLOW — START (V30.5)
- // Everything from Match Confirmation onward (confirmation UI, match
- // state, scoring controls, scorecard, related helpers) is provisional.
- // Future phase: replace with a premium match interface and automatic
- // NEXT DELIVERY outcome prediction based on V37.1. Rules required:
- // 4 overs max per bowler, no consecutive overs, 6 legal balls/over,
- // correct strike changes, wicket/batter selection and innings ending.
- // Stadium selection, toss controls and upstream auction code STAY.
- // Remove/replace this section only after the new engine is approved.
- // ===============================================================
- if(sim.screen==='confirm'){
-  ddLiveHeading(panel,'🏏 Match Confirmation','Check the venue and batting order before starting',()=>{sim.screen='toss';save();crSimulationRender();});ddLiveProgress(panel,'toss');
-  const box=make('div','dd-venue-stage');box.append(make('h3','',ground?ground.name:'Stadium'),make('p','dd-sim-note',ground?ground.city+', '+ground.country:''),make('h3','','🏏 '+niceName(state,sim.batFirst||'a')+' — Bat First'),make('p','',niceName(state,(sim.batFirst||'a')==='a'?'b':'a')+' — Bowl First'));
-  box.append(ddLiveButton('▶ Start Basic Match',()=>{if(!sim.match){sim.match=ddMatchCreate(sim);}sim.screen='match';save();crSimulationRender();window.scrollTo(0,0);}));panel.append(box);return;
- }
- if(!sim.match){sim.screen='confirm';save();crSimulationRender();return;}
- if(sim.match.complete||sim.screen==='score')return ddMatchScorecard(panel,sim,ground);
- return ddMatchPlay(panel,sim,ground);
-}
-function ddMatchCreate(sim){
- const first=sim.batFirst||'a',second=first==='a'?'b':'a';
- const createInnings=(bat,bowl)=>({bat,bowl,runs:0,wickets:0,legal:0,extras:0,striker:0,nonStriker:1,nextBatter:2,bowler:null,lastBowler:null,batStats:sim.choices[bat].map(id=>({id,runs:0,balls:0,fours:0,sixes:0,out:false})),bowlStats:sim.choices[bowl].map(id=>({id,balls:0,runs:0,wickets:0,maidens:0})),events:[],overRuns:0,overWickets:0,fall:[]});
- return {innings:[createInnings(first,second),createInnings(second,first)],current:0,complete:false};
-}
-function ddOvers(balls){return Math.floor(balls/6)+'.'+(balls%6);}
-function ddBatId(inn,index){return inn.batStats[index]?.id;}
-function ddBatName(inn,index){const p=crPoolById(ddBatId(inn,index));return p?p.name:'—';}
-function ddBowlerStats(inn,id){return inn.bowlStats.find(x=>x.id===id);}
-function ddMatchCanBowl(inn,id){const s=ddBowlerStats(inn,id);return !!s&&s.balls<24&&(!inn.lastBowler||inn.lastBowler!==id)&&s.balls%6===0;}
-function ddMatchScoreline(match){return match.innings.map((inn,i)=>({inn,i,team:niceName(state,inn.bat),score:inn.runs+'/'+inn.wickets,overs:ddOvers(inn.legal)}));}
-function ddMatchHeader(panel,sim,ground,stage){ddLiveHeading(panel,stage==='score'?'🏆 Full Match Scorecard':'🏏 Live Match · Basic Engine',(ground?ground.name+' · '+ground.city+' · ':'')+'20-over T20',()=>{sim.screen='confirm';save();crSimulationRender();});ddLiveProgress(panel,stage);}
-function ddMatchScoreBoxes(panel,match){const grid=make('div','dd-match-scoreline');for(const row of ddMatchScoreline(match)){const box=make('div','dd-match-score'+(row.i===match.current&&!match.complete?' active':''));box.append(make('div','',row.team),make('strong','',row.score),make('small','','Overs '+row.overs+(row.i===1?' · Target '+(match.innings[0].runs+1):'')));grid.append(box);}panel.append(grid);}
-function ddMatchPlay(panel,sim,ground){
- const match=sim.match,inn=match.innings[match.current];ddMatchHeader(panel,sim,ground,'match');ddMatchScoreBoxes(panel,match);
- const pair=make('div','dd-match-pair');const bats=make('div','dd-match-info');for(const [idx,star] of [[inn.striker,'🏏 * '],[inn.nonStriker,'   ']]){
-  const s=inn.batStats[idx];if(s)bats.append(make('div','',star+ddBatName(inn,idx)+' — '+s.runs+' ('+s.balls+')'));
- }const bowlerInfo=make('div','dd-match-info');const b=inn.bowler?ddBowlerStats(inn,inn.bowler):null;bowlerInfo.append(make('div','',b?('🎯 '+(crPoolById(inn.bowler)?.name||'Bowler')+' · '+ddOvers(b.balls)+' overs · '+b.runs+' runs · '+b.wickets+' wickets'):'🎯 Choose a bowler to start the over'));pair.append(bats,bowlerInfo);panel.append(pair);
- if(inn.legal%6===0&&!inn.bowler){
-  const choice=make('div','dd-venue-stage');choice.append(make('h3','','Select Bowler · Over '+(Math.floor(inn.legal/6)+1)));
-  const select=make('select');const valid=inn.bowlStats.filter(x=>ddMatchCanBowl(inn,x.id));
-  // Any Playing XI member except the acting WK can bowl, including part-time batters.
-  for(const s of valid){const p=crPoolById(s.id);if(p?.role==='WK')continue;const opt=make('option','',(p?.name||'Player')+' · '+(p?.role||'')+' · '+ddOvers(s.balls)+'/4.0 overs');opt.value=s.id;select.append(opt);}
-  if(!select.options.length){choice.append(make('p','dd-sim-feedback','No eligible bowler: check Playing XI. A bowler can bowl at most 4 overs and never successive overs.'));}else{
-    choice.append(make('p','dd-sim-note','Maximum 4 overs per bowler. Previous-over bowler is excluded. BAT players may bowl part-time.'));choice.append(select,ddLiveButton('Confirm Bowler',()=>{if(!ddMatchCanBowl(inn,select.value))return;inn.bowler=select.value;save();crSimulationRender();}));
-  }panel.append(choice);return;
- }
- const ctl=make('div','dd-venue-stage');ctl.append(make('h3','','Record Ball · Over '+(Math.floor(inn.legal/6)+1)),make('p','dd-sim-note','Select the actual outcome. Wides and no-balls add an extra and do not count as legal deliveries.'));
- const buttons=make('div','dd-match-controls');for(const event of ['0','1','2','3','4','6','W','Wide','No-ball']){
-  const btn=ddLiveButton(event,()=>{ddRecordBall(sim,event);save();crSimulationRender();},event==='W'?'wicket':'');buttons.append(btn);
- }ctl.append(buttons);panel.append(ctl);
- const recent=inn.events.slice(-12).reverse();if(recent.length){const log=make('div','dd-match-info');log.append(make('strong','','Recent deliveries'));for(const ev of recent){log.append(make('div','',ev));}panel.append(log);}
-}
-function ddRecordBall(sim,event){
- const match=sim.match,inn=match.innings[match.current];if(match.complete||!inn.bowler)return false;
- const bowler=ddBowlerStats(inn,inn.bowler),batter=inn.batStats[inn.striker];if(!bowler||!batter)return false;
- const extra=event==='Wide'||event==='No-ball',wicket=event==='W',runs=/^[0-6]$/.test(event)?Number(event):0,legal=!extra;
- inn.runs+=runs+(extra?1:0);bowler.runs+=runs+(extra?1:0);inn.overRuns+=runs+(extra?1:0);
- if(extra)inn.extras++;
- if(legal){inn.legal++;bowler.balls++;batter.balls++;}
- batter.runs+=runs;if(runs===4)batter.fours++;if(runs===6)batter.sixes++;
- if(wicket){inn.wickets++;bowler.wickets++;batter.out=true;inn.fall.push(inn.wickets+'-'+inn.runs+' ('+ddOvers(inn.legal)+')');if(inn.wickets<10&&inn.nextBatter<inn.batStats.length)inn.striker=inn.nextBatter++;}
- else if(runs%2===1){const tmp=inn.striker;inn.striker=inn.nonStriker;inn.nonStriker=tmp;}
- inn.events.push(ddOvers(inn.legal)+' · '+(crPoolById(inn.bowler)?.name||'Bowler')+' to '+(crPoolById(batter.id)?.name||'Batter')+' — '+event);
- const chase=match.current===1&&inn.runs>match.innings[0].runs;
- const done=inn.legal>=120||inn.wickets>=10||chase;
- if(!done&&legal&&inn.legal%6===0){
-  if(inn.overRuns===0)bowler.maidens++;
-  const t=inn.striker;inn.striker=inn.nonStriker;inn.nonStriker=t;
-  inn.lastBowler=inn.bowler;inn.bowler=null;inn.overRuns=0;inn.overWickets=0;
- }
- if(done){inn.lastBowler=inn.bowler;inn.bowler=null;if(match.current===0)match.current=1;else{match.complete=true;sim.screen='score';}}
- return true;
-}
-function ddMatchScorecard(panel,sim,ground){
- const match=sim.match;ddMatchHeader(panel,sim,ground,'score');ddMatchScoreBoxes(panel,match);
- const [a,b]=match.innings;let result='Match in progress';
- if(match.complete){result=b.runs>a.runs?niceName(state,b.bat)+' won by '+(10-b.wickets)+' wickets':a.runs>b.runs?niceName(state,a.bat)+' won by '+(a.runs-b.runs)+' runs':'Match tied';}
- panel.append(make('div','dd-match-result',result));
- for(let i=0;i<match.innings.length;i++){
-  const inn=match.innings[i];if(i===1&&match.current===0)continue;
-  const section=make('section','dd-match-report');section.append(make('h3','','Innings '+(i+1)+' · '+niceName(state,inn.bat)),make('p','dd-sim-note','Score '+inn.runs+'/'+inn.wickets+' · '+ddOvers(inn.legal)+' overs · RR '+(inn.legal?((inn.runs*6)/inn.legal).toFixed(2):'0.00')+' · Extras '+inn.extras));
-  const heading=make('h4','','Batting');section.append(heading);
-  const batRows=inn.batStats.map(x=>{const p=crPoolById(x.id);return [p?.name||'Player',x.out?'Out':x.balls?'Not out':'Did not bat',x.runs,x.balls,x.fours,x.sixes,x.balls?(100*x.runs/x.balls).toFixed(1):'—'];});
-  ddMatchTable(section,['Batter','Status','R','B','4s','6s','SR'],batRows);
-  section.append(make('h4','','Bowling'));
-  const bowlRows=inn.bowlStats.filter(x=>x.balls).map(x=>{const p=crPoolById(x.id);return [p?.name||'Player',ddOvers(x.balls),x.maidens,x.runs,x.wickets,x.balls?(x.runs*6/x.balls).toFixed(2):'—'];});
-  ddMatchTable(section,['Bowler','O','M','R','W','Econ'],bowlRows);
-  section.append(make('p','dd-sim-note','Fall of wickets: '+(inn.fall.join(' · ')||'None')));panel.append(section);
- }
- if(!match.complete)panel.append(ddLiveButton('← Return to Match',()=>{sim.screen='match';save();crSimulationRender();}));
- else panel.append(make('p','dd-sim-note','Basic manual scorekeeping: advanced dismissal types, fielding events and full extras breakdown are reserved for the next engine phase.'));
-}
-function ddMatchTable(parent,headers,rows){const wrap=make('div','dd-match-table-wrap'),table=make('table','dd-match-table'),thead=make('thead'),tr=make('tr');for(const h of headers)tr.append(make('th','',h));thead.append(tr);table.append(thead);const body=make('tbody');for(const data of rows){const row=make('tr');for(const value of data)row.append(make('td','',String(value)));body.append(row);}table.append(body);wrap.append(table);parent.append(wrap);}
-
-// ===============================================================
-// TEMPORARY POST-TOSS MATCH FLOW — END (V30.5)
-// Keep all code below (auction history, admin security, Football, etc.).
-// ===============================================================
 
 function cricketHistoryTable(){
   // Cricket-only history: every SOLD transaction, including deleted purchases
@@ -4230,6 +3914,330 @@ function cricketHistoryTable(){
   }
 }
 
+
+/* V31 — Cricket-only Playing XI selection, captain/WK assignment, confirmation and one-time toss. */
+const SIM_PAGES=['a-xi','a-roles','b-xi','b-roles','confirm','toss'];
+const SIM_ROLES=[['BAT','🏏 Batters'],['BOWL','🎯 Bowlers'],['WK','🧤 Wicketkeepers'],['AR','🔄 All-rounders']];
+let simAnimating=false,simStorageConflict=false;
+function simData(){
+  if(!isAdvanced())return null;
+  const c=cr();
+  if(!c.simulation||typeof c.simulation!=='object'||Array.isArray(c.simulation))c.simulation={};
+  const s=c.simulation;
+  if(!s.teams||typeof s.teams!=='object')s.teams={};
+  for(const t of ['a','b']){
+    const x=s.teams[t];if(!x||typeof x!=='object')s.teams[t]={ids:[],captain:null,wicketkeeper:null};
+    const y=s.teams[t];if(!Array.isArray(y.ids))y.ids=[];
+    y.ids=[...new Set(y.ids.filter(id=>typeof id==='string'))].slice(0,11);
+    if(typeof y.captain!=='string')y.captain=null;
+    if(typeof y.wicketkeeper!=='string')y.wicketkeeper=null;
+  }
+  if(!s.toss||typeof s.toss!=='object')s.toss={winner:null,decision:null};
+  if(!['a','b'].includes(s.toss.winner))s.toss.winner=null;
+  if(!['bat','bowl'].includes(s.toss.decision))s.toss.decision=null;
+  if(!s.toss.winner)s.toss.decision=null;
+  if(!SIM_PAGES.includes(s.page))s.page='a-xi';
+  s.view=!!s.view;
+  if(s.toss.winner){c.complete=true;} // Imported/reloaded flipped toss can never reopen purchases.
+  return s;
+}
+function simSquad(team){
+  const ids=new Set();return crActiveTeam(team).map(e=>crPoolById(e.poolId)).filter(p=>{
+    if(!p||ids.has(p.id))return false;ids.add(p.id);return true;
+  });
+}
+function simPlayers(team){const map=new Map(simSquad(team).map(p=>[p.id,p]));return simData().teams[team].ids.map(id=>map.get(id)).filter(Boolean);}
+function simCounts(team){
+ const players=simPlayers(team),c={BAT:0,BOWL:0,WK:0,AR:0,overseas:0};
+ for(const p of players){if(Object.hasOwn(c,p.role))c[p.role]++;if(p.country!=='India')c.overseas++;}
+ return {...c,total:players.length};
+}
+function simXIProblems(team){
+ const s=simData(),ids=s.teams[team].ids,players=simPlayers(team),c=simCounts(team),issues=[];
+ if(ids.length!==11||players.length!==11)issues.push('Select exactly 11 purchased players ('+players.length+'/11).');
+ if(c.BAT<3)issues.push('Select at least '+(3-c.BAT)+' more BAT ('+c.BAT+'/3).');
+ if(c.BOWL<2)issues.push('Select at least '+(2-c.BOWL)+' more BOWL ('+c.BOWL+'/2).');
+ if(c.WK<1)issues.push('Select at least 1 WK ('+c.WK+'/1).');
+ if(c.overseas<3)issues.push('Select at least '+(3-c.overseas)+' more overseas player'+(3-c.overseas===1?'':'s')+' ('+c.overseas+'/3).');
+ if(c.overseas>6)issues.push('Maximum 6 overseas players allowed ('+c.overseas+'/6).');
+ if(c.total===11&&issues.length)issues.push('Deselect a selected player to make room for the missing requirements.');
+ if(new Set(ids).size!==ids.length)issues.push('A player cannot be selected twice.');
+ if(ids.length>11)issues.push('Maximum 11 players allowed.');
+ return issues;
+}
+function simRoleProblems(team){
+ const s=simData(),t=s.teams[team],selected=simPlayers(team),issues=simXIProblems(team);
+ if(!t.captain||!selected.some(p=>p.id===t.captain))issues.push('Choose a captain from the selected Playing XI.');
+ if(!t.wicketkeeper||!selected.some(p=>p.id===t.wicketkeeper&&p.role==='WK'))issues.push('Choose a designated wicketkeeper from the selected WK players.');
+ return issues;
+}
+function simReconcile(){
+ const s=simData();if(!s||s.toss.winner)return;
+ for(const team of ['a','b']){
+   const legal=new Set(simSquad(team).map(p=>p.id));const t=s.teams[team];
+   t.ids=t.ids.filter(id=>legal.has(id));
+   if(!t.ids.includes(t.captain))t.captain=null;
+   if(!t.ids.includes(t.wicketkeeper)||crPoolById(t.wicketkeeper)?.role!=='WK')t.wicketkeeper=null;
+ }
+ // After a temporary undo/re-purchase, never bypass an invalid earlier selection step.
+ const position=SIM_PAGES.indexOf(s.page);
+ if(position>0&&simXIProblems('a').length)s.page='a-xi';
+ else if(position>1&&simRoleProblems('a').length)s.page='a-roles';
+ else if(position>2&&simXIProblems('b').length)s.page='b-xi';
+ else if(position>3&&simRoleProblems('b').length)s.page='b-roles';
+}
+function simActive(){return isAdvanced()&&cr().complete&&!!simData().view;}
+function simPersist(){
+ if(simStorageConflict){alert('Another browser tab changed your auction. Reload the page before continuing to avoid overwriting its data.');return false;}
+ try{const existing=localStorage.getItem(KEY);if(existing!==simLastStored){
+    simStorageConflict=true;alert('This auction changed in another tab. Reload before continuing.');return false;
+  }}catch{}
+ if(!save()){alert('Browser storage could not save your simulation progress. Export a backup or free browser storage, then retry.');return false;}
+ return true;
+}
+let simLastStored=null;
+try{simLastStored=localStorage.getItem(KEY);}catch{}
+window.addEventListener('storage',e=>{if(e.key===KEY&&e.newValue!==simLastStored){simStorageConflict=true;if(simActive())simRender();}});
+function simStart(){
+ if(!isAdvanced()||!cr().complete)return;
+ const s=simData();simReconcile();s.view=true;
+ if(!simPersist())return;
+ render();$('simulation-stage').scrollIntoView({block:'start'});
+}
+function simGoBack(){
+ if(!simActive()||simAnimating)return;
+ const s=simData(),i=SIM_PAGES.indexOf(s.page);
+ if(i===0){s.view=false;if(!simPersist())return;render();$('cricket-final').scrollIntoView({block:'start'});return;}
+ s.page=SIM_PAGES[i-1];if(!simPersist())return;simRender();$('simulation-stage').scrollIntoView({block:'start'});
+}
+function simGoNext(){
+ if(!simActive()||simAnimating)return;
+ const s=simData(),page=s.page,index=SIM_PAGES.indexOf(page);
+ if(!s.toss.winner){
+   if(page==='a-xi'&&simXIProblems('a').length)return;
+   if(page==='a-roles'&&simRoleProblems('a').length)return;
+   if(page==='b-xi'&&simXIProblems('b').length)return;
+   if(page==='b-roles'&&simRoleProblems('b').length)return;
+   if(page==='confirm'&&(simRoleProblems('a').length||simRoleProblems('b').length))return;
+ }
+ if(index>=SIM_PAGES.length-1)return;
+ s.page=SIM_PAGES[index+1];if(!simPersist())return;simRender();$('simulation-stage').scrollIntoView({block:'start'});
+}
+function simToggle(team,id,checked){
+ const s=simData();if(!simActive()||s.toss.winner||s.page!==team+'-xi')return;
+ const t=s.teams[team],p=simSquad(team).find(x=>x.id===id);if(!p)return;
+ if(checked){
+   if(t.ids.includes(id))return;
+   if(t.ids.length>=11)return;
+   if(p.country!=='India'&&simCounts(team).overseas>=6)return;
+   t.ids.push(id);
+ }else{
+   t.ids=t.ids.filter(x=>x!==id);
+   if(t.captain===id)t.captain=null;
+   if(t.wicketkeeper===id)t.wicketkeeper=null;
+ }
+ if(!simPersist())return;simRender();
+}
+function simAssign(team,property,value){
+ const s=simData();if(!simActive()||s.toss.winner||s.page!==team+'-roles'||!['captain','wicketkeeper'].includes(property))return;
+ const players=simPlayers(team);if(value&& !players.some(p=>p.id===value&&(property!=='wicketkeeper'||p.role==='WK')))return;
+ s.teams[team][property]=value||null;if(!simPersist())return;simRender();
+}
+function simFlip(){
+ if(!simActive()||simStorageConflict||simAnimating)return;
+ const s=simData();if(s.page!=='toss'||s.toss.winner)return;
+ if(simRoleProblems('a').length||simRoleProblems('b').length){simRender();return;}
+ if(!crypto?.getRandomValues){alert('Secure randomness is unavailable in this browser. The toss has not been performed.');return;}
+ // One unbiased cryptographic bit; persisted before the animation starts.
+ const random=new Uint32Array(1);crypto.getRandomValues(random);
+ const previous={...s.toss};
+ s.toss.winner=(random[0]&1)?'b':'a';s.toss.decision=null;s.toss.flippedAt=Date.now();
+ if(!simPersist()){s.toss=previous;return;}
+ simAnimating=true;simRender();
+ setTimeout(()=>{simAnimating=false;if(simActive())simRender();},1050);
+}
+function simChooseToss(value){
+ const s=simData();if(!simActive()||!s.toss.winner||s.toss.decision||simAnimating||!['bat','bowl'].includes(value))return;
+ s.toss.draft=value;if(!simPersist())return;simRender();
+}
+function simConfirmToss(){
+ const s=simData();if(!simActive()||simAnimating||!s.toss.winner||s.toss.decision||!['bat','bowl'].includes(s.toss.draft))return;
+ const winner=niceName(state,s.toss.winner),action=s.toss.draft==='bat'?'BAT FIRST':'BOWL FIRST';
+ if(!confirm(winner+' has chosen to '+action+'. This decision will be permanently locked. Confirm?'))return;
+ if(!simActive()||s.toss.decision)return;
+ s.toss.decision=s.toss.draft;s.toss.confirmedAt=Date.now();if(!simPersist())return;simRender();
+}
+function simEl(tag,cls,text){return make(tag,cls,text);}
+function simNav(root,canNext,nextLabel){
+ const nav=simEl('div','sim-nav'),back=simEl('button','sim-back','← Back');back.type='button';back.onclick=simGoBack;
+ nav.append(back);
+ if(nextLabel){const next=simEl('button','sim-next',nextLabel);next.type='button';next.disabled=!canNext;next.onclick=simGoNext;nav.append(next);}
+ root.append(nav);
+}
+function simHeader(root,title,subtitle){
+ const s=simData(),idx=SIM_PAGES.indexOf(s.page),head=simEl('div','sim-head'),a=simEl('div');
+ a.append(simEl('div','sim-kicker','Dream Draft · Live Simulation Setup'),simEl('h2','',title));
+ head.append(a,simEl('span','sim-step','STEP '+(idx+1)+' / 6'));
+ root.append(head,simEl('p','sim-sub',subtitle));
+ if(s.toss.winner)root.append(simEl('div','sim-lock-banner','🔒 Playing XIs, captain and wicketkeeper assignments are permanently locked. Back / Next is for review only.'));
+}
+function simSelection(root,team){
+ const s=simData(),locked=!!s.toss.winner,squad=simSquad(team),selected=new Set(s.teams[team].ids),counts=simCounts(team);
+ simHeader(root,niceName(state,team)+' — Select Playing XI','Select 11 purchased players. All-rounders count separately from specialist BAT and BOWL.');
+ root.append(simEl('div','sim-selection-count','Selected Players: '+counts.total+' / 11 · Overseas: '+counts.overseas+' / 3–6'));
+ const stat=simEl('div','sim-stats');
+ for(const [label,value] of [['PURCHASED',squad.length],['BAT',squad.filter(p=>p.role==='BAT').length],['BOWL',squad.filter(p=>p.role==='BOWL').length],['WK',squad.filter(p=>p.role==='WK').length],['AR',squad.filter(p=>p.role==='AR').length]]){
+   const box=simEl('div','sim-stat');box.append(simEl('strong','',String(value)),simEl('small','',label));stat.append(box);
+ }
+ root.append(stat);
+ const panels=simEl('div','sim-panels');
+ for(const [role,title] of SIM_ROLES){
+   const panel=simEl('section','sim-role-panel'),head=simEl('div','sim-role-head');
+   head.append(simEl('span','',title),simEl('span','',squad.filter(p=>p.role===role&&selected.has(p.id)).length+' selected'));panel.append(head);
+   const list=simEl('div','sim-player-list');
+   for(const p of squad.filter(p=>p.role===role)){
+     const yes=selected.has(p.id),over=p.country!=='India',blocked=!locked&&!yes&&(selected.size>=11||(over&&counts.overseas>=6));
+     const row=simEl('label','sim-player'+(yes?' selected':'')+(locked?' locked':'')+(blocked?' disabled-choice':''));
+     const input=simEl('input');input.type='checkbox';input.checked=yes;input.disabled=locked||blocked;
+     input.setAttribute('aria-label','Select '+p.name);input.addEventListener('change',()=>simToggle(team,p.id,input.checked));
+     const text=simEl('span','sim-player-body');text.append(simEl('span','sim-player-name',p.name),simEl('span','sim-player-meta',crCountryCode(p.country)+' · '+p.country+' · '+p.role));
+     row.append(input,text);if(over)row.append(simEl('span','sim-os','OS'));list.append(row);
+   }
+   if(!list.childElementCount)list.append(simEl('p','sim-hint','No purchased players in this role.'));
+   panel.append(list);panels.append(panel);
+ }
+ root.append(panels);
+ const rules=simEl('div','sim-rules');
+ for(const [label,display,ok] of [
+    ['Playing XI',counts.total+' / 11',counts.total===11],['BAT minimum',counts.BAT+' / 3',counts.BAT>=3],
+    ['BOWL minimum',counts.BOWL+' / 2',counts.BOWL>=2],['WK minimum',counts.WK+' / 1',counts.WK>=1],
+    ['Overseas (3–6)',counts.overseas+' / 3–6',counts.overseas>=3&&counts.overseas<=6]
+ ]){
+   const row=simEl('div','sim-rule '+(ok?'good':'bad'));
+   row.append(simEl('span','',label),simEl('strong','',(ok?'✓ ':'✕ ')+display));rules.append(row);
+ }
+ root.append(rules);
+ const errors=simXIProblems(team);if(!locked&&errors.length){const list=simEl('div','sim-warnings');for(const issue of errors)list.append(simEl('div','','⚠ '+issue));root.append(list);}
+ simNav(root,locked||!errors.length,locked?'Next — Review Captain & WK →':'Next — Choose Captain & WK →');
+}
+function simRoleScreen(root,team){
+ const s=simData(),t=s.teams[team],locked=!!s.toss.winner,players=simPlayers(team);
+ simHeader(root,niceName(state,team)+' — Captain & WK','Assign exactly one captain and one wicketkeeper from your selected Playing XI.');
+ const form=simEl('div','sim-role-form');
+ function addSelect(prop,label,choices,placeholder){
+   const id='sim-'+team+'-'+prop,lab=simEl('label','',label),input=simEl('select');lab.htmlFor=id;input.id=id;
+   const empty=simEl('option','',placeholder);empty.value='';input.append(empty);
+   for(const p of choices){const opt=simEl('option','',p.name+' ('+crCountryCode(p.country)+')');opt.value=p.id;input.append(opt);}
+   input.value=t[prop]||'';input.disabled=locked;input.onchange=()=>simAssign(team,prop,input.value);
+   form.append(lab,input,simEl('p','sim-hint',prop==='captain'?'All 11 Playing XI players are eligible.':'Only selected players with the WK role are eligible.'));
+ }
+ addSelect('captain','Choose Captain (C)',players,'— Select Captain —');
+ addSelect('wicketkeeper','Choose Wicketkeeper (WK)',players.filter(p=>p.role==='WK'),'— Select Wicketkeeper —');
+ root.append(form);
+ const issues=simRoleProblems(team);
+ if(!locked&&issues.length){const warnings=simEl('div','sim-warnings');for(const issue of issues)warnings.append(simEl('div','','⚠ '+issue));root.append(warnings);}
+ if(!issues.length)root.append(simEl('div','sim-lock-banner','✓ Captain and designated wicketkeeper confirmed. Both roles may belong to the same WK-eligible player.'));
+ simNav(root,locked||!issues.length,team==='a'?'Next — Player B →':'Next — View Both Playing XIs →');
+}
+function simConfirmation(root){
+ const s=simData();simHeader(root,'Playing XI Confirmation','Review both teams separately before the secure coin toss.');
+ const grid=simEl('div','sim-confirm-grid');
+ for(const team of ['a','b']){
+   const t=s.teams[team],box=simEl('div','sim-confirm-team '+team),players=simPlayers(team);
+   box.append(simEl('h3','',niceName(state,team)),simEl('div','sim-confirm-count',players.length+' / 11 Selected · Overseas '+simCounts(team).overseas));
+   for(const [role,title] of SIM_ROLES){
+     box.append(simEl('div','sim-confirm-subhead',title));
+     for(const p of players.filter(p=>p.role===role)){
+       const row=simEl('div','sim-confirm-row');
+       row.append(simEl('span','',p.name+' · '+crCountryCode(p.country)));
+       const flags=[t.captain===p.id?'C':'',t.wicketkeeper===p.id?'WK':'',p.country!=='India'?'OS':''].filter(Boolean);
+       row.append(simEl('span','sim-markers',flags.join(' · ')));box.append(row);
+     }
+   }
+   const info=simEl('div','sim-hint','Captain: '+(crPoolById(t.captain)?.name||'—')+' · Wicketkeeper: '+(crPoolById(t.wicketkeeper)?.name||'—'));
+   box.append(info);grid.append(box);
+ }
+ root.append(grid);
+ const issues=[...simRoleProblems('a'),...simRoleProblems('b')];
+ if(!s.toss.winner&&issues.length){const warn=simEl('div','sim-warnings');warn.append(simEl('div','','⚠ Both teams must have valid lineups and role assignments before continuing.'));root.append(warn);}
+ simNav(root,s.toss.winner||!issues.length,s.toss.winner?'Next — View Toss Result →':'Next — Proceed to Toss →');
+}
+function simToss(root){
+ const s=simData(),t=s.toss;
+ simHeader(root,'🪙 Match Toss',t.winner?'The toss winner is saved and cannot be changed.':'A fair 50/50 coin flip will determine which team wins the toss.');
+ const wrap=simEl('div','sim-toss'),teams=simEl('div','sim-toss-teams');
+ for(const team of ['a','b'])teams.append(simEl('div','sim-toss-team '+team,niceName(state,team)+' · XI Ready'));
+ wrap.append(teams);
+ if(!t.winner){
+    wrap.append(simEl('div','sim-coin','DD'),simEl('p','sim-hint','A secure random coin flip. Each team has an equal 50% chance.'));
+    const flip=simEl('button','sim-next','🪙 Flip Coin');flip.type='button';flip.onclick=simFlip;
+    wrap.append(flip);
+ }else{
+    wrap.append(simEl('div','sim-coin'+(simAnimating?' flipping':''),'DD'));
+    if(simAnimating)wrap.append(simEl('div','sim-toss-winner','Flipping coin…'));
+    else{
+      wrap.append(simEl('div','sim-toss-winner','🏆 '+niceName(state,t.winner)+' Won the Toss!'));
+      if(!t.decision){
+        wrap.append(simEl('p','sim-sub','Toss winner: choose whether to bat or bowl first.'));
+        const choices=simEl('div','sim-toss-choice');
+        for(const [value,label] of [['bat','🏏 BAT FIRST'],['bowl','🎯 BOWL FIRST']]){
+          const b=simEl('button',t.draft===value?'active':'',label);b.type='button';b.onclick=()=>simChooseToss(value);choices.append(b);
+        }
+        wrap.append(choices);
+        const confirmBtn=simEl('button','sim-next','Confirm Toss Decision');confirmBtn.type='button';confirmBtn.disabled=!['bat','bowl'].includes(t.draft);confirmBtn.onclick=simConfirmToss;wrap.append(confirmBtn);
+        wrap.append(simEl('p','sim-hint','A confirmation popup will appear. This decision cannot be changed afterward.'));
+      }else{
+        const bat=t.decision==='bat'?t.winner:(t.winner==='a'?'b':'a'),bowl=bat==='a'?'b':'a';
+        const panel=simEl('div','sim-toss-result');
+        for(const [label,value] of [['Toss Winner',niceName(state,t.winner)],['Toss Decision',t.decision==='bat'?'Bat First':'Bowl First'],['Batting First',niceName(state,bat)],['Bowling First',niceName(state,bowl)]]){
+          const line=simEl('div');line.append(simEl('span','',label),simEl('strong','',value));panel.append(line);
+        }
+        wrap.append(panel,simEl('p','sim-future','✓ Toss Completed · Match simulation will be added in a future update.'));
+      }
+    }
+ }
+ root.append(wrap);simNav(root,false,null);
+}
+function simRender(){
+ const out=$('simulation-stage');if(!simActive()){out.hidden=true;return;}
+ const s=simData();out.hidden=false;out.replaceChildren();
+ if(simStorageConflict){
+   const panel=simEl('div','sim-blocker','Another tab updated your auction. Reload this page to safely restore the latest saved state.');
+   const button=simEl('button','','Reload');button.type='button';button.onclick=()=>location.reload();panel.append(button);out.append(panel);return;
+ }
+ switch(s.page){
+   case 'a-xi':simSelection(out,'a');break;
+   case 'a-roles':simRoleScreen(out,'a');break;
+   case 'b-xi':simSelection(out,'b');break;
+   case 'b-roles':simRoleScreen(out,'b');break;
+   case 'confirm':simConfirmation(out);break;
+   case 'toss':simToss(out);break;
+ }
+}
+function simApplyView(){
+ const s=isAdvanced()&&cr().complete?simData():null;
+ if(s&&!s.toss.winner)simReconcile();
+ const viewing=!!s?.view;
+ const actions=$('simulation-actions'),stage=$('simulation-stage');
+ actions.hidden=!isAdvanced()||!cr().complete||viewing;
+ stage.hidden=!viewing;
+ const top=document.querySelector('#cricket-live .cricket-live-top');
+ top.hidden=viewing;$('cricket-bidding-layout').hidden=viewing;
+ $('cricket-xi-view').hidden=viewing;
+ document.querySelector('.bottom-grid').hidden=viewing;
+ $('cricket-board').hidden=viewing||!isAdvanced()||!cr().started;
+ $('cricket-finish-panel').hidden=viewing||!!cr().complete;
+ $('cricket-final').hidden=viewing||!cr().complete;
+ document.querySelector('.history').hidden=viewing;
+ const start=$('simulation-start');
+ if(s){
+   start.textContent=s.toss.winner?'🔒 Review Live Simulation':s.page!=='a-xi'||s.teams.a.ids.length||s.teams.b.ids.length?'↻ Resume Live Simulation':'▶ Start Live Simulation';
+   $('simulation-undo-slot').querySelector('button')?.toggleAttribute('disabled',!!s.toss.winner);
+ }
+ if(viewing)simRender();
+}
+$('simulation-start').addEventListener('click',simStart);
+
 function renderCricket(){
   const enabled=isAdvanced(),setup=enabled&&!cr().started,live=enabled&&cr().started;
   document.body.classList.toggle('cricket-roster-mode',enabled);document.body.classList.toggle('cricket-setup-active',setup);
@@ -4237,17 +4245,17 @@ function renderCricket(){
   // Cricket-only presentation order: Playing XI, Squad, Achievements, Final Results, History.
   // Restore the original nodes to their Cricket container when the mode is inactive.
   const board=$('cricket-board'),finish=$('cricket-finish-panel');
-  const xiView=$('cricket-xi-view'),finalView=$('cricket-final');
+  const xiView=$('cricket-xi-view'),finalView=$('cricket-final'),simActions=$('simulation-actions'),simStage=$('simulation-stage');
   const historySection=document.querySelector('.history');
   const squadSection=document.querySelector('.bottom-grid');
   if(live){
     squadSection.before(xiView);
-    historySection.before(board,finish,finalView);
+    historySection.before(board,finish,finalView,simActions,simStage);
     board.hidden=false;finish.hidden=!!cr().complete;
   }else{
     const cricketLive=$('cricket-live');
-    cricketLive.append(board,finish,xiView,finalView);
-    board.hidden=true;finish.hidden=true;finalView.hidden=true;
+    cricketLive.append(board,finish,xiView,finalView,simActions,simStage);
+    board.hidden=true;finish.hidden=true;finalView.hidden=true;simActions.hidden=true;simStage.hidden=true;
   }
   document.querySelector('.auction-entry').hidden=enabled;
   document.querySelector('.cards').hidden=setup;
@@ -4268,7 +4276,7 @@ function renderCricket(){
   }
   $('mode-chip').textContent='🏏 Cricket';$('current-budget-note').textContent='Starting purse: '+crfmt(state.budget)+' per team';
   {const cards=document.querySelector('section.cards');if(live&&cards.parentElement.id!=='cricket-bidding-layout')$('cricket-bidding-layout').append(cards);else if(!live&&cards.parentElement.id==='cricket-bidding-layout')$('cricket-live').after(cards);}
-  if(setup){document.body.classList.remove('cricket-completed-lock');if(document.activeElement!==$('cricket-setup-budget'))$('cricket-setup-budget').value=String(state.budget/100);$('cricket-title').value=state.title;$('cricket-name-a').value=state.names.a;$('cricket-name-b').value=state.names.b;crPoolTable();crValidateUI();return;}
+  if(setup){simActions.hidden=true;simStage.hidden=true;document.body.classList.remove('cricket-completed-lock');if(document.activeElement!==$('cricket-setup-budget'))$('cricket-setup-budget').value=String(state.budget/100);$('cricket-title').value=state.title;$('cricket-name-a').value=state.names.a;$('cricket-name-b').value=state.names.b;crPoolTable();crValidateUI();return;}
   const config=$('cricket-live-config');config.replaceChildren();
   const configRow=(label,value)=>{const el=make('div','cr-config-row');el.append(make('span','cr-config-label',label),document.createTextNode(value));return el;};
   const poolConfigRow=configRow('Player pool: ',cr().pool.length+' players · ');poolConfigRow.append(make('span','cr-config-freeze','Frozen after Start Auction'));
@@ -4279,6 +4287,7 @@ function renderCricket(){
   $('cricket-shared-price').hidden=!!cr().complete;
   crStats();
   cricketHistoryTable();
+  simApplyView();
 }
 function cricketPurchase(team){
   if(!isAdvanced()||manageOn||!cr().started||cr().complete||cr().awaitingEnd||cr().resolution!=='pending'||cr().passed[team])return;
@@ -4374,14 +4383,10 @@ function cricketDeleteSigning(id){
     if(!checkbox.checked)return;
     const current=state.entries.find(e=>e.id===id&&!e.deletedAt);
     if(!current||!manageOn||cr().complete){closeDialog();return;}
-    ddAdminVerify('Delete Signing',()=>{
-      const confirmed=state.entries.find(e=>e.id===id&&!e.deletedAt);
-      if(!confirmed||!isAdvanced()||!manageOn||cr().complete)return;
-      record('Deleted',{...confirmed},null);confirmed.deletedAt=Date.now();
-      crSyncDeletedReentries();
-      if(cr().awaitingEnd)crAdvanceToReentry();
-      save();render();closeDialog();
-    });
+    record('Deleted',{...current},null);current.deletedAt=Date.now();
+    crSyncDeletedReentries();
+    if(cr().awaitingEnd)crAdvanceToReentry();
+    save();render();closeDialog();
   };
 }
 
